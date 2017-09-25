@@ -1,29 +1,47 @@
+#include <thread>
 #include <SFML/Graphics.hpp>
-#include <iostream>
-#include "GameBoard.h"
+#include <entities/Asteroid.h>
+#include "Game.h"
+#include "Renderer.h"
 
-//int main() {
-//  sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-//  sf::CircleShape shape(100.f);
-//  shape.setFillColor(sf::Color::Green);
-//
-//  while (window.isOpen()) {
-//    sf::Event event;
-//    while (window.pollEvent(event)) {
-//      if (event.type == sf::Event::Closed)
-//        window.close();
-//    }
-//
-//    window.clear();
-//    window.draw(shape);
-//    window.display();
-//  }
-//
-//  return 0;
-//}
+void engine(Asteroids *game) {
+  auto player = new Player("Player 1");
+  auto session = new PlayerSession(player);
+
+  auto ast = new Asteroid();
+  ast->pos.x = 5;
+  ast->pos.y = 5;
+  ast->vel.x = 2;
+  ast->vel.y = 1;
+  ast->setHeight(32);
+  ast->setWidth(32);
+
+  game->getWorld()->pushObject(ast);
+  game->getSessions()->push_back(session);
+  game->run();
+}
+
+void renderer(Asteroids *game) {
+  sf::ContextSettings settings;
+  settings.depthBits = 24;
+  settings.stencilBits = 8;
+  settings.antialiasingLevel = 4;
+  settings.majorVersion = 3;
+  settings.minorVersion = 0;
+
+  auto window = new sf::RenderWindow(sf::VideoMode(800, 600), "Asteroids", sf::Style::Default, settings);
+  auto renderer = new Renderer(window);
+  renderer->setGame(game);
+  renderer->render();
+}
 
 int main() {
-  auto board = new GameBoard(16, 16);
-  cout << "main";
+  auto game = new Asteroids();
+
+  std::thread eng(engine, game);
+  std::thread render(renderer, game);
+
+  eng.join();
+  render.join();
   return 0;
 }
