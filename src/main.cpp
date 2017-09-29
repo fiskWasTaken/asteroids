@@ -1,8 +1,8 @@
 #include <thread>
 #include <SFML/Graphics.hpp>
-#include <entities/Asteroid.h>
 #include "Game.h"
 #include "Renderer.h"
+#include "entities/Asteroid.h"
 
 void engine(Asteroids *game) {
   auto player = new Player("Player 1");
@@ -26,8 +26,8 @@ void renderer(Asteroids *game) {
   settings.depthBits = 24;
   settings.stencilBits = 8;
   settings.antialiasingLevel = 4;
-  settings.majorVersion = 3;
-  settings.minorVersion = 0;
+  settings.majorVersion = 2;
+  settings.minorVersion = 1;
 
   auto window = new sf::RenderWindow(sf::VideoMode(800, 600), "Asteroids", sf::Style::Default, settings);
   auto renderer = new Renderer(window);
@@ -39,9 +39,8 @@ int main() {
   auto game = new Asteroids();
 
   std::thread eng(engine, game);
-  std::thread render(renderer, game);
 
+  renderer(game);
   eng.join();
-  render.join();
   return 0;
 }

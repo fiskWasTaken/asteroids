@@ -6,7 +6,7 @@
 #define ASTEROIDS_SHIP_H
 
 #include "WorldObject.h"
-#include "Player.h"
+#include "../Player.h"
 
 class Ship : WorldObject {
  private:

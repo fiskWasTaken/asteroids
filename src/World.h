@@ -5,9 +5,9 @@
 #ifndef ASTEROIDS_WORLD_H
 #define ASTEROIDS_WORLD_H
 
-#include <entities/WorldObject.h>
 #include <set>
 #include "Collision.h"
+#include "entities/WorldObject.h"
 
 class World {
  private:

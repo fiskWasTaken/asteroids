@@ -36,6 +36,7 @@ void Renderer::renderFrame() {
   auto world = game->getWorld();
   auto vec = sf::Vector2f((float) world->getWidth(), (float) world->getHeight());
   sf::RectangleShape shape(vec);
+  shape.setFillColor(sf::Color::White);
   window->draw(shape);
 
   for (auto entity: world->getObjects()) {
