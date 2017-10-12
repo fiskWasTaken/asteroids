@@ -9,7 +9,7 @@
 
 class Asteroid : public WorldObject {
  private:
-  int health;
+  int health = 0;
 
  public:
   static const WorldObjectClass OBJECT_CLASS = WorldObjectClass::ASTEROID;
@@ -24,8 +24,9 @@ class Asteroid : public WorldObject {
     if (health < 0)
       health = 0;
   }
-  void update() override;
-  void onCollision(WorldObject other) override;
+  void update(World *world) override;
+  void onCollision(WorldObject *other) override;
+  bool isRecyclable() override;
 };
 
 #endif //ASTEROIDS_ASTEROID_H

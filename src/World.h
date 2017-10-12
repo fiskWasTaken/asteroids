@@ -6,21 +6,23 @@
 #define ASTEROIDS_WORLD_H
 
 #include <set>
-#include "Collision.h"
+#include "CollisionModel.h"
 #include "entities/WorldObject.h"
+
+class WorldObject;
 
 class World {
  private:
   std::set<WorldObject*> objects;
   double w;
   double h;
-  Collision collision;
+  CollisionModel collisionModel;
 
  public:
   World(double w, double h) {
     this->w = w;
     this->h = h;
-    this->collision = Collision();
+    this->collisionModel = CollisionModel();
   }
 
   void wrapObject(WorldObject *object);

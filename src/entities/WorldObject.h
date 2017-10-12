@@ -9,8 +9,11 @@
 #include <utility>
 #include <vector>
 #include "WorldObjectClass.h"
+#include "../World.h"
 
 typedef std::pair<sf::Vector2f, sf::Vector2f> BoundingBox;
+
+class World;
 
 class WorldObject {
  protected:
@@ -21,20 +24,31 @@ class WorldObject {
   sf::Vector2f pos;
   sf::Vector2f vel;
   sf::Vector2f acc;
+  float rot;
+
   static const WorldObjectClass OBJECT_CLASS = WorldObjectClass::NONE;
 
-  virtual void update() {
+  virtual void update(World *world) {
 
   }
 
-  virtual void onCollision(WorldObject other) {
+  virtual bool isRecyclable() = 0;
+
+  /**
+   * Invoked when this object is colliding with another object
+   * This will be triggered on each frame in which there is a collision
+   *
+   * @param other the other object this object is colliding with
+   */
+  virtual void onCollision(WorldObject *other) {
 
   }
 
-  WorldObject() {
+  explicit WorldObject() {
     pos = sf::Vector2f(0, 0);
     vel = sf::Vector2f(0, 0);
     acc = sf::Vector2f(0, 0);
+    rot = 0.0F;
   }
 
   inline double getWidth() const { return width; }

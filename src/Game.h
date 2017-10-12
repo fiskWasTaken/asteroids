@@ -6,8 +6,12 @@
 #define ASTEROIDS_GAME_H
 
 #include "World.h"
+
+class SceneInterface;
+
 class Game {
  protected:
+  SceneInterface *scene;
   long tick;
   bool running = false;
 
@@ -17,6 +21,12 @@ class Game {
 
   // methods for game instance to implement
   virtual void main() = 0;
+
+  void setScene(SceneInterface *scene);
+
+  inline SceneInterface *getScene() {
+    return scene;
+  }
 };
 
 #endif //ASTEROIDS_GAME_H

@@ -1,0 +1,12 @@
+//
+// Created by Fisk on 09/10/2017.
+//
+
+#ifndef ASTEROIDS_INPUTACTION_H
+#define ASTEROIDS_INPUTACTION_H
+
+enum InputAction {
+  ACCELERATE, BRAKE, LEFT, RIGHT, FIRE
+};
+
+#endif //ASTEROIDS_INPUTACTION_H

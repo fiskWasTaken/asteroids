@@ -15,7 +15,7 @@ if(NOT MSVC)
     set(PThreadLib -pthread)
 endif()
 
-set(SOURCE_FILES src/main.cpp src/Game.cpp src/Game.h src/Renderer.cpp src/Renderer.h src/entities/Ship.cpp src/entities/Ship.h src/entities/Asteroid.cpp src/entities/Asteroid.h src/entities/WorldObject.cpp src/entities/WorldObject.h src/Player.cpp src/Player.h src/scenes/IScene.cpp src/scenes/IScene.h src/scenes/MainMenu.cpp src/scenes/MainMenu.h src/scenes/GameScene.cpp src/scenes/GameScene.h src/PlayerSession.cpp src/PlayerSession.h src/Controller.cpp src/Controller.h src/entities/ShipWeapon.cpp src/entities/ShipWeapon.h src/entities/Bullet.cpp src/entities/Bullet.h src/World.cpp src/World.h src/Asteroids.cpp src/Asteroids.h src/entities/WorldObjectClass.h src/Collision.cpp src/Collision.h)
+set(SOURCE_FILES src/main.cpp src/Game.cpp src/Game.h src/Renderer.cpp src/Renderer.h src/entities/Ship.cpp src/entities/Ship.h src/entities/Asteroid.cpp src/entities/Asteroid.h src/entities/WorldObject.cpp src/entities/WorldObject.h src/Player.cpp src/Player.h src/scenes/SceneInterface.h src/scenes/MainMenuScene.cpp src/scenes/MainMenuScene.h src/scenes/GameScene.cpp src/scenes/GameScene.h src/PlayerSession.cpp src/PlayerSession.h src/input/Controller.h src/entities/ShipWeapon.cpp src/entities/ShipWeapon.h src/entities/Bullet.cpp src/entities/Bullet.h src/World.cpp src/World.h src/Asteroids.cpp src/Asteroids.h src/entities/WorldObjectClass.h src/CollisionModel.cpp src/CollisionModel.h src/input/InputAction.h src/input/KeyboardController.cpp src/input/KeyboardController.h src/input/ControllerListenerInterface.h)
 add_executable(${PROJECT_NAME_STR} ${SOURCE_FILES})
 
 if (SFML_FOUND)

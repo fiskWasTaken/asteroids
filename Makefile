@@ -150,59 +150,32 @@ src/Asteroids.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Asteroids.cpp.s
 .PHONY : src/Asteroids.cpp.s
 
-src/Collision.o: src/Collision.cpp.o
+src/CollisionModel.o: src/CollisionModel.cpp.o
 
-.PHONY : src/Collision.o
-
-# target to build an object file
-src/Collision.cpp.o:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Collision.cpp.o
-.PHONY : src/Collision.cpp.o
-
-src/Collision.i: src/Collision.cpp.i
-
-.PHONY : src/Collision.i
-
-# target to preprocess a source file
-src/Collision.cpp.i:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Collision.cpp.i
-.PHONY : src/Collision.cpp.i
-
-src/Collision.s: src/Collision.cpp.s
-
-.PHONY : src/Collision.s
-
-# target to generate assembly for a file
-src/Collision.cpp.s:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Collision.cpp.s
-.PHONY : src/Collision.cpp.s
-
-src/Controller.o: src/Controller.cpp.o
-
-.PHONY : src/Controller.o
+.PHONY : src/CollisionModel.o
 
 # target to build an object file
-src/Controller.cpp.o:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Controller.cpp.o
-.PHONY : src/Controller.cpp.o
+src/CollisionModel.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/CollisionModel.cpp.o
+.PHONY : src/CollisionModel.cpp.o
 
-src/Controller.i: src/Controller.cpp.i
+src/CollisionModel.i: src/CollisionModel.cpp.i
 
-.PHONY : src/Controller.i
+.PHONY : src/CollisionModel.i
 
 # target to preprocess a source file
-src/Controller.cpp.i:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Controller.cpp.i
-.PHONY : src/Controller.cpp.i
+src/CollisionModel.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/CollisionModel.cpp.i
+.PHONY : src/CollisionModel.cpp.i
 
-src/Controller.s: src/Controller.cpp.s
+src/CollisionModel.s: src/CollisionModel.cpp.s
 
-.PHONY : src/Controller.s
+.PHONY : src/CollisionModel.s
 
 # target to generate assembly for a file
-src/Controller.cpp.s:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Controller.cpp.s
-.PHONY : src/Controller.cpp.s
+src/CollisionModel.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/CollisionModel.cpp.s
+.PHONY : src/CollisionModel.cpp.s
 
 src/Game.o: src/Game.cpp.o
 
@@ -474,6 +447,33 @@ src/entities/WorldObject.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/WorldObject.cpp.s
 .PHONY : src/entities/WorldObject.cpp.s
 
+src/input/KeyboardController.o: src/input/KeyboardController.cpp.o
+
+.PHONY : src/input/KeyboardController.o
+
+# target to build an object file
+src/input/KeyboardController.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/input/KeyboardController.cpp.o
+.PHONY : src/input/KeyboardController.cpp.o
+
+src/input/KeyboardController.i: src/input/KeyboardController.cpp.i
+
+.PHONY : src/input/KeyboardController.i
+
+# target to preprocess a source file
+src/input/KeyboardController.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/input/KeyboardController.cpp.i
+.PHONY : src/input/KeyboardController.cpp.i
+
+src/input/KeyboardController.s: src/input/KeyboardController.cpp.s
+
+.PHONY : src/input/KeyboardController.s
+
+# target to generate assembly for a file
+src/input/KeyboardController.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/input/KeyboardController.cpp.s
+.PHONY : src/input/KeyboardController.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -528,59 +528,32 @@ src/scenes/GameScene.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/GameScene.cpp.s
 .PHONY : src/scenes/GameScene.cpp.s
 
-src/scenes/IScene.o: src/scenes/IScene.cpp.o
+src/scenes/MainMenuScene.o: src/scenes/MainMenuScene.cpp.o
 
-.PHONY : src/scenes/IScene.o
-
-# target to build an object file
-src/scenes/IScene.cpp.o:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/IScene.cpp.o
-.PHONY : src/scenes/IScene.cpp.o
-
-src/scenes/IScene.i: src/scenes/IScene.cpp.i
-
-.PHONY : src/scenes/IScene.i
-
-# target to preprocess a source file
-src/scenes/IScene.cpp.i:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/IScene.cpp.i
-.PHONY : src/scenes/IScene.cpp.i
-
-src/scenes/IScene.s: src/scenes/IScene.cpp.s
-
-.PHONY : src/scenes/IScene.s
-
-# target to generate assembly for a file
-src/scenes/IScene.cpp.s:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/IScene.cpp.s
-.PHONY : src/scenes/IScene.cpp.s
-
-src/scenes/MainMenu.o: src/scenes/MainMenu.cpp.o
-
-.PHONY : src/scenes/MainMenu.o
+.PHONY : src/scenes/MainMenuScene.o
 
 # target to build an object file
-src/scenes/MainMenu.cpp.o:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/MainMenu.cpp.o
-.PHONY : src/scenes/MainMenu.cpp.o
+src/scenes/MainMenuScene.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/MainMenuScene.cpp.o
+.PHONY : src/scenes/MainMenuScene.cpp.o
 
-src/scenes/MainMenu.i: src/scenes/MainMenu.cpp.i
+src/scenes/MainMenuScene.i: src/scenes/MainMenuScene.cpp.i
 
-.PHONY : src/scenes/MainMenu.i
+.PHONY : src/scenes/MainMenuScene.i
 
 # target to preprocess a source file
-src/scenes/MainMenu.cpp.i:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/MainMenu.cpp.i
-.PHONY : src/scenes/MainMenu.cpp.i
+src/scenes/MainMenuScene.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/MainMenuScene.cpp.i
+.PHONY : src/scenes/MainMenuScene.cpp.i
 
-src/scenes/MainMenu.s: src/scenes/MainMenu.cpp.s
+src/scenes/MainMenuScene.s: src/scenes/MainMenuScene.cpp.s
 
-.PHONY : src/scenes/MainMenu.s
+.PHONY : src/scenes/MainMenuScene.s
 
 # target to generate assembly for a file
-src/scenes/MainMenu.cpp.s:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/MainMenu.cpp.s
-.PHONY : src/scenes/MainMenu.cpp.s
+src/scenes/MainMenuScene.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/MainMenuScene.cpp.s
+.PHONY : src/scenes/MainMenuScene.cpp.s
 
 # Help Target
 help:
@@ -594,12 +567,9 @@ help:
 	@echo "... src/Asteroids.o"
 	@echo "... src/Asteroids.i"
 	@echo "... src/Asteroids.s"
-	@echo "... src/Collision.o"
-	@echo "... src/Collision.i"
-	@echo "... src/Collision.s"
-	@echo "... src/Controller.o"
-	@echo "... src/Controller.i"
-	@echo "... src/Controller.s"
+	@echo "... src/CollisionModel.o"
+	@echo "... src/CollisionModel.i"
+	@echo "... src/CollisionModel.s"
 	@echo "... src/Game.o"
 	@echo "... src/Game.i"
 	@echo "... src/Game.s"
@@ -630,18 +600,18 @@ help:
 	@echo "... src/entities/WorldObject.o"
 	@echo "... src/entities/WorldObject.i"
 	@echo "... src/entities/WorldObject.s"
+	@echo "... src/input/KeyboardController.o"
+	@echo "... src/input/KeyboardController.i"
+	@echo "... src/input/KeyboardController.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
 	@echo "... src/scenes/GameScene.o"
 	@echo "... src/scenes/GameScene.i"
 	@echo "... src/scenes/GameScene.s"
-	@echo "... src/scenes/IScene.o"
-	@echo "... src/scenes/IScene.i"
-	@echo "... src/scenes/IScene.s"
-	@echo "... src/scenes/MainMenu.o"
-	@echo "... src/scenes/MainMenu.i"
-	@echo "... src/scenes/MainMenu.s"
+	@echo "... src/scenes/MainMenuScene.o"
+	@echo "... src/scenes/MainMenuScene.i"
+	@echo "... src/scenes/MainMenuScene.s"
 .PHONY : help
 
 

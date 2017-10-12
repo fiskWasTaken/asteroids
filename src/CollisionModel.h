@@ -8,7 +8,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <vector>
 
-class Collision {
+class CollisionModel {
  public:
   bool check(std::vector<sf::Vector2f> a, std::vector<sf::Vector2f> b);
 };

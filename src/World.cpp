@@ -27,7 +27,11 @@ void World::checkCollision(WorldObject *a) {
 
     auto points_b = b->getPoints();
 
-    bool result = collision.check(points_a, points_b);
+    bool result = collisionModel.check(points_a, points_b);
+
+    if (result) {
+      a->onCollision(b);
+    }
   }
 }
 
@@ -35,6 +39,22 @@ void World::update() {
   for (auto object: objects) {
     wrapObject(object);
     checkCollision(object);
-    object->update();
+    object->update(this);
+  }
+
+  std::set<WorldObject*>::iterator tmp;
+
+  for (auto it = objects.begin(); it != objects.end();) {
+    auto object = *it;
+
+    if (object->isRecyclable()) {
+      tmp = it;
+      ++tmp;
+      objects.erase(it);
+      delete(object);
+      it = tmp;
+    } else {
+      ++it;
+    }
   }
 }

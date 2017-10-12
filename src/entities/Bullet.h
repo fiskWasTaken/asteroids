@@ -7,17 +7,18 @@
 
 #include "WorldObject.h"
 
-class Bullet : WorldObject {
+class Bullet : public WorldObject {
   int lifetime = 100;
 
  public:
   static const WorldObjectClass OBJECT_CLASS = WorldObjectClass::BULLET;
 
-  Bullet() {
-
+  bool isRecyclable() override {
+    return lifetime < 0;
   }
 
-  void update() {
+  void update(World *world) override {
+    pos += vel;
     lifetime--;
   };
 };

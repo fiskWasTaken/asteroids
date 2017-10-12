@@ -6,7 +6,7 @@
 #define ASTEROIDS_PLAYER_H
 
 #include <string>
-#include "Controller.h"
+#include "input/Controller.h"
 
 class Player {
  public:
@@ -18,7 +18,7 @@ class Player {
     this->controller = controller;
   }
 
-  inline const Controller *getController() const {
+  inline Controller *getController() {
     return controller;
   }
 

@@ -6,8 +6,12 @@
 #define ASTEROIDS_ASTEROIDS_H
 
 #include <vector>
+#include <SFML/Window/Keyboard.hpp>
 #include "Game.h"
 #include "PlayerSession.h"
+
+class Game;
+
 class Asteroids : public Game {
  private:
   World *world;
@@ -15,7 +19,7 @@ class Asteroids : public Game {
 
  public:
   inline Asteroids(): Game() {
-    world = new World(512, 512);
+    world = new World(800, 600);
     sessions = new std::vector<PlayerSession*>();
   }
 
@@ -27,7 +31,9 @@ class Asteroids : public Game {
     return sessions;
   }
 
-  void main();
+  void main() override;
+
+  Controller *getDefaultController();
 };
 
 #endif //ASTEROIDS_ASTEROIDS_H
