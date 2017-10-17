@@ -4,7 +4,7 @@
 
 #include "World.h"
 
-void World::wrapObject(WorldObject *object) {
+void World::wrapObject(AbstractWorldObject *object) {
   auto pos = &object->pos;
 
   if (pos->x < 0)
@@ -18,7 +18,9 @@ void World::wrapObject(WorldObject *object) {
     pos->y -= h;
 }
 
-void World::checkCollision(WorldObject *a) {
+void World::checkCollision(AbstractWorldObject *a) {
+  return; // collision checking is not done yet
+
   auto points_a = a->getPoints();
 
   for (auto b: objects) {
@@ -39,10 +41,10 @@ void World::update() {
   for (auto object: objects) {
     wrapObject(object);
     checkCollision(object);
-    object->update(this);
+    object->update();
   }
 
-  std::set<WorldObject*>::iterator tmp;
+  std::set<AbstractWorldObject*>::iterator tmp;
 
   for (auto it = objects.begin(); it != objects.end();) {
     auto object = *it;

@@ -204,6 +204,33 @@ src/Game.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Game.cpp.s
 .PHONY : src/Game.cpp.s
 
+src/HighScores.o: src/HighScores.cpp.o
+
+.PHONY : src/HighScores.o
+
+# target to build an object file
+src/HighScores.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/HighScores.cpp.o
+.PHONY : src/HighScores.cpp.o
+
+src/HighScores.i: src/HighScores.cpp.i
+
+.PHONY : src/HighScores.i
+
+# target to preprocess a source file
+src/HighScores.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/HighScores.cpp.i
+.PHONY : src/HighScores.cpp.i
+
+src/HighScores.s: src/HighScores.cpp.s
+
+.PHONY : src/HighScores.s
+
+# target to generate assembly for a file
+src/HighScores.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/HighScores.cpp.s
+.PHONY : src/HighScores.cpp.s
+
 src/Player.o: src/Player.cpp.o
 
 .PHONY : src/Player.o
@@ -311,6 +338,33 @@ src/World.s: src/World.cpp.s
 src/World.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/World.cpp.s
 .PHONY : src/World.cpp.s
+
+src/entities/AbstractWorldObject.o: src/entities/AbstractWorldObject.cpp.o
+
+.PHONY : src/entities/AbstractWorldObject.o
+
+# target to build an object file
+src/entities/AbstractWorldObject.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/AbstractWorldObject.cpp.o
+.PHONY : src/entities/AbstractWorldObject.cpp.o
+
+src/entities/AbstractWorldObject.i: src/entities/AbstractWorldObject.cpp.i
+
+.PHONY : src/entities/AbstractWorldObject.i
+
+# target to preprocess a source file
+src/entities/AbstractWorldObject.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/AbstractWorldObject.cpp.i
+.PHONY : src/entities/AbstractWorldObject.cpp.i
+
+src/entities/AbstractWorldObject.s: src/entities/AbstractWorldObject.cpp.s
+
+.PHONY : src/entities/AbstractWorldObject.s
+
+# target to generate assembly for a file
+src/entities/AbstractWorldObject.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/AbstractWorldObject.cpp.s
+.PHONY : src/entities/AbstractWorldObject.cpp.s
 
 src/entities/Asteroid.o: src/entities/Asteroid.cpp.o
 
@@ -420,33 +474,6 @@ src/entities/ShipWeapon.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/ShipWeapon.cpp.s
 .PHONY : src/entities/ShipWeapon.cpp.s
 
-src/entities/WorldObject.o: src/entities/WorldObject.cpp.o
-
-.PHONY : src/entities/WorldObject.o
-
-# target to build an object file
-src/entities/WorldObject.cpp.o:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/WorldObject.cpp.o
-.PHONY : src/entities/WorldObject.cpp.o
-
-src/entities/WorldObject.i: src/entities/WorldObject.cpp.i
-
-.PHONY : src/entities/WorldObject.i
-
-# target to preprocess a source file
-src/entities/WorldObject.cpp.i:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/WorldObject.cpp.i
-.PHONY : src/entities/WorldObject.cpp.i
-
-src/entities/WorldObject.s: src/entities/WorldObject.cpp.s
-
-.PHONY : src/entities/WorldObject.s
-
-# target to generate assembly for a file
-src/entities/WorldObject.cpp.s:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/WorldObject.cpp.s
-.PHONY : src/entities/WorldObject.cpp.s
-
 src/input/KeyboardController.o: src/input/KeyboardController.cpp.o
 
 .PHONY : src/input/KeyboardController.o
@@ -501,6 +528,33 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/scenes/GameOverScene.o: src/scenes/GameOverScene.cpp.o
+
+.PHONY : src/scenes/GameOverScene.o
+
+# target to build an object file
+src/scenes/GameOverScene.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/GameOverScene.cpp.o
+.PHONY : src/scenes/GameOverScene.cpp.o
+
+src/scenes/GameOverScene.i: src/scenes/GameOverScene.cpp.i
+
+.PHONY : src/scenes/GameOverScene.i
+
+# target to preprocess a source file
+src/scenes/GameOverScene.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/GameOverScene.cpp.i
+.PHONY : src/scenes/GameOverScene.cpp.i
+
+src/scenes/GameOverScene.s: src/scenes/GameOverScene.cpp.s
+
+.PHONY : src/scenes/GameOverScene.s
+
+# target to generate assembly for a file
+src/scenes/GameOverScene.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/GameOverScene.cpp.s
+.PHONY : src/scenes/GameOverScene.cpp.s
+
 src/scenes/GameScene.o: src/scenes/GameScene.cpp.o
 
 .PHONY : src/scenes/GameScene.o
@@ -527,6 +581,33 @@ src/scenes/GameScene.s: src/scenes/GameScene.cpp.s
 src/scenes/GameScene.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/GameScene.cpp.s
 .PHONY : src/scenes/GameScene.cpp.s
+
+src/scenes/HighScoreTableScene.o: src/scenes/HighScoreTableScene.cpp.o
+
+.PHONY : src/scenes/HighScoreTableScene.o
+
+# target to build an object file
+src/scenes/HighScoreTableScene.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/HighScoreTableScene.cpp.o
+.PHONY : src/scenes/HighScoreTableScene.cpp.o
+
+src/scenes/HighScoreTableScene.i: src/scenes/HighScoreTableScene.cpp.i
+
+.PHONY : src/scenes/HighScoreTableScene.i
+
+# target to preprocess a source file
+src/scenes/HighScoreTableScene.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/HighScoreTableScene.cpp.i
+.PHONY : src/scenes/HighScoreTableScene.cpp.i
+
+src/scenes/HighScoreTableScene.s: src/scenes/HighScoreTableScene.cpp.s
+
+.PHONY : src/scenes/HighScoreTableScene.s
+
+# target to generate assembly for a file
+src/scenes/HighScoreTableScene.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/HighScoreTableScene.cpp.s
+.PHONY : src/scenes/HighScoreTableScene.cpp.s
 
 src/scenes/MainMenuScene.o: src/scenes/MainMenuScene.cpp.o
 
@@ -573,6 +654,9 @@ help:
 	@echo "... src/Game.o"
 	@echo "... src/Game.i"
 	@echo "... src/Game.s"
+	@echo "... src/HighScores.o"
+	@echo "... src/HighScores.i"
+	@echo "... src/HighScores.s"
 	@echo "... src/Player.o"
 	@echo "... src/Player.i"
 	@echo "... src/Player.s"
@@ -585,6 +669,9 @@ help:
 	@echo "... src/World.o"
 	@echo "... src/World.i"
 	@echo "... src/World.s"
+	@echo "... src/entities/AbstractWorldObject.o"
+	@echo "... src/entities/AbstractWorldObject.i"
+	@echo "... src/entities/AbstractWorldObject.s"
 	@echo "... src/entities/Asteroid.o"
 	@echo "... src/entities/Asteroid.i"
 	@echo "... src/entities/Asteroid.s"
@@ -597,18 +684,21 @@ help:
 	@echo "... src/entities/ShipWeapon.o"
 	@echo "... src/entities/ShipWeapon.i"
 	@echo "... src/entities/ShipWeapon.s"
-	@echo "... src/entities/WorldObject.o"
-	@echo "... src/entities/WorldObject.i"
-	@echo "... src/entities/WorldObject.s"
 	@echo "... src/input/KeyboardController.o"
 	@echo "... src/input/KeyboardController.i"
 	@echo "... src/input/KeyboardController.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/scenes/GameOverScene.o"
+	@echo "... src/scenes/GameOverScene.i"
+	@echo "... src/scenes/GameOverScene.s"
 	@echo "... src/scenes/GameScene.o"
 	@echo "... src/scenes/GameScene.i"
 	@echo "... src/scenes/GameScene.s"
+	@echo "... src/scenes/HighScoreTableScene.o"
+	@echo "... src/scenes/HighScoreTableScene.i"
+	@echo "... src/scenes/HighScoreTableScene.s"
 	@echo "... src/scenes/MainMenuScene.o"
 	@echo "... src/scenes/MainMenuScene.i"
 	@echo "... src/scenes/MainMenuScene.s"

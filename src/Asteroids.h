@@ -9,6 +9,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include "Game.h"
 #include "PlayerSession.h"
+#include "HighScores.h"
 
 class Game;
 
@@ -16,6 +17,7 @@ class Asteroids : public Game {
  private:
   World *world;
   std::vector<PlayerSession*> *sessions;
+  HighScores highScores;
 
  public:
   inline Asteroids(): Game() {
@@ -32,6 +34,10 @@ class Asteroids : public Game {
   }
 
   void main() override;
+
+  inline HighScores getHighScores() const {
+    return highScores;
+  }
 
   Controller *getDefaultController();
 };

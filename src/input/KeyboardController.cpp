@@ -30,4 +30,9 @@ void KeyboardController::poll() {
     // Fire
     emit(InputAction::FIRE);
   }
+
+  if (sf::Keyboard::isKeyPressed(map[InputAction::ALTFIRE])) {
+    // Fire
+    emit(InputAction::ALTFIRE);
+  }
 }

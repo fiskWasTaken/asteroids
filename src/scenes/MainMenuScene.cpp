@@ -4,8 +4,12 @@
 
 #include "MainMenuScene.h"
 #include "GameScene.h"
+#include "HighScoreTableScene.h"
 
-void drawIntroScreen(sf::RenderWindow *window, sf::Font *font) {
+void MainMenuScene::render(Renderer *renderer) {
+  auto window = renderer->getWindow();
+  auto font = renderer->getFont();
+
   sf::Text startTitleText("Asteroids", *font, 16);
   sf::Text startPromptText("Press C to start", *font, 16);
   sf::Text startLicenseText("fisk, 2017", *font, 16);
@@ -22,12 +26,6 @@ void drawIntroScreen(sf::RenderWindow *window, sf::Font *font) {
   window->draw(startLicenseText);
 }
 
-void MainMenuScene::render(Renderer *renderer) {
-  auto window = renderer->getWindow();
-
-  drawIntroScreen(window, renderer->getFont());
-}
-
 void MainMenuScene::handleEvents() {
   controller->poll();
 }
@@ -35,6 +33,10 @@ void MainMenuScene::handleEvents() {
 void MainMenuScene::onAction(InputAction action) {
   if (action == InputAction::FIRE) {
     game->setScene(new GameScene(game));
+  }
+
+  if (action == InputAction::ALTFIRE) {
+    game->setScene(new HighScoreTableScene(game));
   }
 }
 

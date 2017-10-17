@@ -2,38 +2,14 @@
 // Created by fisk on 21/09/17.
 //
 
+#include <sstream>
 #include "GameScene.h"
 #include "../entities/Asteroid.h"
 #include "../entities/Ship.h"
 
-void drawWorld(sf::RenderWindow *window, World *world) {
-  for (auto entity: world->getObjects()) {
-    sf::RectangleShape shep(sf::Vector2f((float) entity->getWidth(), (float) entity->getHeight()));
-    shep.setFillColor(sf::Color::Transparent);
-    shep.setOutlineColor(sf::Color::Green);
-    shep.setOutlineThickness(1.0F);
-    shep.setPosition(entity->pos);
-    shep.setOrigin(entity->getWidth() / 2, entity->getHeight() / 2);
-    shep.setRotation(entity->rot);
-    window->draw(shep);
-  }
-}
-
-void drawHud(sf::RenderWindow *window, sf::Font *font) {
-  sf::Text scoreText("Score: 0", *font, 16);
-  sf::Text livesText("Lives: 3", *font, 16);
-
-  scoreText.setPosition(4, 0);
-  livesText.setPosition(4, 14);
-
-  window->draw(scoreText);
-  window->draw(livesText);
-}
-
 void GameScene::render(Renderer *renderer) {
   auto game = renderer->getGame();
   auto window = renderer->getWindow();
-  auto font = renderer->getFont();
 
   auto world = game->getWorld();
   auto vec = sf::Vector2f((float) world->getWidth(), (float) world->getHeight());
@@ -43,8 +19,8 @@ void GameScene::render(Renderer *renderer) {
 
   auto session = game->getSessions()[0];
 
-  drawWorld(window, world);
-  drawHud(window, font);
+  drawWorld(renderer);
+  drawHud(renderer);
 }
 
 void GameScene::handleEvents() {
@@ -63,7 +39,7 @@ void GameScene::onVisible() {
 
   auto world = game->getWorld();
 
-  auto ast = new Asteroid();
+  auto ast = new Asteroid(world);
   ast->pos.x = 5;
   ast->pos.y = 5;
   ast->vel.x = 2;
@@ -71,7 +47,7 @@ void GameScene::onVisible() {
   ast->setHeight(32);
   ast->setWidth(32);
 
-  auto ast2 = new Asteroid();
+  auto ast2 = new Asteroid(world);
   ast2->pos.x = 55;
   ast2->pos.y = 300;
   ast2->vel.x = -1.5F;
@@ -79,7 +55,7 @@ void GameScene::onVisible() {
   ast2->setHeight(32);
   ast2->setWidth(32);
 
-  auto ast3 = new Asteroid();
+  auto ast3 = new Asteroid(world);
   ast3->pos.x = 200;
   ast3->pos.y = 300;
   ast3->vel.x = -1.5F;
@@ -87,24 +63,76 @@ void GameScene::onVisible() {
   ast3->setHeight(32);
   ast3->setWidth(32);
 
-  auto ship = new Ship(player);
-  ship->pos.x = 100;
-  ship->pos.y = 100;
-  ship->setHeight(16);
-  ship->setWidth(16);
-
   auto controller = game->getDefaultController();
   player->setController(controller);
-  controller->setDelegate(ship);
 
-  world->pushObject(ship);
   world->pushObject(ast);
   world->pushObject(ast2);
   world->pushObject(ast3);
 
+  session->spawnShip(world);
+
   game->getSessions()->push_back(session);
+
+  // playerSession 2 stuff -- cool, it works, but we don't want to do this just yet :>
+//  auto player2 = new Player("Player 2");
+//  auto session2 = new PlayerSession(player2);
+//  auto ship2 = new Ship(player2);
+//  ship2->pos.x = 200;
+//  ship2->pos.y = 100;
+//  ship2->setWidth(16);
+//  ship2->setHeight(16);
+//
+//  auto controller2 = new KeyboardController();
+//  controller2->assignKeyForAction(InputAction::ACCELERATE, sf::Keyboard::Up);
+//  controller2->assignKeyForAction(InputAction::BRAKE, sf::Keyboard::Down);
+//  controller2->assignKeyForAction(InputAction::LEFT, sf::Keyboard::Left);
+//  controller2->assignKeyForAction(InputAction::RIGHT, sf::Keyboard::Right);
+//  controller2->assignKeyForAction(InputAction::FIRE, sf::Keyboard::RShift);
+//  controller2->setDelegate(ship2);
+//
+//  player2->setController(controller2);
+//
+//  world->pushObject(ship2);
+//  game->getSessions()->push_back(session2);
 }
 
 void GameScene::onDestroy() {
 
+}
+
+void GameScene::drawHud(Renderer *renderer) {
+  auto font = renderer->getFont();
+  auto window = renderer->getWindow();
+  int offset = 4;
+
+  for (auto session: *game->getSessions()) {
+    std::stringstream score;
+    std::stringstream lives;
+    score << "Score: " << session->getScore();
+    lives << "Lives: " << session->getLives();
+
+    sf::Text nameText(session->getPlayer()->getName(), *font, 16);
+    sf::Text scoreText(score.str(), *font, 16);
+    sf::Text livesText(lives.str(), *font, 16);
+
+    nameText.setPosition(offset, 0);
+    scoreText.setPosition(offset, 14);
+    livesText.setPosition(offset, 28);
+
+    window->draw(nameText);
+    window->draw(scoreText);
+    window->draw(livesText);
+
+    offset += 64;
+  }
+}
+void GameScene::drawWorld(Renderer *renderer) {
+  auto world = game->getWorld();
+  auto window = renderer->getWindow();
+
+  for (auto entity: world->getObjects()) {
+    auto shape = entity->getDrawable();
+    window->draw(*shape);
+  }
 }

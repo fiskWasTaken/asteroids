@@ -16,6 +16,9 @@ class GameScene : public SceneInterface {
   void render(Renderer *renderer) override;
   void onVisible() override;
   void onDestroy() override;
+
+  void drawHud(Renderer *renderer);
+  void drawWorld(Renderer *renderer);
 };
 
 #endif //ASTEROIDS_SCENES_GAMESCENE_H

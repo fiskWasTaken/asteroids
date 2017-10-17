@@ -8,6 +8,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <utility>
 #include <vector>
+#include <SFML/Graphics/Shape.hpp>
 #include "WorldObjectClass.h"
 #include "../World.h"
 
@@ -15,10 +16,11 @@ typedef std::pair<sf::Vector2f, sf::Vector2f> BoundingBox;
 
 class World;
 
-class WorldObject {
+class AbstractWorldObject {
  protected:
   double width = 1;
   double height = 1;
+  World *world;
 
  public:
   sf::Vector2f pos;
@@ -28,10 +30,8 @@ class WorldObject {
 
   static const WorldObjectClass OBJECT_CLASS = WorldObjectClass::NONE;
 
-  virtual void update(World *world) {
-
-  }
-
+  virtual void update() = 0;
+  virtual sf::Drawable *getDrawable() = 0;
   virtual bool isRecyclable() = 0;
 
   /**
@@ -40,11 +40,12 @@ class WorldObject {
    *
    * @param other the other object this object is colliding with
    */
-  virtual void onCollision(WorldObject *other) {
+  virtual void onCollision(AbstractWorldObject *other) {
 
   }
 
-  explicit WorldObject() {
+  explicit AbstractWorldObject(World *world) {
+    this->world = world;
     pos = sf::Vector2f(0, 0);
     vel = sf::Vector2f(0, 0);
     acc = sf::Vector2f(0, 0);
@@ -52,9 +53,9 @@ class WorldObject {
   }
 
   inline double getWidth() const { return width; }
-  inline void setWidth(double width) { WorldObject::width = width; }
+  inline void setWidth(double width) { AbstractWorldObject::width = width; }
   inline double getHeight() const { return height; }
-  inline void setHeight(double height) { WorldObject::height = height; }
+  inline void setHeight(double height) { AbstractWorldObject::height = height; }
 
   BoundingBox getBoundingBox() {
     return BoundingBox(

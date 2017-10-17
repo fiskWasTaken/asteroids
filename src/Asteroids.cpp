@@ -16,6 +16,7 @@ Controller *Asteroids::getDefaultController() {
   controller->assignKeyForAction(InputAction::LEFT, sf::Keyboard::A);
   controller->assignKeyForAction(InputAction::RIGHT, sf::Keyboard::D);
   controller->assignKeyForAction(InputAction::FIRE, sf::Keyboard::C);
+  controller->assignKeyForAction(InputAction::ALTFIRE, sf::Keyboard::E);
 
   return controller;
 }

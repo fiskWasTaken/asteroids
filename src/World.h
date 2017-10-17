@@ -7,13 +7,13 @@
 
 #include <set>
 #include "CollisionModel.h"
-#include "entities/WorldObject.h"
+#include "entities/AbstractWorldObject.h"
 
-class WorldObject;
+class AbstractWorldObject;
 
 class World {
  private:
-  std::set<WorldObject*> objects;
+  std::set<AbstractWorldObject*> objects;
   double w;
   double h;
   CollisionModel collisionModel;
@@ -25,19 +25,19 @@ class World {
     this->collisionModel = CollisionModel();
   }
 
-  void wrapObject(WorldObject *object);
+  void wrapObject(AbstractWorldObject *object);
 
   void update();
 
-  bool pushObject(WorldObject *object) {
+  bool pushObject(AbstractWorldObject *object) {
     return objects.insert(object).second;
   }
 
-  bool popObject(WorldObject *object) {
+  bool popObject(AbstractWorldObject *object) {
     return objects.erase(object) != 0;
   }
 
-  const std::set<WorldObject *> &getObjects() const {
+  const std::set<AbstractWorldObject *> &getObjects() const {
     return objects;
   }
 
@@ -47,7 +47,7 @@ class World {
   double getHeight() const {
     return h;
   }
-  void checkCollision(WorldObject *a);
+  void checkCollision(AbstractWorldObject *a);
 };
 
 #endif //ASTEROIDS_WORLD_H
