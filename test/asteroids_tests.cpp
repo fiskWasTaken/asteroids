@@ -1,26 +1,11 @@
 #include <gtest/gtest.h>
-#include <entities/WorldObject.h>
 #include <entities/Asteroid.cpp>
 #include <World.cpp>
-
-TEST(asteroid, bounding_box) {
-  auto asteroid = Asteroid();
-  asteroid.setHeight(4);
-  asteroid.setWidth(6);
-  asteroid.pos.x = 10;
-  asteroid.pos.y = 10;
-
-  auto vecs = asteroid.getBoundingBox();
-  EXPECT_EQ(7, vecs.first.x);
-  EXPECT_EQ(8, vecs.first.y);
-  EXPECT_EQ(13, vecs.second.x);
-  EXPECT_EQ(12, vecs.second.y);
-}
 
 TEST(game_world, obj_wrap) {
   auto world = World(10, 10);
 
-  auto object = new Asteroid();
+  auto object = new Asteroid(&world);
   object->pos.x = 5;
   object->pos.y = 5;
 
@@ -52,8 +37,8 @@ TEST(game_world, obj_wrap) {
 TEST(game_world, obj_management) {
   auto world = World(10, 10);
 
-  auto object = Asteroid();
-  auto object2 = Asteroid();
+  auto object = Asteroid(&world);
+  auto object2 = Asteroid(&world);
 
   EXPECT_TRUE(world.pushObject(&object));
   EXPECT_FALSE(world.pushObject(&object));

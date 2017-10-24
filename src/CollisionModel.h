@@ -7,10 +7,11 @@
 
 #include <SFML/System/Vector2.hpp>
 #include <vector>
+#include <entities/WorldObjectInterface.h>
 
 class CollisionModel {
  public:
-  bool check(std::vector<sf::Vector2f> a, std::vector<sf::Vector2f> b);
+  bool check(WorldObjectInterface *a, WorldObjectInterface *b);
 };
 
 #endif //ASTEROIDS_COLLISION_H

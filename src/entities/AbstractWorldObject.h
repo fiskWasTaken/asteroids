@@ -11,24 +11,20 @@
 #include <SFML/Graphics/Shape.hpp>
 #include "WorldObjectClass.h"
 #include "../World.h"
+#include "WorldObjectInterface.h"
 
 typedef std::pair<sf::Vector2f, sf::Vector2f> BoundingBox;
 
 class World;
 
-class AbstractWorldObject {
+class AbstractWorldObject : public WorldObjectInterface {
  protected:
-  double width = 1;
-  double height = 1;
   World *world;
 
  public:
-  sf::Vector2f pos;
-  sf::Vector2f vel;
-  sf::Vector2f acc;
-  float rot;
-
-  static const WorldObjectClass OBJECT_CLASS = WorldObjectClass::NONE;
+  virtual WorldObjectClass getClass() {
+    return WorldObjectClass::NONE;
+  }
 
   virtual void update() = 0;
   virtual sf::Drawable *getDrawable() = 0;
@@ -50,29 +46,6 @@ class AbstractWorldObject {
     vel = sf::Vector2f(0, 0);
     acc = sf::Vector2f(0, 0);
     rot = 0.0F;
-  }
-
-  inline double getWidth() const { return width; }
-  inline void setWidth(double width) { AbstractWorldObject::width = width; }
-  inline double getHeight() const { return height; }
-  inline void setHeight(double height) { AbstractWorldObject::height = height; }
-
-  BoundingBox getBoundingBox() {
-    return BoundingBox(
-        sf::Vector2f((float) (pos.x - width / 2), (float) (pos.y - height / 2)),
-        sf::Vector2f((float) (pos.x + width / 2), (float) (pos.y + height / 2))
-    );
-  }
-
-  std::vector<sf::Vector2f> getPoints() {
-    std::vector<sf::Vector2f> vector;
-
-    vector.push_back(sf::Vector2f((float) (pos.x - width / 2), (float) (pos.y - height / 2)));
-    vector.push_back(sf::Vector2f((float) (pos.x + width / 2), (float) (pos.y + height / 2)));
-    vector.push_back(sf::Vector2f((float) (pos.x + width / 2), (float) (pos.y - height / 2)));
-    vector.push_back(sf::Vector2f((float) (pos.x - width / 2), (float) (pos.y + height / 2)));
-
-    return vector;
   }
 };
 

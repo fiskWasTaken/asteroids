@@ -11,7 +11,9 @@ class Bullet : public AbstractWorldObject {
   int lifetime = 100;
 
  public:
-  static const WorldObjectClass OBJECT_CLASS = WorldObjectClass::BULLET;
+  WorldObjectClass getClass() {
+    return WorldObjectClass::BULLET;
+  }
 
   sf::Drawable *getDrawable() override;
 

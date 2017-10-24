@@ -6,6 +6,11 @@
 #include "KeyboardController.h"
 
 void KeyboardController::poll() {
+  if (sf::Keyboard::isKeyPressed(map[InputAction::ALTFIRE])) {
+    // Fire
+    emit(InputAction::ALTFIRE);
+  }
+
   if (sf::Keyboard::isKeyPressed(map[InputAction::LEFT])) {
     // Left
     emit(InputAction::LEFT);
@@ -29,10 +34,5 @@ void KeyboardController::poll() {
   if (sf::Keyboard::isKeyPressed(map[InputAction::FIRE])) {
     // Fire
     emit(InputAction::FIRE);
-  }
-
-  if (sf::Keyboard::isKeyPressed(map[InputAction::ALTFIRE])) {
-    // Fire
-    emit(InputAction::ALTFIRE);
   }
 }

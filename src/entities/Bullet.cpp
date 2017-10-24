@@ -7,12 +7,12 @@
 #include "Bullet.h"
 
 sf::Drawable *Bullet::getDrawable() {
-  auto shep = new sf::CircleShape(getWidth(), 3);
+  auto shep = new sf::CircleShape(1, 3);
   shep->setFillColor(sf::Color::Transparent);
   shep->setOutlineColor(sf::Color::Green);
   shep->setOutlineThickness(1.0F);
   shep->setPosition(pos);
-  shep->setOrigin(getWidth() / 2, getHeight() / 2);
+  shep->setOrigin(0, 0);
   shep->setRotation(rot + 90);
   return shep;
 }

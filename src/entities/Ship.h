@@ -20,10 +20,16 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
   bool isDestroyed = false;
 
  public:
-  static const WorldObjectClass OBJECT_CLASS = WorldObjectClass::SHIP;
+  WorldObjectClass getClass() {
+    return WorldObjectClass::SHIP;
+  }
 
   explicit Ship(World *world, PlayerSession *playerSession) : AbstractWorldObject(world) {
     this->playerSession = playerSession;
+
+    points.push_back(sf::Vector2f(20, 10));
+    points.push_back(sf::Vector2f(0, 0));
+    points.push_back(sf::Vector2f(0, 20));
   }
 
   void onAction(InputAction action) override;

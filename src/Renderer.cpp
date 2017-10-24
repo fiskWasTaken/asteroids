@@ -52,7 +52,7 @@ void Renderer::handleGlobalEvents() {
       window->close();
       game->stop();
     } else if (event.type == sf::Event::Resized) {
-      onResize();
+//      onResize();
     }
   }
 }

@@ -4,6 +4,6 @@
 
 #include "CollisionModel.h"
 
-bool CollisionModel::check(std::vector<sf::Vector2f> a, std::vector<sf::Vector2f> b) {
+bool CollisionModel::check(WorldObjectInterface *a, WorldObjectInterface *b) {
   return false;
 }

@@ -118,11 +118,11 @@ bool Ship::isRecyclable() {
 sf::Drawable *Ship::getDrawable() {
   auto shep = new sf::ConvexShape();
 
-  shep->setPointCount(3);
+  shep->setPointCount(points.size());
 
-  shep->setPoint(0, sf::Vector2f(20, 10));
-  shep->setPoint(1, sf::Vector2f(0, 0));
-  shep->setPoint(2, sf::Vector2f(0, 20));
+  for (int i = 0; i < points.size(); i++) {
+    shep->setPoint(i, points[i]);
+  }
 
   shep->setFillColor(sf::Color::Transparent);
   shep->setOutlineColor(sf::Color::Green);

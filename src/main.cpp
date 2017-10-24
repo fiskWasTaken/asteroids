@@ -19,7 +19,7 @@ void renderer(Asteroids *game) {
   sf::ContextSettings settings;
   settings.depthBits = 24;
   settings.stencilBits = 8;
-  settings.antialiasingLevel = 4;
+  settings.antialiasingLevel = 0;
   settings.majorVersion = 2;
   settings.minorVersion = 1;
 

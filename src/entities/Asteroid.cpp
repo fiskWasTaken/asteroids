@@ -13,22 +13,23 @@ void Asteroid::update() {
 }
 
 void Asteroid::onCollision(AbstractWorldObject *other) {
-  if (other->OBJECT_CLASS == WorldObjectClass::BULLET) {
+  if (other->getClass() == WorldObjectClass::BULLET) {
     // take damage
     health -= 10;
   }
 
-  if (other->OBJECT_CLASS == WorldObjectClass::ASTEROID) {
+  if (other->getClass() == WorldObjectClass::ASTEROID) {
     // bounce
     vel = -vel;
     other->vel = -other->vel;
   }
 
-  if (other->OBJECT_CLASS == WorldObjectClass::SHIP) {
+  if (other->getClass() == WorldObjectClass::SHIP) {
     // kill ship
     ((Ship*) other)->onDestroyed();
   }
 }
+
 bool Asteroid::isRecyclable() {
   return health <= 0;
 }
@@ -37,19 +38,17 @@ sf::Drawable *Asteroid::getDrawable() {
   // create an empty shape
   auto shep = new sf::ConvexShape();
 
-  shep->setPointCount(5);
+  shep->setPointCount(points.size());
 
-  shep->setPoint(0, sf::Vector2f(0, 0));
-  shep->setPoint(1, sf::Vector2f(50, 10));
-  shep->setPoint(2, sf::Vector2f(50, 45));
-  shep->setPoint(3, sf::Vector2f(30, 50));
-  shep->setPoint(4, sf::Vector2f(0, 50));
+  for (int i = 0; i < points.size(); i++) {
+    shep->setPoint(i, points[i]);
+  }
 
   shep->setFillColor(sf::Color::Transparent);
   shep->setOutlineColor(sf::Color::Green);
   shep->setOutlineThickness(1.0F);
   shep->setPosition(pos);
-  shep->setOrigin(getWidth() / 2, getHeight() / 2);
+  shep->setOrigin(25, 25);
   shep->setRotation(rot);
   return shep;
 }

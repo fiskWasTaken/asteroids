@@ -13,9 +13,17 @@ class Asteroid : public AbstractWorldObject {
   int size = 0;
 
  public:
-  static const WorldObjectClass OBJECT_CLASS = WorldObjectClass::ASTEROID;
+  WorldObjectClass getClass() {
+    return WorldObjectClass::ASTEROID;
+  }
 
-  explicit Asteroid(World *world) : AbstractWorldObject(world) {}
+  explicit Asteroid(World *world) : AbstractWorldObject(world) {
+    points.push_back(sf::Vector2f(0, 0));
+    points.push_back(sf::Vector2f(50, 10));
+    points.push_back(sf::Vector2f(50, 45));
+    points.push_back(sf::Vector2f(30, 50));
+    points.push_back(sf::Vector2f(0, 50));
+  }
 
   inline int getHealth() {
     return health;

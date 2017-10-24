@@ -19,20 +19,13 @@ void World::wrapObject(AbstractWorldObject *object) {
 }
 
 void World::checkCollision(AbstractWorldObject *a) {
-  return; // collision checking is not done yet
-
-  auto points_a = a->getPoints();
-
   for (auto b: objects) {
-    if (b == a)
-      continue;
+    if (a != b) {
+      bool result = collisionModel.check(a, b);
 
-    auto points_b = b->getPoints();
-
-    bool result = collisionModel.check(points_a, points_b);
-
-    if (result) {
-      a->onCollision(b);
+      if (result) {
+        a->onCollision(b);
+      }
     }
   }
 }
