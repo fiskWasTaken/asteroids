@@ -13,7 +13,7 @@ class Asteroid : public AbstractWorldObject {
   int size = 0;
 
  public:
-  WorldObjectClass getClass() {
+  WorldObjectClass getClass() override {
     return WorldObjectClass::ASTEROID;
   }
 

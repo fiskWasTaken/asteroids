@@ -5,43 +5,13 @@
 #include "Renderer.h"
 #include "scenes/SceneInterface.h"
 
-void Renderer::run() {
-  glEnable(GL_TEXTURE_2D);
-
-  auto world = game->getWorld();
-
-  window->setSize(sf::Vector2<unsigned int>(
-      (unsigned int) world->getWidth(),
-      (unsigned int) world->getHeight()
-  ));
-
-  while (window->isOpen()) {
-    main();
-
-    struct timespec tim, tim2;
-    tim.tv_sec = 0;
-    tim.tv_nsec = 30000000;
-
-    nanosleep(&tim, &tim2);
-  }
-}
-
 void Renderer::main() {
   handleEvents();
   renderFrame();
 }
 
 void Renderer::onResize() {
-  auto videoMode = sf::VideoMode(game->getWorld()->getWidth(), game->getWorld()->getHeight());
 
-  sf::ContextSettings settings;
-  settings.depthBits = 24;
-  settings.stencilBits = 8;
-  settings.antialiasingLevel = 4;
-  settings.majorVersion = 2;
-  settings.minorVersion = 1;
-
-  window->create(videoMode, "Asteroids", sf::Style::Default, settings);
 }
 
 void Renderer::handleGlobalEvents() {
@@ -49,6 +19,7 @@ void Renderer::handleGlobalEvents() {
 
   while (window->pollEvent(event)) {
     if (event.type == sf::Event::Closed) {
+
       window->close();
       game->stop();
     } else if (event.type == sf::Event::Resized) {
@@ -70,4 +41,16 @@ void Renderer::renderFrame() {
 
 void Renderer::setGame(Asteroids *game) {
   this->game = game;
+}
+
+Renderer::Renderer(sf::RenderWindow *window) {
+  if (!font->loadFromFile("Monospace.ttf")) {
+    std::cout << "Runtime error: could not load Monospace.ttf font file";
+    exit(1);
+  }
+
+  this->window = window;
+  view.reset(sf::FloatRect(0, 0, 640, 480));
+  view.setViewport(sf::FloatRect(0, 0, 1, 1));
+  window->setView(view);
 }

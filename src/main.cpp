@@ -15,25 +15,25 @@ void engine(Asteroids *game) {
 //  game->run();
 }
 
-void renderer(Asteroids *game) {
+sf::ContextSettings getContextSettings() {
   sf::ContextSettings settings;
   settings.depthBits = 24;
   settings.stencilBits = 8;
   settings.antialiasingLevel = 0;
   settings.majorVersion = 2;
   settings.minorVersion = 1;
+  return settings;
+}
 
-  auto videoMode = sf::VideoMode(1, 1);
-
+void renderer(Asteroids *game) {
+  auto settings = getContextSettings();
+  auto videoMode = sf::VideoMode(640, 480);
   auto window = new sf::RenderWindow(videoMode, "Asteroids", sf::Style::Default, settings);
   auto renderer = new Renderer(window);
-  renderer->setGame(game);
-//  renderer->run();
 
-  renderer->onResize();
+  renderer->setGame(game);
 
   glEnable(GL_TEXTURE_2D);
-
   while (window->isOpen()) {
     renderer->main();
     game->main();

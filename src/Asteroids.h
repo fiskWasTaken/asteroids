@@ -21,7 +21,7 @@ class Asteroids : public Game {
 
  public:
   inline Asteroids(): Game() {
-    world = new World(800, 600);
+    world = new World(640, 480);
     sessions = new std::vector<PlayerSession*>();
   }
 

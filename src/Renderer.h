@@ -14,19 +14,12 @@ class Renderer {
  private:
   Asteroids *game;
   sf::RenderWindow *window;
+  sf::View view;
   sf::Font *font = new sf::Font();
 
  public:
-  Renderer(sf::RenderWindow *window) {
-    this->window = window;
+  explicit Renderer(sf::RenderWindow *window);
 
-    if (!font->loadFromFile("Monospace.ttf")) {
-      std::cout << "Runtime error: could not load Monospace.ttf font file";
-      exit(1);
-    }
-  }
-
-  void run();
   void setGame(Asteroids *game);
   void renderFrame();
   void handleEvents();
@@ -44,6 +37,10 @@ class Renderer {
 
   inline sf::Font *getFont() {
     return font;
+  }
+
+  inline sf::View getView() {
+    return view;
   }
 };
 

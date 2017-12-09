@@ -8,31 +8,29 @@
 #include <SFML/Graphics/ConvexShape.hpp>
 #include "Ship.h"
 #include "Bullet.h"
+#include "../utility/vector.h"
 
 void Ship::update() {
-  if (isFiring) {
-    if (fireCooldown != 0) {
-      fireCooldown--;
-    } else {
-      auto thisRot = getRotationVector();
-      auto velocity = thisRot * 5.0F;
-      auto bullet = new Bullet(world);
+  if (fireCooldown != 0) {
+    fireCooldown--;
+  } else if (isFiring) {
+    auto thisRot = vector::getFromAngle(rot);
+    auto velocity = thisRot * 5.0F;
+    auto bullet = new Bullet(world);
 
-      bullet->pos.x = pos.x + thisRot.x * 10;
-      bullet->pos.y = pos.y + thisRot.y * 10;
-      bullet->vel.x = velocity.x + vel.x;
-      bullet->vel.y = velocity.y + vel.y;
-      bullet->rot = rot;
+    bullet->pos.x = pos.x + thisRot.x * 10;
+    bullet->pos.y = pos.y + thisRot.y * 10;
+    bullet->vel = velocity + vel;
+    bullet->rot = rot;
 
-      vel.x -= bullet->vel.x / 100;
-      vel.y -= bullet->vel.y / 100;
+    vel.x -= bullet->vel.x / 100;
+    vel.y -= bullet->vel.y / 100;
 
-      world->pushObject(bullet);
-      fireCooldown = fireRate;
-    }
+    world->pushObject(bullet);
+    fireCooldown = fireRate;
   }
 
-  isFiring = false;
+  this->isFiring = false;
   this->pos += vel;
 }
 
@@ -44,7 +42,7 @@ void Ship::onDestroyed() {
 }
 
 float Ship::getSpeed() {
-  return sqrt(vel.x * vel.x + vel.y * vel.y);
+  return vector::len(vel);
 }
 
 void Ship::limitSpeed() {
@@ -59,7 +57,7 @@ void Ship::limitSpeed() {
 void Ship::onAction(InputAction action) {
   if (action == InputAction::ACCELERATE) {
     // get the vector for the ship's rotation
-    auto rV = getRotationVector();
+    auto rV = vector::getFromAngle(rot);
 
     // get the current speed
     auto speed = getSpeed();
@@ -73,8 +71,8 @@ void Ship::onAction(InputAction action) {
 
     // todo: the new velocity should be a step towards the target
     // instead of immediately snapping to the target
-    vel.x += diff.x / 1;
-    vel.y += diff.y / 1;
+    vel.x += diff.x;
+    vel.y += diff.y;
     limitSpeed();
   }
 
@@ -104,11 +102,6 @@ void Ship::onAction(InputAction action) {
   if (action == InputAction::FIRE) {
     isFiring = true;
   }
-}
-
-sf::Vector2f Ship::getRotationVector() {
-  float r = 3.14159265F/180;
-  return {cos(rot*r), sin(rot*r)};
 }
 
 bool Ship::isRecyclable() {

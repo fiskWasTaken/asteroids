@@ -20,7 +20,7 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
   bool isDestroyed = false;
 
  public:
-  WorldObjectClass getClass() {
+  WorldObjectClass getClass() override {
     return WorldObjectClass::SHIP;
   }
 
@@ -34,7 +34,6 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
 
   void onAction(InputAction action) override;
   void update() override;
-  sf::Vector2f getRotationVector();
   void limitSpeed();
   float getSpeed();
   bool isRecyclable() override;
