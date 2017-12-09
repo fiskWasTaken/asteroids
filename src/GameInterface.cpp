@@ -3,7 +3,6 @@
 //
 
 #include "GameInterface.h"
-#include "scenes/SceneInterface.h"
 
 void GameInterface::stop() {
   running = false;

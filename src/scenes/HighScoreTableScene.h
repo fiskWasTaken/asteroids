@@ -14,7 +14,7 @@ class HighScoreTableScene : public SceneInterface {
   Controller *controller;
 
  public:
-  HighScoreTableScene(Asteroids *game) {
+  explicit HighScoreTableScene(Asteroids *game) {
     this->game = game;
     this->controller = game->getDefaultController();
   }

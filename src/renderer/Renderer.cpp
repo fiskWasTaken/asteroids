@@ -3,7 +3,6 @@
 //
 #include <iostream>
 #include "Renderer.h"
-#include "scenes/SceneInterface.h"
 #include <cmath>
 
 void Renderer::main() {

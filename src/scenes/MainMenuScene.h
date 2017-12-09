@@ -12,7 +12,7 @@ class MainMenuScene : public SceneInterface, public ControllerListenerInterface 
   Asteroids *game;
   Controller *controller;
  public:
-  MainMenuScene(Asteroids *game) {
+  explicit MainMenuScene(Asteroids *game) {
     this->game = game;
     this->controller = game->getDefaultController();
   }

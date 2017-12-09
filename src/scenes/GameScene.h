@@ -12,7 +12,7 @@ class GameScene : public SceneInterface {
  private:
   Asteroids *game;
  public:
-  GameScene(Asteroids *game) { this->game = game; }
+  explicit GameScene(Asteroids *game) { this->game = game; }
   void handleEvents() override;
   void render(RendererInterface *renderer) override;
   void onVisible() override;

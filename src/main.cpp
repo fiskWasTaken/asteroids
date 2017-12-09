@@ -3,7 +3,6 @@
 #include <SFML/OpenGL.hpp>
 #include "GameInterface.h"
 #include "renderer/Renderer.h"
-#include "scenes/GameScene.h"
 #include "scenes/MainMenuScene.h"
 
 void engine(Asteroids *game) {

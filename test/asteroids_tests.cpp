@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include <entities/Asteroid.cpp>
-#include <world/World.cpp>
 #include <Asteroids.h>
 
 TEST(game_world, obj_wrap) {

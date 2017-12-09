@@ -12,7 +12,7 @@ class KeyboardController : public Controller {
   std::map<InputAction, sf::Keyboard::Key> map{};
 
  public:
-  void poll();
+  void poll() override;
   void assignKeyForAction(InputAction action, sf::Keyboard::Key key) {
     map[action] = key;
   }

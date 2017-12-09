@@ -30,19 +30,15 @@ class Renderer : public RendererInterface {
   void onResize() override;
   void main() override;
 
-  inline sf::RenderWindow *getWindow() {
+  inline sf::RenderWindow *getWindow() override {
     return window;
   }
 
-  inline Asteroids *getGame() {
-    return game;
-  }
-
-  inline sf::Font *getFont() {
+  inline sf::Font *getFont() override {
     return font;
   }
 
-  inline sf::View getView() {
+  inline sf::View getView() override {
     return view;
   }
 };
