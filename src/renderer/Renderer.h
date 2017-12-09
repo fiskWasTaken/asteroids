@@ -9,8 +9,9 @@
 #include <SFML/OpenGL.hpp>
 #include <iostream>
 #include "Asteroids.h"
+#include "RendererInterface.h"
 
-class Renderer {
+class Renderer : public RendererInterface {
  private:
   Asteroids *game;
   sf::RenderWindow *window;
@@ -23,11 +24,11 @@ class Renderer {
   explicit Renderer(sf::RenderWindow *window);
 
   void setGame(Asteroids *game);
-  void renderFrame();
-  void handleEvents();
-  void handleGlobalEvents();
-  void onResize();
-  void main();
+  void renderFrame() override;
+  void handleEvents() override;
+  void handleGlobalEvents() override;
+  void onResize() override;
+  void main() override;
 
   inline sf::RenderWindow *getWindow() {
     return window;

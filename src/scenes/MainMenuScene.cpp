@@ -2,11 +2,12 @@
 // Created by fisk on 21/09/17.
 //
 
+#include <SFML/Graphics/Text.hpp>
 #include "MainMenuScene.h"
 #include "GameScene.h"
 #include "HighScoreTableScene.h"
 
-void MainMenuScene::render(Renderer *renderer) {
+void MainMenuScene::render(RendererInterface *renderer) {
   auto window = renderer->getWindow();
   auto view = renderer->getView();
   auto font = renderer->getFont();
@@ -45,5 +46,5 @@ void MainMenuScene::onVisible() {
   controller->setDelegate(this);
 }
 void MainMenuScene::onDestroy() {
-  delete(controller);
+  delete (controller);
 }

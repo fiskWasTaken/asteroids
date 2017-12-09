@@ -26,7 +26,7 @@ void Asteroid::onCollision(AbstractWorldObject *other) {
 
   if (other->getClass() == WorldObjectClass::SHIP) {
     // kill ship
-    ((Ship*) other)->onDestroyed();
+    ((Ship *) other)->onDestroyed();
   }
 }
 

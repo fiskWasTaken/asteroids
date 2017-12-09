@@ -17,7 +17,7 @@ class Bullet : public AbstractWorldObject {
 
   sf::Drawable *getDrawable() override;
 
-  explicit Bullet(World *world) : AbstractWorldObject(world) {}
+  explicit Bullet(WorldInterface *world) : AbstractWorldObject(world) {}
 
   bool isRecyclable() override {
     return lifetime < 0;
@@ -27,7 +27,6 @@ class Bullet : public AbstractWorldObject {
     pos += vel;
     lifetime--;
   };
-
 
 };
 

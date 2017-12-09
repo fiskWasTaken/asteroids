@@ -6,33 +6,20 @@
 #include "KeyboardController.h"
 
 void KeyboardController::poll() {
-  if (sf::Keyboard::isKeyPressed(map[InputAction::ALTFIRE])) {
-    // Fire
-    emit(InputAction::ALTFIRE);
-  }
+  InputAction keys[] = {
+      InputAction::ALTFIRE,
+      InputAction::PANIC,
+      InputAction::PAUSE,
+      InputAction::LEFT,
+      InputAction::RIGHT,
+      InputAction::ACCELERATE,
+      InputAction::BRAKE,
+      InputAction::FIRE,
+  };
 
-  if (sf::Keyboard::isKeyPressed(map[InputAction::LEFT])) {
-    // Left
-    emit(InputAction::LEFT);
-  }
-
-  if (sf::Keyboard::isKeyPressed(map[InputAction::RIGHT])) {
-    // Right
-    emit(InputAction::RIGHT);
-  }
-
-  if (sf::Keyboard::isKeyPressed(map[InputAction::ACCELERATE])) {
-    // Accelerate
-    emit(InputAction::ACCELERATE);
-  }
-
-  if (sf::Keyboard::isKeyPressed(map[InputAction::BRAKE])) {
-    // Brake
-    emit(InputAction::BRAKE);
-  }
-
-  if (sf::Keyboard::isKeyPressed(map[InputAction::FIRE])) {
-    // Fire
-    emit(InputAction::FIRE);
+  for (auto key : keys) {
+    if (sf::Keyboard::isKeyPressed(map[key])) {
+      emit(key);
+    }
   }
 }

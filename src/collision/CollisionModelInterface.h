@@ -9,9 +9,9 @@
 #include <vector>
 #include <entities/WorldObjectInterface.h>
 
-class CollisionModel {
+class CollisionModelInterface {
  public:
-  bool check(WorldObjectInterface *a, WorldObjectInterface *b);
+  virtual bool check(WorldObjectInterface *a, WorldObjectInterface *b) = 0;
 };
 
 #endif //ASTEROIDS_COLLISION_H

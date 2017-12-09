@@ -5,8 +5,10 @@
 #ifndef ASTEROIDS_HIGHSCORETABLESCENE_H
 #define ASTEROIDS_HIGHSCORETABLESCENE_H
 
+#include <Asteroids.h>
 #include "SceneInterface.h"
-class HighScoreTableScene : public SceneInterface  {private:
+class HighScoreTableScene : public SceneInterface {
+ private:
  private:
   Asteroids *game;
   Controller *controller;
@@ -16,7 +18,7 @@ class HighScoreTableScene : public SceneInterface  {private:
     this->game = game;
     this->controller = game->getDefaultController();
   }
-  void render(Renderer *renderer) override;
+  void render(RendererInterface *renderer) override;
   void handleEvents() override;
   void onVisible() override;
   void onDestroy() override;

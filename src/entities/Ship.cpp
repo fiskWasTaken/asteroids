@@ -14,7 +14,7 @@ void Ship::update() {
   if (fireCooldown != 0) {
     fireCooldown--;
   } else if (isFiring) {
-    auto thisRot = vector::getFromAngle(rot);
+    auto thisRot = vector::fromAngle(rot);
     auto velocity = thisRot * 5.0F;
     auto bullet = new Bullet(world);
 
@@ -42,7 +42,7 @@ void Ship::onDestroyed() {
 }
 
 float Ship::getSpeed() {
-  return vector::getLength(&vel);
+  return vector::len(&vel);
 }
 
 void Ship::limitSpeed() {
@@ -52,7 +52,7 @@ void Ship::limitSpeed() {
 void Ship::onAction(InputAction action) {
   if (action == InputAction::ACCELERATE) {
     // get the vector for the ship's rotation
-    auto rV = vector::getFromAngle(rot);
+    auto rV = vector::fromAngle(rot);
 
     // get the current speed
     auto speed = getSpeed();
@@ -96,6 +96,15 @@ void Ship::onAction(InputAction action) {
 
   if (action == InputAction::FIRE) {
     isFiring = true;
+  }
+
+  if (action == InputAction::PANIC) {
+    onDestroyed();
+  }
+
+  if (action == InputAction::PAUSE) {
+    auto scene = world->getGame()->getScene();
+
   }
 }
 

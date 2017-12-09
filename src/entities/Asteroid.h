@@ -17,7 +17,7 @@ class Asteroid : public AbstractWorldObject {
     return WorldObjectClass::ASTEROID;
   }
 
-  explicit Asteroid(World *world) : AbstractWorldObject(world) {
+  explicit Asteroid(WorldInterface *world) : AbstractWorldObject(world) {
     points.push_back(sf::Vector2f(0, 0));
     points.push_back(sf::Vector2f(50, 10));
     points.push_back(sf::Vector2f(50, 45));

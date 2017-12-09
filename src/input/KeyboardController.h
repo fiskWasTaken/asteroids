@@ -5,12 +5,11 @@
 #ifndef ASTEROIDS_KEYBOARDCONTROLLER_H
 #define ASTEROIDS_KEYBOARDCONTROLLER_H
 
-#include <set>
 #include "Controller.h"
 #include "ControllerListenerInterface.h"
-class KeyboardController: public Controller {
+class KeyboardController : public Controller {
  private:
-  std::map<InputAction, sf::Keyboard::Key> map;
+  std::map<InputAction, sf::Keyboard::Key> map{};
 
  public:
   void poll();

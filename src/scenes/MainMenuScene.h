@@ -5,6 +5,7 @@
 #ifndef ASTEROIDS_SCENES_MAINMENU_H
 #define ASTEROIDS_SCENES_MAINMENU_H
 
+#include <Asteroids.h>
 #include "SceneInterface.h"
 class MainMenuScene : public SceneInterface, public ControllerListenerInterface {
  private:
@@ -15,7 +16,7 @@ class MainMenuScene : public SceneInterface, public ControllerListenerInterface 
     this->game = game;
     this->controller = game->getDefaultController();
   }
-  void render(Renderer *renderer) override;
+  void render(RendererInterface *renderer) override;
   void handleEvents() override;
   void onAction(InputAction action) override;
   void onVisible() override;

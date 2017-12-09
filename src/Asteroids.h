@@ -7,29 +7,27 @@
 
 #include <vector>
 #include <SFML/Window/Keyboard.hpp>
-#include "Game.h"
+#include "GameInterface.h"
 #include "PlayerSession.h"
 #include "HighScores.h"
 
-class Game;
-
-class Asteroids : public Game {
+class Asteroids : public GameInterface {
  private:
   World *world;
-  std::vector<PlayerSession*> *sessions;
+  std::vector<PlayerSession *> *sessions;
   HighScores highScores;
 
  public:
-  inline Asteroids(): Game() {
-    world = new World(640, 480);
-    sessions = new std::vector<PlayerSession*>();
+  inline Asteroids() : GameInterface() {
+    world = new World(this, 640, 480);
+    sessions = new std::vector<PlayerSession *>();
   }
 
   inline World *getWorld() const {
     return world;
   }
 
-  inline std::vector<PlayerSession*> *getSessions() const {
+  inline std::vector<PlayerSession *> *getSessions() const {
     return sessions;
   }
 

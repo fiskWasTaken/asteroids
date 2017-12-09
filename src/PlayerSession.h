@@ -6,7 +6,8 @@
 #define ASTEROIDS_PLAYERSESSION_H
 
 #include "Player.h"
-#include "World.h"
+#include "world/World.h"
+
 class PlayerSession {
  private:
   Player *player;
@@ -28,7 +29,7 @@ class PlayerSession {
   inline int getLives() const { return lives; }
   inline void setLives(int lives) { this->lives = lives; }
 
-  void spawnShip(World *world);
+  void spawnShip(WorldInterface *world);
 };
 
 #endif //ASTEROIDS_PLAYERSESSION_H

@@ -8,7 +8,7 @@
 #include "SceneInterface.h"
 class GameOverScene : public SceneInterface {
  public:
-  void render(Renderer *renderer) override;
+  void render(RendererInterface *renderer) override;
   void handleEvents() override;
   void onVisible() override;
   void onDestroy() override;

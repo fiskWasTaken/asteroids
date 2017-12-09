@@ -10,22 +10,16 @@
 #include <vector>
 #include <SFML/Graphics/Shape.hpp>
 #include "WorldObjectClass.h"
-#include "../World.h"
+#include "world/WorldInterface.h"
 #include "WorldObjectInterface.h"
 
 typedef std::pair<sf::Vector2f, sf::Vector2f> BoundingBox;
 
-class World;
-
 class AbstractWorldObject : public WorldObjectInterface {
  protected:
-  World *world;
+  WorldInterface *world;
 
  public:
-  virtual WorldObjectClass getClass() {
-    return WorldObjectClass::NONE;
-  }
-
   virtual void update() = 0;
   virtual sf::Drawable *getDrawable() = 0;
   virtual bool isRecyclable() = 0;
@@ -40,7 +34,7 @@ class AbstractWorldObject : public WorldObjectInterface {
 
   }
 
-  explicit AbstractWorldObject(World *world) {
+  explicit AbstractWorldObject(WorldInterface *world) {
     this->world = world;
     pos = sf::Vector2f(0, 0);
     vel = sf::Vector2f(0, 0);

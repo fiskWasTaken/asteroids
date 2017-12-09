@@ -4,7 +4,7 @@
 
 #include "World.h"
 
-void World::wrapObject(AbstractWorldObject *object) {
+void World::wrapObject(WorldObjectInterface *object) {
   auto pos = &object->pos;
 
   if (pos->x < 0)
@@ -37,7 +37,7 @@ void World::update() {
     object->update();
   }
 
-  std::set<AbstractWorldObject*>::iterator tmp;
+  std::set<AbstractWorldObject *>::iterator tmp;
 
   for (auto it = objects.begin(); it != objects.end();) {
     auto object = *it;
@@ -46,7 +46,7 @@ void World::update() {
       tmp = it;
       ++tmp;
       objects.erase(it);
-      delete(object);
+      delete (object);
       it = tmp;
     } else {
       ++it;

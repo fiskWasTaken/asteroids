@@ -174,59 +174,32 @@ src/Asteroids.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Asteroids.cpp.s
 .PHONY : src/Asteroids.cpp.s
 
-src/CollisionModel.o: src/CollisionModel.cpp.o
+src/GameInterface.o: src/GameInterface.cpp.o
 
-.PHONY : src/CollisionModel.o
-
-# target to build an object file
-src/CollisionModel.cpp.o:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/CollisionModel.cpp.o
-.PHONY : src/CollisionModel.cpp.o
-
-src/CollisionModel.i: src/CollisionModel.cpp.i
-
-.PHONY : src/CollisionModel.i
-
-# target to preprocess a source file
-src/CollisionModel.cpp.i:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/CollisionModel.cpp.i
-.PHONY : src/CollisionModel.cpp.i
-
-src/CollisionModel.s: src/CollisionModel.cpp.s
-
-.PHONY : src/CollisionModel.s
-
-# target to generate assembly for a file
-src/CollisionModel.cpp.s:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/CollisionModel.cpp.s
-.PHONY : src/CollisionModel.cpp.s
-
-src/Game.o: src/Game.cpp.o
-
-.PHONY : src/Game.o
+.PHONY : src/GameInterface.o
 
 # target to build an object file
-src/Game.cpp.o:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Game.cpp.o
-.PHONY : src/Game.cpp.o
+src/GameInterface.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/GameInterface.cpp.o
+.PHONY : src/GameInterface.cpp.o
 
-src/Game.i: src/Game.cpp.i
+src/GameInterface.i: src/GameInterface.cpp.i
 
-.PHONY : src/Game.i
+.PHONY : src/GameInterface.i
 
 # target to preprocess a source file
-src/Game.cpp.i:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Game.cpp.i
-.PHONY : src/Game.cpp.i
+src/GameInterface.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/GameInterface.cpp.i
+.PHONY : src/GameInterface.cpp.i
 
-src/Game.s: src/Game.cpp.s
+src/GameInterface.s: src/GameInterface.cpp.s
 
-.PHONY : src/Game.s
+.PHONY : src/GameInterface.s
 
 # target to generate assembly for a file
-src/Game.cpp.s:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Game.cpp.s
-.PHONY : src/Game.cpp.s
+src/GameInterface.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/GameInterface.cpp.s
+.PHONY : src/GameInterface.cpp.s
 
 src/HighScores.o: src/HighScores.cpp.o
 
@@ -309,86 +282,32 @@ src/PlayerSession.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/PlayerSession.cpp.s
 .PHONY : src/PlayerSession.cpp.s
 
-src/Renderer.o: src/Renderer.cpp.o
+src/collision/SATCollisionModel.o: src/collision/SATCollisionModel.cpp.o
 
-.PHONY : src/Renderer.o
-
-# target to build an object file
-src/Renderer.cpp.o:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Renderer.cpp.o
-.PHONY : src/Renderer.cpp.o
-
-src/Renderer.i: src/Renderer.cpp.i
-
-.PHONY : src/Renderer.i
-
-# target to preprocess a source file
-src/Renderer.cpp.i:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Renderer.cpp.i
-.PHONY : src/Renderer.cpp.i
-
-src/Renderer.s: src/Renderer.cpp.s
-
-.PHONY : src/Renderer.s
-
-# target to generate assembly for a file
-src/Renderer.cpp.s:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Renderer.cpp.s
-.PHONY : src/Renderer.cpp.s
-
-src/World.o: src/World.cpp.o
-
-.PHONY : src/World.o
+.PHONY : src/collision/SATCollisionModel.o
 
 # target to build an object file
-src/World.cpp.o:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/World.cpp.o
-.PHONY : src/World.cpp.o
+src/collision/SATCollisionModel.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/collision/SATCollisionModel.cpp.o
+.PHONY : src/collision/SATCollisionModel.cpp.o
 
-src/World.i: src/World.cpp.i
+src/collision/SATCollisionModel.i: src/collision/SATCollisionModel.cpp.i
 
-.PHONY : src/World.i
-
-# target to preprocess a source file
-src/World.cpp.i:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/World.cpp.i
-.PHONY : src/World.cpp.i
-
-src/World.s: src/World.cpp.s
-
-.PHONY : src/World.s
-
-# target to generate assembly for a file
-src/World.cpp.s:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/World.cpp.s
-.PHONY : src/World.cpp.s
-
-src/entities/AbstractWorldObject.o: src/entities/AbstractWorldObject.cpp.o
-
-.PHONY : src/entities/AbstractWorldObject.o
-
-# target to build an object file
-src/entities/AbstractWorldObject.cpp.o:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/AbstractWorldObject.cpp.o
-.PHONY : src/entities/AbstractWorldObject.cpp.o
-
-src/entities/AbstractWorldObject.i: src/entities/AbstractWorldObject.cpp.i
-
-.PHONY : src/entities/AbstractWorldObject.i
+.PHONY : src/collision/SATCollisionModel.i
 
 # target to preprocess a source file
-src/entities/AbstractWorldObject.cpp.i:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/AbstractWorldObject.cpp.i
-.PHONY : src/entities/AbstractWorldObject.cpp.i
+src/collision/SATCollisionModel.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/collision/SATCollisionModel.cpp.i
+.PHONY : src/collision/SATCollisionModel.cpp.i
 
-src/entities/AbstractWorldObject.s: src/entities/AbstractWorldObject.cpp.s
+src/collision/SATCollisionModel.s: src/collision/SATCollisionModel.cpp.s
 
-.PHONY : src/entities/AbstractWorldObject.s
+.PHONY : src/collision/SATCollisionModel.s
 
 # target to generate assembly for a file
-src/entities/AbstractWorldObject.cpp.s:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/AbstractWorldObject.cpp.s
-.PHONY : src/entities/AbstractWorldObject.cpp.s
+src/collision/SATCollisionModel.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/collision/SATCollisionModel.cpp.s
+.PHONY : src/collision/SATCollisionModel.cpp.s
 
 src/entities/Asteroid.o: src/entities/Asteroid.cpp.o
 
@@ -552,6 +471,33 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/renderer/Renderer.o: src/renderer/Renderer.cpp.o
+
+.PHONY : src/renderer/Renderer.o
+
+# target to build an object file
+src/renderer/Renderer.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/renderer/Renderer.cpp.o
+.PHONY : src/renderer/Renderer.cpp.o
+
+src/renderer/Renderer.i: src/renderer/Renderer.cpp.i
+
+.PHONY : src/renderer/Renderer.i
+
+# target to preprocess a source file
+src/renderer/Renderer.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/renderer/Renderer.cpp.i
+.PHONY : src/renderer/Renderer.cpp.i
+
+src/renderer/Renderer.s: src/renderer/Renderer.cpp.s
+
+.PHONY : src/renderer/Renderer.s
+
+# target to generate assembly for a file
+src/renderer/Renderer.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/renderer/Renderer.cpp.s
+.PHONY : src/renderer/Renderer.cpp.s
+
 src/scenes/GameOverScene.o: src/scenes/GameOverScene.cpp.o
 
 .PHONY : src/scenes/GameOverScene.o
@@ -687,6 +633,33 @@ src/utility/vector.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/utility/vector.cpp.s
 .PHONY : src/utility/vector.cpp.s
 
+src/world/World.o: src/world/World.cpp.o
+
+.PHONY : src/world/World.o
+
+# target to build an object file
+src/world/World.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/world/World.cpp.o
+.PHONY : src/world/World.cpp.o
+
+src/world/World.i: src/world/World.cpp.i
+
+.PHONY : src/world/World.i
+
+# target to preprocess a source file
+src/world/World.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/world/World.cpp.i
+.PHONY : src/world/World.cpp.i
+
+src/world/World.s: src/world/World.cpp.s
+
+.PHONY : src/world/World.s
+
+# target to generate assembly for a file
+src/world/World.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/world/World.cpp.s
+.PHONY : src/world/World.cpp.s
+
 test/asteroids_tests.o: test/asteroids_tests.cpp.o
 
 .PHONY : test/asteroids_tests.o
@@ -728,12 +701,9 @@ help:
 	@echo "... src/Asteroids.o"
 	@echo "... src/Asteroids.i"
 	@echo "... src/Asteroids.s"
-	@echo "... src/CollisionModel.o"
-	@echo "... src/CollisionModel.i"
-	@echo "... src/CollisionModel.s"
-	@echo "... src/Game.o"
-	@echo "... src/Game.i"
-	@echo "... src/Game.s"
+	@echo "... src/GameInterface.o"
+	@echo "... src/GameInterface.i"
+	@echo "... src/GameInterface.s"
 	@echo "... src/HighScores.o"
 	@echo "... src/HighScores.i"
 	@echo "... src/HighScores.s"
@@ -743,15 +713,9 @@ help:
 	@echo "... src/PlayerSession.o"
 	@echo "... src/PlayerSession.i"
 	@echo "... src/PlayerSession.s"
-	@echo "... src/Renderer.o"
-	@echo "... src/Renderer.i"
-	@echo "... src/Renderer.s"
-	@echo "... src/World.o"
-	@echo "... src/World.i"
-	@echo "... src/World.s"
-	@echo "... src/entities/AbstractWorldObject.o"
-	@echo "... src/entities/AbstractWorldObject.i"
-	@echo "... src/entities/AbstractWorldObject.s"
+	@echo "... src/collision/SATCollisionModel.o"
+	@echo "... src/collision/SATCollisionModel.i"
+	@echo "... src/collision/SATCollisionModel.s"
 	@echo "... src/entities/Asteroid.o"
 	@echo "... src/entities/Asteroid.i"
 	@echo "... src/entities/Asteroid.s"
@@ -770,6 +734,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/renderer/Renderer.o"
+	@echo "... src/renderer/Renderer.i"
+	@echo "... src/renderer/Renderer.s"
 	@echo "... src/scenes/GameOverScene.o"
 	@echo "... src/scenes/GameOverScene.i"
 	@echo "... src/scenes/GameOverScene.s"
@@ -785,6 +752,9 @@ help:
 	@echo "... src/utility/vector.o"
 	@echo "... src/utility/vector.i"
 	@echo "... src/utility/vector.s"
+	@echo "... src/world/World.o"
+	@echo "... src/world/World.i"
+	@echo "... src/world/World.s"
 	@echo "... test/asteroids_tests.o"
 	@echo "... test/asteroids_tests.i"
 	@echo "... test/asteroids_tests.s"

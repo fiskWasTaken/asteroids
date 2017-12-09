@@ -5,18 +5,16 @@
 #ifndef ASTEROIDS_GAME_H
 #define ASTEROIDS_GAME_H
 
-#include "World.h"
+#include <scenes/SceneInterface.h>
+#include "world/World.h"
 
-class SceneInterface;
-
-class Game {
+class GameInterface {
  protected:
   SceneInterface *scene;
   long tick;
   bool running = false;
 
  public:
-  void run();
   void stop();
 
   // methods for game instance to implement

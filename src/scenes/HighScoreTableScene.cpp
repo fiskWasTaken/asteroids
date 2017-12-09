@@ -3,8 +3,9 @@
 //
 
 #include <sstream>
+#include <SFML/Graphics/Text.hpp>
 #include "HighScoreTableScene.h"
-void HighScoreTableScene::render(Renderer *renderer) {
+void HighScoreTableScene::render(RendererInterface *renderer) {
   auto window = renderer->getWindow();
   auto font = renderer->getFont();
   sf::Text titleText("High scores", *font, 16);

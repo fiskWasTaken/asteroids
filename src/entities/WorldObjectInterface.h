@@ -6,6 +6,8 @@
 #define ASTEROIDS_WORLDOBJECTINTERFACE_H
 
 #include <SFML/Window.hpp>
+#include "WorldObjectClass.h"
+
 class WorldObjectInterface {
  public:
   std::vector<sf::Vector2f> points;
@@ -17,6 +19,12 @@ class WorldObjectInterface {
   const std::vector<sf::Vector2f> &getPoints() const {
     return points;
   }
+
+  virtual WorldObjectClass getClass() {
+    return WorldObjectClass::NONE;
+  }
+
+  virtual void onCollision(WorldObjectInterface *other) {}
 };
 
 #endif //ASTEROIDS_WORLDOBJECTINTERFACE_H

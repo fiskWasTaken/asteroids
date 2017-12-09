@@ -1,9 +1,11 @@
 #include <gtest/gtest.h>
 #include <entities/Asteroid.cpp>
-#include <World.cpp>
+#include <world/World.cpp>
+#include <Asteroids.h>
 
 TEST(game_world, obj_wrap) {
-  auto world = World(10, 10);
+  auto game = Asteroids();
+  auto world = World(&game, 10, 10);
 
   auto object = new Asteroid(&world);
   object->pos.x = 5;
@@ -35,7 +37,8 @@ TEST(game_world, obj_wrap) {
 }
 
 TEST(game_world, obj_management) {
-  auto world = World(10, 10);
+  auto game = Asteroids();
+  auto world = World(&game, 10, 10);
 
   auto object = Asteroid(&world);
   auto object2 = Asteroid(&world);

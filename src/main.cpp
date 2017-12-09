@@ -1,18 +1,13 @@
 #include <thread>
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
-#include "Game.h"
-#include "Renderer.h"
-#include "entities/Asteroid.h"
-#include "entities/Ship.h"
-#include "input/Controller.h"
-#include "input/KeyboardController.h"
+#include "GameInterface.h"
+#include "renderer/Renderer.h"
 #include "scenes/GameScene.h"
 #include "scenes/MainMenuScene.h"
 
 void engine(Asteroids *game) {
   game->setScene(new MainMenuScene(game));
-//  game->run();
 }
 
 sf::ContextSettings getContextSettings() {
@@ -38,7 +33,7 @@ void renderer(Asteroids *game) {
     renderer->main();
     game->main();
 
-    struct timespec tim, tim2;
+    struct timespec tim{}, tim2{};
     tim.tv_sec = 0;
     tim.tv_nsec = 30000000;
 
@@ -49,14 +44,6 @@ void renderer(Asteroids *game) {
 int main() {
   auto game = new Asteroids();
   engine(game);
-
-//  std::thread eng(engine, game);
-
-  /*
-   * The window runs on the main thread. This is due to a limitation
-   * in macOS where windows cannot be created in worker threads.
-   */
   renderer(game);
-//  eng.join();
   return 0;
 }

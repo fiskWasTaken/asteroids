@@ -2,8 +2,10 @@
 // Created by Fisk on 13/10/2017.
 //
 
+#include <SFML/Graphics/Text.hpp>
 #include "GameOverScene.h"
-void GameOverScene::render(Renderer *renderer) {
+
+void GameOverScene::render(RendererInterface *renderer) {
   auto window = renderer->getWindow();
   auto font = renderer->getFont();
 
@@ -20,6 +22,7 @@ void GameOverScene::render(Renderer *renderer) {
   window->draw(startTitleText);
   window->draw(startPromptText);
 }
+
 void GameOverScene::handleEvents() {
 
 }

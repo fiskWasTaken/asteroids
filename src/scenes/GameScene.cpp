@@ -3,11 +3,12 @@
 //
 
 #include <sstream>
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include "GameScene.h"
 #include "../entities/Asteroid.h"
 
-void GameScene::render(Renderer *renderer) {
-  auto game = renderer->getGame();
+void GameScene::render(RendererInterface *renderer) {
   auto window = renderer->getWindow();
 
   auto world = game->getWorld();
@@ -94,7 +95,7 @@ void GameScene::onDestroy() {
 
 }
 
-void GameScene::drawHud(Renderer *renderer) {
+void GameScene::drawHud(RendererInterface *renderer) {
   auto font = renderer->getFont();
   auto window = renderer->getWindow();
   int offset = 4;
@@ -120,7 +121,7 @@ void GameScene::drawHud(Renderer *renderer) {
     offset += 64;
   }
 }
-void GameScene::drawWorld(Renderer *renderer) {
+void GameScene::drawWorld(RendererInterface *renderer) {
   auto world = game->getWorld();
   auto window = renderer->getWindow();
 

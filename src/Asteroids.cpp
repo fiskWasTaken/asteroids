@@ -5,7 +5,7 @@
 #include "Asteroids.h"
 #include "input/KeyboardController.h"
 void Asteroids::main() {
-//  printf("Game is running... (tick %ld)\n", tick);
+//  printf("GameInterface is running... (tick %ld)\n", tick);
   world->update();
 }
 
@@ -16,7 +16,9 @@ Controller *Asteroids::getDefaultController() {
   controller->assignKeyForAction(InputAction::LEFT, sf::Keyboard::A);
   controller->assignKeyForAction(InputAction::RIGHT, sf::Keyboard::D);
   controller->assignKeyForAction(InputAction::FIRE, sf::Keyboard::C);
-  controller->assignKeyForAction(InputAction::ALTFIRE, sf::Keyboard::E);
+  controller->assignKeyForAction(InputAction::ALTFIRE, sf::Keyboard::L);
+  controller->assignKeyForAction(InputAction::PANIC, sf::Keyboard::K);
+  controller->assignKeyForAction(InputAction::PAUSE, sf::Keyboard::P);
 
   return controller;
 }

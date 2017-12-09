@@ -5,6 +5,7 @@
 #ifndef ASTEROIDS_SCENES_GAMESCENE_H
 #define ASTEROIDS_SCENES_GAMESCENE_H
 
+#include <Asteroids.h>
 #include "SceneInterface.h"
 
 class GameScene : public SceneInterface {
@@ -13,12 +14,12 @@ class GameScene : public SceneInterface {
  public:
   GameScene(Asteroids *game) { this->game = game; }
   void handleEvents() override;
-  void render(Renderer *renderer) override;
+  void render(RendererInterface *renderer) override;
   void onVisible() override;
   void onDestroy() override;
 
-  void drawHud(Renderer *renderer);
-  void drawWorld(Renderer *renderer);
+  void drawHud(RendererInterface *renderer);
+  void drawWorld(RendererInterface *renderer);
 };
 
 #endif //ASTEROIDS_SCENES_GAMESCENE_H

@@ -4,7 +4,7 @@
 
 #include "PlayerSession.h"
 #include "entities/Ship.h"
-void PlayerSession::spawnShip(World *world) {
+void PlayerSession::spawnShip(WorldInterface *world) {
   auto ship = new Ship(world, this);
   ship->pos.x = 200;
   ship->pos.y = 200;
