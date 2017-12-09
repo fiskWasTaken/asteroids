@@ -11,7 +11,7 @@ class HighScoreTableScene : public SceneInterface {
  private:
  private:
   Asteroids *game;
-  Controller *controller;
+  ControllerInterface *controller;
 
  public:
   explicit HighScoreTableScene(Asteroids *game) {

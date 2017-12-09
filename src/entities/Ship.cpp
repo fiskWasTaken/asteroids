@@ -6,6 +6,7 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/ConvexShape.hpp>
+#include <scenes/GameScene.h>
 #include "Ship.h"
 #include "Bullet.h"
 #include "../utility/vector.h"
@@ -35,10 +36,9 @@ void Ship::update() {
 }
 
 void Ship::onDestroyed() {
-  playerSession->setLives(playerSession->getLives() - 1);
-  playerSession->getPlayer()->getController()->setDelegate(nullptr);
+  auto scene = dynamic_cast<GameScene *>(world->getGame()->getScene());
   isDestroyed = true;
-  playerSession->spawnShip(world);
+  scene->onShipDestroyed(playerSession);
 }
 
 float Ship::getSpeed() {
@@ -103,8 +103,8 @@ void Ship::onAction(InputAction action) {
   }
 
   if (action == InputAction::PAUSE) {
-    auto scene = world->getGame()->getScene();
-
+    auto scene = dynamic_cast<GameScene *>(world->getGame()->getScene());
+    scene->pause(this->playerSession);
   }
 }
 

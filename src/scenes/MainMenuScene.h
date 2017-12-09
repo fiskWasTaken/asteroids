@@ -10,7 +10,7 @@
 class MainMenuScene : public SceneInterface, public ControllerListenerInterface {
  private:
   Asteroids *game;
-  Controller *controller;
+  ControllerInterface *controller;
  public:
   explicit MainMenuScene(Asteroids *game) {
     this->game = game;

@@ -13,6 +13,7 @@ class SceneInterface {
   virtual void handleEvents() = 0;
   virtual void onVisible() = 0;
   virtual void onDestroy() = 0;
+  virtual void main() {}
 };
 
 #endif //ASTEROIDS_SCENES_ISCENE_H

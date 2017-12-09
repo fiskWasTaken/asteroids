@@ -11,7 +11,7 @@ class Bullet : public AbstractWorldObject {
   int lifetime = 100;
 
  public:
-  WorldObjectClass getClass() {
+  WorldObjectClass getClass() override {
     return WorldObjectClass::BULLET;
   }
 

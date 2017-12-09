@@ -7,6 +7,7 @@
 #include <SFML/Graphics/Text.hpp>
 #include "GameScene.h"
 #include "../entities/Asteroid.h"
+#include "GameOverScene.h"
 
 void GameScene::render(RendererInterface *renderer) {
   auto window = renderer->getWindow();
@@ -68,14 +69,12 @@ void GameScene::onVisible() {
 
   game->getSessions()->push_back(session);
 
-  // playerSession 2 stuff -- cool, it works, but we don't want to do this just yet :>
+//   playerSession 2 stuff -- cool, it works, but we don't want to do this just yet :>
 //  auto player2 = new Player("Player 2");
 //  auto session2 = new PlayerSession(player2);
-//  auto ship2 = new Ship(player2);
+//  auto ship2 = new Ship(world, session2);
 //  ship2->pos.x = 200;
 //  ship2->pos.y = 100;
-//  ship2->setWidth(16);
-//  ship2->setHeight(16);
 //
 //  auto controller2 = new KeyboardController();
 //  controller2->assignKeyForAction(InputAction::ACCELERATE, sf::Keyboard::Up);
@@ -121,6 +120,7 @@ void GameScene::drawHud(RendererInterface *renderer) {
     offset += 64;
   }
 }
+
 void GameScene::drawWorld(RendererInterface *renderer) {
   auto world = game->getWorld();
   auto window = renderer->getWindow();
@@ -129,4 +129,53 @@ void GameScene::drawWorld(RendererInterface *renderer) {
     auto shape = entity->getDrawable();
     window->draw(*shape);
   }
+}
+
+void GameScene::pause(PlayerSession *initiator) {
+  paused = true;
+  pauseInitiator = initiator;
+  initiator->getPlayer()->getController()->setDelegate(this);
+}
+
+void GameScene::main() {
+  if (!paused) {
+    this->game->getWorld()->update();
+
+    for (auto respawnTimer : respawnTimers) {
+      auto session = respawnTimer.first;
+      respawnTimers[session]--;
+
+      if (respawnTimers[session] == 0) {
+        respawnTimers.erase(session);
+        session->setLives(session->getLives() - 1);
+
+        if (session->getLives() == 0) {
+          onGameOver(session);
+        } else {
+          session->spawnShip(game->getWorld());
+        }
+      }
+    }
+  }
+}
+
+void GameScene::onAction(InputAction action) {
+  if (action == InputAction::PAUSE) {
+    paused = false;
+    pauseInitiator->getPlayer()->getController()->setDelegate(pauseInitiator->getShip());
+  }
+}
+
+void GameScene::onGameOver(PlayerSession *playerSession) {
+  // todo: support multiple players (wait until everyone dies for good)
+  game->setScene(new GameOverScene(game));
+}
+
+void GameScene::onShipDestroyed(PlayerSession *playerSession) {
+  playerSession->getPlayer()->getController()->setDelegate(nullptr);
+  startRespawnTimer(playerSession);
+}
+
+void GameScene::startRespawnTimer(PlayerSession *playerSession) {
+  respawnTimers[playerSession] = respawnTime;
 }

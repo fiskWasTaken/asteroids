@@ -10,8 +10,8 @@
 
 class GameInterface {
  protected:
-  SceneInterface *scene;
-  long tick;
+  SceneInterface *scene = nullptr;
+  long tick = 0;
   bool running = false;
 
  public:

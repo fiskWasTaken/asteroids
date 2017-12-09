@@ -6,10 +6,11 @@
 #include "input/KeyboardController.h"
 void Asteroids::main() {
 //  printf("GameInterface is running... (tick %ld)\n", tick);
-  world->update();
+  scene->main();
+  tick += 1;
 }
 
-Controller *Asteroids::getDefaultController() {
+ControllerInterface *Asteroids::getDefaultController() {
   auto controller = new KeyboardController();
   controller->assignKeyForAction(InputAction::ACCELERATE, sf::Keyboard::W);
   controller->assignKeyForAction(InputAction::BRAKE, sf::Keyboard::S);

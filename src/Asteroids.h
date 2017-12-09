@@ -13,6 +13,7 @@
 
 class Asteroids : public GameInterface {
  private:
+  // todo: move to GameScene, no point managing this here.
   World *world;
   std::vector<PlayerSession *> *sessions;
   HighScores highScores;
@@ -37,7 +38,7 @@ class Asteroids : public GameInterface {
     return highScores;
   }
 
-  Controller *getDefaultController();
+  ControllerInterface *getDefaultController();
 };
 
 #endif //ASTEROIDS_ASTEROIDS_H

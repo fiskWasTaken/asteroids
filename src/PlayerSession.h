@@ -5,17 +5,21 @@
 #ifndef ASTEROIDS_PLAYERSESSION_H
 #define ASTEROIDS_PLAYERSESSION_H
 
+#include <entities/Ship.h>
 #include "Player.h"
 #include "world/World.h"
 
+class Ship;
+
 class PlayerSession {
  private:
+  Ship *ship = nullptr;
   Player *player;
   int score;
   int lives;
 
  public:
-  PlayerSession(Player *player, int lives = 5) {
+  explicit PlayerSession(Player *player, int lives = 5) {
     this->player = player;
     this->lives = lives;
     this->score = 0;
@@ -28,6 +32,10 @@ class PlayerSession {
 
   inline int getLives() const { return lives; }
   inline void setLives(int lives) { this->lives = lives; }
+
+  inline Ship *getShip() {
+    return this->ship;
+  }
 
   void spawnShip(WorldInterface *world);
 };

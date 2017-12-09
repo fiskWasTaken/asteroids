@@ -7,7 +7,8 @@
 
 #include "AbstractWorldObject.h"
 #include "../Player.h"
-#include "../PlayerSession.h"
+
+class PlayerSession;
 
 class Ship : public AbstractWorldObject, public ControllerListenerInterface {
  private:

@@ -6,19 +6,19 @@
 #define ASTEROIDS_PLAYER_H
 
 #include <string>
-#include "input/Controller.h"
+#include "input/ControllerInterface.h"
 
 class Player {
  public:
-  Player(const std::string name) {
+  explicit Player(const std::string name) {
     this->name = name;
   }
 
-  inline void setController(Controller *controller) {
+  inline void setController(ControllerInterface *controller) {
     this->controller = controller;
   }
 
-  inline Controller *getController() {
+  inline ControllerInterface *getController() {
     return controller;
   }
 
@@ -26,7 +26,7 @@ class Player {
 
  private:
   std::string name;
-  Controller *controller;
+  ControllerInterface *controller = nullptr;
 };
 
 #endif //ASTEROIDS_PLAYER_H

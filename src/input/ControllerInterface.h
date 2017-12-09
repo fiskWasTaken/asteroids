@@ -9,9 +9,10 @@
 #include <map>
 #include "InputAction.h"
 #include "ControllerListenerInterface.h"
-class Controller {
+
+class ControllerInterface {
  protected:
-  ControllerListenerInterface *delegate;
+  ControllerListenerInterface *delegate = nullptr;
 
  public:
   virtual void poll() = 0;
