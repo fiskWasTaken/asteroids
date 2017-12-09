@@ -12,7 +12,6 @@
 void GameScene::render(RendererInterface *renderer) {
   auto window = renderer->getWindow();
 
-  auto world = game->getWorld();
   auto vec = sf::Vector2f((float) world->getWidth(), (float) world->getHeight());
   sf::RectangleShape shape(vec);
   shape.setFillColor(sf::Color::Black);
@@ -37,8 +36,6 @@ void GameScene::handleEvents() {
 void GameScene::onVisible() {
   auto player = new Player("Player 1");
   auto session = new PlayerSession(player);
-
-  auto world = game->getWorld();
 
   auto ast = new Asteroid(world);
   ast->pos.x = 5;
@@ -122,7 +119,6 @@ void GameScene::drawHud(RendererInterface *renderer) {
 }
 
 void GameScene::drawWorld(RendererInterface *renderer) {
-  auto world = game->getWorld();
   auto window = renderer->getWindow();
 
   for (auto entity: world->getObjects()) {
@@ -139,7 +135,7 @@ void GameScene::pause(PlayerSession *initiator) {
 
 void GameScene::main() {
   if (!paused) {
-    this->game->getWorld()->update();
+    world->update();
 
     for (auto respawnTimer : respawnTimers) {
       auto session = respawnTimer.first;
@@ -152,7 +148,7 @@ void GameScene::main() {
         if (session->getLives() == 0) {
           onGameOver(session);
         } else {
-          session->spawnShip(game->getWorld());
+          session->spawnShip(world);
         }
       }
     }
