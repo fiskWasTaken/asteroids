@@ -16,6 +16,8 @@ class Renderer {
   sf::RenderWindow *window;
   sf::View view;
   sf::Font *font = new sf::Font();
+  int viewWidth = 640;
+  int viewHeight = 480;
 
  public:
   explicit Renderer(sf::RenderWindow *window);

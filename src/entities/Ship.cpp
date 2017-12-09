@@ -42,16 +42,11 @@ void Ship::onDestroyed() {
 }
 
 float Ship::getSpeed() {
-  return vector::len(vel);
+  return vector::getLength(&vel);
 }
 
 void Ship::limitSpeed() {
-  auto len = getSpeed();
-
-  if (len > maxSpeed) {
-    vel.x = vel.x / len * maxSpeed;
-    vel.y = vel.y / len * maxSpeed;
-  }
+  vel = *vector::limit(&vel, maxSpeed);
 }
 
 void Ship::onAction(InputAction action) {

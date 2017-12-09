@@ -5,7 +5,6 @@
 #include <sstream>
 #include "GameScene.h"
 #include "../entities/Asteroid.h"
-#include "../entities/Ship.h"
 
 void GameScene::render(Renderer *renderer) {
   auto game = renderer->getGame();

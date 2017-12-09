@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Renderer.h"
 #include "scenes/SceneInterface.h"
+#include <cmath>
 
 void Renderer::main() {
   handleEvents();
@@ -11,7 +12,18 @@ void Renderer::main() {
 }
 
 void Renderer::onResize() {
+  auto windowSize = window->getSize();
+  float desiredRatio = float(viewWidth) / viewHeight;
+  float aspectRatio = float(windowSize.x) / windowSize.y;
 
+  float ySize = 1 / (desiredRatio / aspectRatio);
+  float yMargin = (1 - ySize) / 2;
+
+  float xSize = 1;
+  float xMargin = (1 - xSize) / 2;
+
+  view.setViewport(sf::FloatRect(xMargin, yMargin, xSize, ySize));
+  window->setView(view);
 }
 
 void Renderer::handleGlobalEvents() {
@@ -19,11 +31,10 @@ void Renderer::handleGlobalEvents() {
 
   while (window->pollEvent(event)) {
     if (event.type == sf::Event::Closed) {
-
       window->close();
       game->stop();
     } else if (event.type == sf::Event::Resized) {
-//      onResize();
+      onResize();
     }
   }
 }
@@ -49,8 +60,8 @@ Renderer::Renderer(sf::RenderWindow *window) {
     exit(1);
   }
 
-  this->window = window;
   view.reset(sf::FloatRect(0, 0, 640, 480));
-  view.setViewport(sf::FloatRect(0, 0, 1, 1));
-  window->setView(view);
+  this->window = window;
+
+  onResize();
 }
