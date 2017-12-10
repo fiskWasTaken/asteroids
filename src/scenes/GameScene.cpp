@@ -42,25 +42,25 @@ void GameScene::onVisible() {
   ast->pos.y = 5;
   ast->vel.x = 2;
   ast->vel.y = 1;
-
-  auto ast2 = new Asteroid(world);
-  ast2->pos.x = 55;
-  ast2->pos.y = 300;
-  ast2->vel.x = -1.5F;
-  ast2->vel.y = 1;
-
-  auto ast3 = new Asteroid(world);
-  ast3->pos.x = 200;
-  ast3->pos.y = 300;
-  ast3->vel.x = -1.5F;
-  ast3->vel.y = -1;
+//
+//  auto ast2 = new Asteroid(world);
+//  ast2->pos.x = 55;
+//  ast2->pos.y = 300;
+//  ast2->vel.x = -1.5F;
+//  ast2->vel.y = 1;
+//
+//  auto ast3 = new Asteroid(world);
+//  ast3->pos.x = 200;
+//  ast3->pos.y = 300;
+//  ast3->vel.x = -1.5F;
+//  ast3->vel.y = -1;
 
   auto controller = game->getDefaultController();
   player->setController(controller);
 
   world->pushObject(ast);
-  world->pushObject(ast2);
-  world->pushObject(ast3);
+//  world->pushObject(ast2);
+//  world->pushObject(ast3);
 
   session->spawnShip(world);
 

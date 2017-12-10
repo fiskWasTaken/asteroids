@@ -26,6 +26,7 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
     this->game = game;
     world = new World(game, 640, 480);
   }
+
   void handleEvents() override;
   void render(RendererInterface *renderer) override;
   void onVisible() override;

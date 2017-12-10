@@ -6,13 +6,17 @@
 #include "vector.h"
 
 namespace vector {
+float len(sf::Vector2f *vector) {
+  return std::sqrt(vector->x * vector->x + vector->y * vector->y);
+}
+
+float dot(sf::Vector2f *a, sf::Vector2f *b) {
+  return a->x * b->x + a->y * b->y;
+}
+
 sf::Vector2f fromAngle(float angle) {
   float r = 3.14159265F / 180;
   return {std::cos(angle * r), std::sin(angle * r)};
-}
-
-float len(sf::Vector2f *vector) {
-  return std::sqrt(vector->x * vector->x + vector->y * vector->y);
 }
 
 sf::Vector2f *normalise(sf::Vector2f *vector) {
@@ -26,6 +30,20 @@ sf::Vector2f *len(sf::Vector2f *vector, float length) {
   vector = normalise(vector);
   vector->x = vector->x * length;
   vector->y = vector->y * length;
+  return vector;
+}
+
+sf::Vector2f *perpL(sf::Vector2f *vector) {
+  float tmp = vector->x;
+  vector->x = -vector->y;
+  vector->y = tmp;
+  return vector;
+}
+
+sf::Vector2f *perpR(sf::Vector2f *vector) {
+  float tmp = vector->y;
+  vector->y = -vector->x;
+  vector->x = tmp;
   return vector;
 }
 

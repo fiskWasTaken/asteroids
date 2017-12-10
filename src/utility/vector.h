@@ -11,11 +11,16 @@
  * All setter functions take a reference and return the reference for chaining
  */
 namespace vector {
-sf::Vector2f fromAngle(float angle);
 float len(sf::Vector2f *vector);
+float dot(sf::Vector2f *a, sf::Vector2f *b);
+
+sf::Vector2f fromAngle(float angle);
+
 sf::Vector2f *len(sf::Vector2f *vector, float length);
 sf::Vector2f *normalise(sf::Vector2f *vector);
 sf::Vector2f *limit(sf::Vector2f *vector, float length);
+sf::Vector2f *perpL(sf::Vector2f *vector);
+sf::Vector2f *perpR(sf::Vector2f *vector);
 }
 
 #endif //ASTEROIDS_VECTOR_H
