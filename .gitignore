@@ -2,6 +2,5 @@
 /cmake-build-debug
 /build
 *.cbp
-asteroids
 asteroids_test
 /CMakeFiles
