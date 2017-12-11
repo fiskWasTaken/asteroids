@@ -19,3 +19,7 @@ ControllerInterface *Asteroids::getDefaultController() {
 
   return controller;
 }
+
+Playlist &Asteroids::getPlaylist() {
+  return playlist;
+}

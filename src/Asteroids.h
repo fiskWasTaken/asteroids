@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <SFML/Window/Keyboard.hpp>
+#include <levels/Playlist.h>
 #include "GameInterface.h"
 #include "player/PlayerSession.h"
 #include "HighScores.h"
@@ -10,6 +11,7 @@ class Asteroids : public GameInterface {
  private:
   std::vector<PlayerSession *> *sessions;
   HighScores highScores;
+  Playlist playlist;
 
  public:
   inline Asteroids() : GameInterface() {
@@ -27,4 +29,6 @@ class Asteroids : public GameInterface {
   }
 
   ControllerInterface *getDefaultController();
+
+  Playlist &getPlaylist();
 };

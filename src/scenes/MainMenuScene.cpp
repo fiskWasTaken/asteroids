@@ -1,5 +1,6 @@
 #include <SFML/Graphics/Text.hpp>
 #include <entities/asteroids/LargeAsteroid.h>
+#include <levels/LevelLoader.h>
 #include "MainMenuScene.h"
 #include "GameScene.h"
 #include "HighScoreTableScene.h"
@@ -43,15 +44,13 @@ void MainMenuScene::onAction(InputAction action) {
 void MainMenuScene::onVisible() {
   controller->setDelegate(this);
 
-  for (int i = 0; i < 40; i++) {
-    auto ast = new LargeAsteroid(world);
-    ast->pos.x = 50 * rand() % 600;
-    ast->pos.y = -50 * rand() % 400;
-    ast->vel.x = rand() % 100 / 80;
-    ast->vel.y = rand() % 100 / 80;
-
-    world->pushObject(ast);
-  }
+  LevelLoader loader;
+  loader.load(world, {
+      "Main menu background",
+      10,
+      10,
+      10
+  });
 }
 
 void MainMenuScene::drawWorld(RendererInterface *renderer) {

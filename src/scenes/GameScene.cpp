@@ -2,6 +2,10 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/ConvexShape.hpp>
+#include <levels/Playlist.h>
+#include <entities/asteroids/SmallAsteroid.h>
+#include <entities/asteroids/MediumAsteroid.h>
+#include <levels/LevelLoader.h>
 #include "GameScene.h"
 #include "entities/asteroids/LargeAsteroid.h"
 #include "GameOverScene.h"
@@ -27,18 +31,18 @@ void GameScene::drawDebug(RendererInterface *renderer) {
   for (auto obj : world->getObjects()) {
     auto points = getOffsetPoints(obj);
     // create an empty shape
-    auto shep = new sf::ConvexShape();
+    auto shape = new sf::ConvexShape();
 
-    shep->setPointCount(points.size());
+    shape->setPointCount(points.size());
 
     for (int i = 0; i < points.size(); i++) {
-      shep->setPoint(i, points[i]);
+      shape->setPoint(i, points[i]);
     }
 
-    shep->setFillColor(sf::Color::Transparent);
-    shep->setOutlineColor(sf::Color::Red);
-    shep->setOutlineThickness(1.0F);
-    window->draw(*shep);
+    shape->setFillColor(sf::Color::Transparent);
+    shape->setOutlineColor(sf::Color::Red);
+    shape->setOutlineThickness(1.0F);
+    window->draw(*shape);
   }
 }
 
@@ -52,25 +56,20 @@ void GameScene::handleEvents() {
   }
 }
 
+void GameScene::loadCurrentLevel() {
+  LevelLoader loader;
+  auto level = game->getPlaylist().getLevel();
+  loader.load(world, level);
+  showLevelTextTimeout = LEVEL_TEXT_DISPLAY_TIME;
+}
+
 void GameScene::onVisible() {
   auto player = new Player("Player 1");
   auto session = new PlayerSession(player);
-
-  for (int i = 0; i < 10; i++) {
-    auto ast = new LargeAsteroid(world);
-    ast->pos.x = 50 * rand() % 600;
-    ast->pos.y = -50 * rand() % 400;
-    ast->vel.x = rand() % 100 / 80;
-    ast->vel.y = rand() % 100 / 80;
-
-    world->pushObject(ast);
-  }
-
   auto controller = game->getDefaultController();
+
   player->setController(controller);
-
   session->spawnShip(world);
-
   game->getSessions()->push_back(session);
 
 //   playerSession 2 stuff -- cool, it works, but we don't want to do this just yet :>
@@ -92,6 +91,8 @@ void GameScene::onVisible() {
 //
 //  world->pushObject(ship2);
 //  game->getSessions()->push_back(session2);
+
+  loadCurrentLevel();
 }
 
 void GameScene::drawHud(RendererInterface *renderer) {
@@ -122,7 +123,6 @@ void GameScene::drawHud(RendererInterface *renderer) {
 
   if (paused) {
     auto view = renderer->getView();
-
     sf::Text pausedText("Paused", *font, 16);
 
     auto center = view.getSize().x / 2;
@@ -130,6 +130,19 @@ void GameScene::drawHud(RendererInterface *renderer) {
 
     pausedText.setPosition(center, middle - 14);
     window->draw(pausedText);
+  }
+
+  if (showLevelTextTimeout > 0) {
+    auto view = renderer->getView();
+    sf::Text levelText(game->getPlaylist().getLevel().name, *font, 16);
+
+    auto center = view.getSize().x / 2;
+    auto middle = view.getSize().y / 2;
+
+    levelText.setPosition(center, middle - 14);
+    window->draw(levelText);
+
+    showLevelTextTimeout--;
   }
 }
 
@@ -150,20 +163,36 @@ void GameScene::pause(PlayerSession *initiator) {
 void GameScene::main() {
   if (!paused) {
     world->update();
+    updateRespawnTimers();
 
-    for (auto respawnTimer : respawnTimers) {
-      auto session = respawnTimer.first;
-      respawnTimers[session]--;
+    int remainingAsteroids = 0;
 
-      if (respawnTimers[session] == 0) {
-        respawnTimers.erase(session);
-        session->setLives(session->getLives() - 1);
+    for (auto object : world->getObjects()) {
+      if (object->getClass() == WorldObjectClass::ASTEROID) {
+        remainingAsteroids++;
+      }
+    }
 
-        if (session->getLives() == 0) {
-          onGameOver(session);
-        } else {
-          session->spawnShip(world);
-        }
+    if (remainingAsteroids == 0) {
+      game->getPlaylist().next();
+      loadCurrentLevel();
+    }
+  }
+}
+
+void GameScene::updateRespawnTimers() {
+  for (auto respawnTimer : respawnTimers) {
+    auto session = respawnTimer.first;
+    respawnTimers[session]--;
+
+    if (respawnTimers[session] == 0) {
+      respawnTimers.erase(session);
+      session->setLives(session->getLives() - 1);
+
+      if (session->getLives() == 0) {
+        onGameOver(session);
+      } else {
+        session->spawnShip(world);
       }
     }
   }
@@ -187,5 +216,5 @@ void GameScene::onShipDestroyed(PlayerSession *playerSession) {
 }
 
 void GameScene::startRespawnTimer(PlayerSession *playerSession) {
-  respawnTimers[playerSession] = respawnTime;
+  respawnTimers[playerSession] = RESPAWN_TIME;
 }

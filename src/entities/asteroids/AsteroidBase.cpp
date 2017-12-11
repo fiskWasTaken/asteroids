@@ -10,7 +10,7 @@ bool AsteroidBase::isRecyclable() {
 
 void AsteroidBase::update() {
   this->pos += vel;
-  this->rot += 0.1F;
+  this->rot += rotSpeed;
 }
 
 void AsteroidBase::renderTo(sf::RenderWindow *renderWindow) {

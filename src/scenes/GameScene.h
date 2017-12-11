@@ -5,12 +5,15 @@
 
 class GameScene : public SceneInterface, public ControllerListenerInterface {
  private:
+  const int RESPAWN_TIME = 50;
+  const int LEVEL_TEXT_DISPLAY_TIME = 100;
+
   Asteroids *game;
   World *world;
   std::map<PlayerSession *, int> respawnTimers;
   PlayerSession *pauseInitiator = nullptr;
-  const int respawnTime = 50;
   bool paused = false;
+  int showLevelTextTimeout = 0;
 
   void onGameOver(PlayerSession *playerSession);
   void startRespawnTimer(PlayerSession *playerSession);
@@ -38,4 +41,7 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   ~GameScene() override {
     delete world;
   }
+  void loadCurrentLevel();
+
+  void updateRespawnTimers();
 };

@@ -7,6 +7,7 @@ class Bullet;
 class AsteroidBase : public AbstractWorldObject {
  protected:
   int health = 100;
+  float rotSpeed = 0.1f;
 
  public:
   WorldObjectClass getClass() override {
@@ -14,6 +15,7 @@ class AsteroidBase : public AbstractWorldObject {
   }
 
   explicit AsteroidBase(WorldInterface *world) : AbstractWorldObject(world) {
+    rotSpeed = (-5 + float(random() % 10)) / 10;
   }
 
   inline int getHealth() {

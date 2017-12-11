@@ -417,6 +417,60 @@ src/input/KeyboardController.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/input/KeyboardController.cpp.s
 .PHONY : src/input/KeyboardController.cpp.s
 
+src/levels/LevelLoader.o: src/levels/LevelLoader.cpp.o
+
+.PHONY : src/levels/LevelLoader.o
+
+# target to build an object file
+src/levels/LevelLoader.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/levels/LevelLoader.cpp.o
+.PHONY : src/levels/LevelLoader.cpp.o
+
+src/levels/LevelLoader.i: src/levels/LevelLoader.cpp.i
+
+.PHONY : src/levels/LevelLoader.i
+
+# target to preprocess a source file
+src/levels/LevelLoader.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/levels/LevelLoader.cpp.i
+.PHONY : src/levels/LevelLoader.cpp.i
+
+src/levels/LevelLoader.s: src/levels/LevelLoader.cpp.s
+
+.PHONY : src/levels/LevelLoader.s
+
+# target to generate assembly for a file
+src/levels/LevelLoader.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/levels/LevelLoader.cpp.s
+.PHONY : src/levels/LevelLoader.cpp.s
+
+src/levels/Playlist.o: src/levels/Playlist.cpp.o
+
+.PHONY : src/levels/Playlist.o
+
+# target to build an object file
+src/levels/Playlist.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/levels/Playlist.cpp.o
+.PHONY : src/levels/Playlist.cpp.o
+
+src/levels/Playlist.i: src/levels/Playlist.cpp.i
+
+.PHONY : src/levels/Playlist.i
+
+# target to preprocess a source file
+src/levels/Playlist.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/levels/Playlist.cpp.i
+.PHONY : src/levels/Playlist.cpp.i
+
+src/levels/Playlist.s: src/levels/Playlist.cpp.s
+
+.PHONY : src/levels/Playlist.s
+
+# target to generate assembly for a file
+src/levels/Playlist.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/levels/Playlist.cpp.s
+.PHONY : src/levels/Playlist.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -755,6 +809,12 @@ help:
 	@echo "... src/input/KeyboardController.o"
 	@echo "... src/input/KeyboardController.i"
 	@echo "... src/input/KeyboardController.s"
+	@echo "... src/levels/LevelLoader.o"
+	@echo "... src/levels/LevelLoader.i"
+	@echo "... src/levels/LevelLoader.s"
+	@echo "... src/levels/Playlist.o"
+	@echo "... src/levels/Playlist.i"
+	@echo "... src/levels/Playlist.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
