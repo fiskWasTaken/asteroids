@@ -41,4 +41,5 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
   inline PlayerSession *getPlayerSession() {
     return playerSession;
   }
+  void fireBullet();
 };

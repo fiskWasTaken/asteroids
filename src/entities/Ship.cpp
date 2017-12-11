@@ -6,23 +6,27 @@
 #include "Bullet.h"
 #include "../utility/vector.h"
 
+void Ship::fireBullet() {
+  auto thisRot = vector::fromAngle(rot);
+  auto velocity = thisRot * 5.0F;
+  auto bullet = new Bullet(world, this->getPlayerSession());
+
+  bullet->pos.x = pos.x + thisRot.x * 10;
+  bullet->pos.y = pos.y + thisRot.y * 10;
+  bullet->vel = velocity + vel;
+  bullet->rot = rot;
+
+  vel.x -= bullet->vel.x / 100;
+  vel.y -= bullet->vel.y / 100;
+
+  world->pushObject(bullet);
+}
+
 void Ship::update() {
   if (fireCooldown != 0) {
     fireCooldown--;
   } else if (isFiring) {
-    auto thisRot = vector::fromAngle(rot);
-    auto velocity = thisRot * 5.0F;
-    auto bullet = new Bullet(world, this->getPlayerSession());
-
-    bullet->pos.x = pos.x + thisRot.x * 10;
-    bullet->pos.y = pos.y + thisRot.y * 10;
-    bullet->vel = velocity + vel;
-    bullet->rot = rot;
-
-    vel.x -= bullet->vel.x / 100;
-    vel.y -= bullet->vel.y / 100;
-
-    world->pushObject(bullet);
+    fireBullet();
     fireCooldown = fireRate;
   }
 

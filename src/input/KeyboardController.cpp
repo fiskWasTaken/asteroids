@@ -2,20 +2,9 @@
 #include "KeyboardController.h"
 
 void KeyboardController::poll() {
-  InputAction keys[] = {
-      InputAction::ALTFIRE,
-      InputAction::PANIC,
-      InputAction::PAUSE,
-      InputAction::LEFT,
-      InputAction::RIGHT,
-      InputAction::ACCELERATE,
-      InputAction::BRAKE,
-      InputAction::FIRE,
-  };
-
-  for (auto key : keys) {
-    if (sf::Keyboard::isKeyPressed(map[key])) {
-      emit(key);
+  for (auto &it : map) {
+    if (sf::Keyboard::isKeyPressed(it.second)) {
+      emit(it.first);
     }
   }
 }
