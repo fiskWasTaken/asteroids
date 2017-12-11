@@ -53,9 +53,6 @@ void MainMenuScene::onVisible() {
     world->pushObject(ast);
   }
 }
-void MainMenuScene::onDestroy() {
-  delete (controller);
-}
 
 void MainMenuScene::drawWorld(RendererInterface *renderer) {
   auto window = renderer->getWindow();

@@ -94,10 +94,6 @@ void GameScene::onVisible() {
 //  game->getSessions()->push_back(session2);
 }
 
-void GameScene::onDestroy() {
-
-}
-
 void GameScene::drawHud(RendererInterface *renderer) {
   auto font = renderer->getFont();
   auto window = renderer->getWindow();

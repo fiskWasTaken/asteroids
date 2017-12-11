@@ -30,6 +30,3 @@ void HighScoreTableScene::handleEvents() {
 void HighScoreTableScene::onVisible() {
 
 }
-void HighScoreTableScene::onDestroy() {
-
-}

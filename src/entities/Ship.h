@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AbstractWorldObject.h"
-#include "../Player.h"
+#include "player/Player.h"
 
 class PlayerSession;
 

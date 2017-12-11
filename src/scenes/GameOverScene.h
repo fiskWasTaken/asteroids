@@ -12,7 +12,10 @@ class GameOverScene : public SceneInterface, public ControllerListenerInterface 
   void render(RendererInterface *renderer) override;
   void handleEvents() override;
   void onVisible() override;
-  void onDestroy() override;
+
+  ~GameOverScene() override {
+    delete controller;
+  }
 
   explicit GameOverScene(Asteroids *game) {
     this->game = game;

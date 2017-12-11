@@ -1,6 +1,6 @@
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <entities/Bullet.h>
-#include <PlayerSession.h>
+#include <player/PlayerSession.h>
 #include <utility/drawing.h>
 #include "AsteroidBase.h"
 

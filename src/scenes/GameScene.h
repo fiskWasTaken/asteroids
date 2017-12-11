@@ -24,7 +24,6 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   void handleEvents() override;
   void render(RendererInterface *renderer) override;
   void onVisible() override;
-  void onDestroy() override;
   void onAction(InputAction action) override;
 
   void pause(PlayerSession *initiator);
@@ -35,4 +34,8 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   void main() override;
   void onShipDestroyed(PlayerSession *playerSession);
   void drawDebug(RendererInterface *renderer);
+
+  ~GameScene() override {
+    delete world;
+  }
 };

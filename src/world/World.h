@@ -53,4 +53,10 @@ class World : public WorldInterface {
 
   void checkCollision(AbstractWorldObject *a);
   void recycle();
+
+  ~World() {
+    for (auto object: objects) {
+      delete object;
+    }
+  }
 };

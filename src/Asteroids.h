@@ -3,7 +3,7 @@
 #include <vector>
 #include <SFML/Window/Keyboard.hpp>
 #include "GameInterface.h"
-#include "PlayerSession.h"
+#include "player/PlayerSession.h"
 #include "HighScores.h"
 
 class Asteroids : public GameInterface {

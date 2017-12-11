@@ -23,13 +23,13 @@ class PlayerSession {
   inline Player *getPlayer() const { return player; }
 
   inline int getScore() const { return score; }
-  inline void setScore(int score) { PlayerSession::score = score; }
+  inline void setScore(int score) { this->score = score; }
 
   inline int getLives() const { return lives; }
   inline void setLives(int lives) { this->lives = lives; }
 
   inline Ship *getShip() {
-    return this->ship;
+    return ship;
   }
 
   void spawnShip(WorldInterface *world);

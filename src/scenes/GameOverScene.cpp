@@ -30,10 +30,6 @@ void GameOverScene::onVisible() {
   controller->setDelegate(this);
 }
 
-void GameOverScene::onDestroy() {
-
-}
-
 void GameOverScene::onAction(InputAction action) {
   if (action == InputAction::FIRE) {
     game->setScene(new GameScene(game));

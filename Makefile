@@ -201,33 +201,6 @@ src/GameInterface.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/GameInterface.cpp.s
 .PHONY : src/GameInterface.cpp.s
 
-src/PlayerSession.o: src/PlayerSession.cpp.o
-
-.PHONY : src/PlayerSession.o
-
-# target to build an object file
-src/PlayerSession.cpp.o:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/PlayerSession.cpp.o
-.PHONY : src/PlayerSession.cpp.o
-
-src/PlayerSession.i: src/PlayerSession.cpp.i
-
-.PHONY : src/PlayerSession.i
-
-# target to preprocess a source file
-src/PlayerSession.cpp.i:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/PlayerSession.cpp.i
-.PHONY : src/PlayerSession.cpp.i
-
-src/PlayerSession.s: src/PlayerSession.cpp.s
-
-.PHONY : src/PlayerSession.s
-
-# target to generate assembly for a file
-src/PlayerSession.cpp.s:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/PlayerSession.cpp.s
-.PHONY : src/PlayerSession.cpp.s
-
 src/collision/SATCollisionModel.o: src/collision/SATCollisionModel.cpp.o
 
 .PHONY : src/collision/SATCollisionModel.o
@@ -470,6 +443,33 @@ src/main.s: src/main.cpp.s
 src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
+
+src/player/PlayerSession.o: src/player/PlayerSession.cpp.o
+
+.PHONY : src/player/PlayerSession.o
+
+# target to build an object file
+src/player/PlayerSession.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/player/PlayerSession.cpp.o
+.PHONY : src/player/PlayerSession.cpp.o
+
+src/player/PlayerSession.i: src/player/PlayerSession.cpp.i
+
+.PHONY : src/player/PlayerSession.i
+
+# target to preprocess a source file
+src/player/PlayerSession.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/player/PlayerSession.cpp.i
+.PHONY : src/player/PlayerSession.cpp.i
+
+src/player/PlayerSession.s: src/player/PlayerSession.cpp.s
+
+.PHONY : src/player/PlayerSession.s
+
+# target to generate assembly for a file
+src/player/PlayerSession.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/player/PlayerSession.cpp.s
+.PHONY : src/player/PlayerSession.cpp.s
 
 src/renderer/Renderer.o: src/renderer/Renderer.cpp.o
 
@@ -731,9 +731,6 @@ help:
 	@echo "... src/GameInterface.o"
 	@echo "... src/GameInterface.i"
 	@echo "... src/GameInterface.s"
-	@echo "... src/PlayerSession.o"
-	@echo "... src/PlayerSession.i"
-	@echo "... src/PlayerSession.s"
 	@echo "... src/collision/SATCollisionModel.o"
 	@echo "... src/collision/SATCollisionModel.i"
 	@echo "... src/collision/SATCollisionModel.s"
@@ -761,6 +758,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/player/PlayerSession.o"
+	@echo "... src/player/PlayerSession.i"
+	@echo "... src/player/PlayerSession.s"
 	@echo "... src/renderer/Renderer.o"
 	@echo "... src/renderer/Renderer.i"
 	@echo "... src/renderer/Renderer.s"
