@@ -111,9 +111,9 @@ void Ship::renderTo(sf::RenderWindow *renderWindow) {
   shape.setFillColor(sf::Color::Transparent);
   shape.setOutlineColor(sf::Color::Green);
   shape.setOutlineThickness(1.0F);
-  shape.setPosition(pos);
   shape.setOrigin(origin.x, origin.y);
   shape.setRotation(rot);
 
+  shape.setPosition(pos);
   renderWindow->draw(shape);
 }

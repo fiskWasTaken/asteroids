@@ -18,6 +18,10 @@ class MediumAsteroid : public AsteroidBase {
     return 30;
   }
 
+  inline int getScoreValue() override {
+    return 2;
+  }
+
   void onDestroyed() override;
 };
 

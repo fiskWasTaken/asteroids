@@ -3,13 +3,9 @@
 #include <SFML/System/Vector2.hpp>
 #include <vector>
 #include <entities/WorldObjectInterface.h>
-
-struct collisionResult {
-  bool isCollision = false;
-  sf::Vector2f mtv;
-};
+#include "collision_result_t.h"
 
 class CollisionModelInterface {
  public:
-  virtual collisionResult check(WorldObjectInterface *a, WorldObjectInterface *b) = 0;
+  virtual collision_result_t check(WorldObjectInterface *a, WorldObjectInterface *b) = 0;
 };

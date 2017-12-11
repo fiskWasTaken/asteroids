@@ -20,5 +20,9 @@ class LargeAsteroid : public AsteroidBase {
     return 60;
   }
 
+  inline int getScoreValue() override {
+    return 1;
+  }
+
   void onDestroyed() override;
 };

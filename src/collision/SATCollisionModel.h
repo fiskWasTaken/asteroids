@@ -6,5 +6,5 @@ std::vector<sf::Vector2f> getOffsetPoints(WorldObjectInterface *object);
 
 class SATCollisionModel : public CollisionModelInterface {
  public:
-  collisionResult check(WorldObjectInterface *a, WorldObjectInterface *b) override;
+  collision_result_t check(WorldObjectInterface *a, WorldObjectInterface *b) override;
 };

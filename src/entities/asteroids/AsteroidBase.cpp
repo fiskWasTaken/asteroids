@@ -24,7 +24,7 @@ void AsteroidBase::renderTo(sf::RenderWindow *renderWindow) {
   }
 
   shape.setFillColor(sf::Color::Transparent);
-  shape.setOutlineColor(sf::Color::Green);
+  shape.setOutlineColor(sf::Color(244, 167, 66));
   shape.setOutlineThickness(1.0F);
   shape.setPosition(pos);
   shape.setOrigin(origin.x, origin.y);
@@ -52,7 +52,7 @@ void AsteroidBase::onBulletHit(Bullet *bullet) {
 
   if (isDestroyed()) {
     auto session = bullet->getOwner();
-    session->setScore(session->getScore() + 5);
+    session->setScore(session->getScore() + getScoreValue());
   }
 }
 

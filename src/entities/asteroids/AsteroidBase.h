@@ -21,6 +21,7 @@ class AsteroidBase : public AbstractWorldObject {
   }
 
   virtual int getMaxHealth() = 0;
+  virtual int getScoreValue() = 0;
 
   inline bool isDestroyed() {
     return health <= 0;

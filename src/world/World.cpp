@@ -17,11 +17,11 @@ void World::wrapObject(WorldObjectInterface *object) {
 void World::checkCollision(AbstractWorldObject *a) {
   for (auto b: objects) {
     if (a != b) {
-      collisionResult result = collisionModel.check(a, b);
+      collision_result_t result = collisionModel.check(a, b);
 
       if (result.isCollision) {
         a->onCollision(b);
-        b->pos += sf::Vector2f(result.mtv.x / 10, result.mtv.y / 10);
+        b->pos += sf::Vector2f(result.mtv.x / 100, result.mtv.y / 100);
       }
     }
   }

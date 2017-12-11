@@ -18,5 +18,9 @@ class SmallAsteroid : public AsteroidBase {
     return 15;
   }
 
+  inline int getScoreValue() override {
+    return 3;
+  }
+
   void onDestroyed() override;
 };

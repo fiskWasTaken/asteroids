@@ -57,7 +57,7 @@ std::vector<sf::Vector2f> getOffsetPoints(WorldObjectInterface *object) {
   return offsets;
 }
 
-collisionResult SATCollisionModel::check(WorldObjectInterface *a, WorldObjectInterface *b) {
+collision_result_t SATCollisionModel::check(WorldObjectInterface *a, WorldObjectInterface *b) {
   auto aOffsets = getOffsetPoints(a);
   auto bOffsets = getOffsetPoints(b);
   sf::Vector2f mtv;
