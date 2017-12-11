@@ -1,9 +1,4 @@
-//
-// Created by fisk on 24/09/17.
-//
-
-#ifndef ASTEROIDS_WORLD_H
-#define ASTEROIDS_WORLD_H
+#pragma once
 
 #include <set>
 #include <collision/SATCollisionModel.h>
@@ -59,5 +54,3 @@ class World : public WorldInterface {
   void checkCollision(AbstractWorldObject *a);
   void recycle();
 };
-
-#endif //ASTEROIDS_WORLD_H

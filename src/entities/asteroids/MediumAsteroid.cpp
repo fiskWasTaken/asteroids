@@ -1,7 +1,3 @@
-//
-// Created by fisk on 11/12/17.
-//
-
 #include <utility/vector.h>
 #include "MediumAsteroid.h"
 #include "SmallAsteroid.h"

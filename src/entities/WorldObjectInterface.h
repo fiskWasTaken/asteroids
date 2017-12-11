@@ -1,9 +1,4 @@
-//
-// Created by fisk on 17/10/17.
-//
-
-#ifndef ASTEROIDS_WORLDOBJECTINTERFACE_H
-#define ASTEROIDS_WORLDOBJECTINTERFACE_H
+#pragma once
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -27,5 +22,3 @@ class WorldObjectInterface {
 
   virtual void renderTo(sf::RenderWindow *renderWindow) = 0;
 };
-
-#endif //ASTEROIDS_WORLDOBJECTINTERFACE_H

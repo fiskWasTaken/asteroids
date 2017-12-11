@@ -1,7 +1,3 @@
-//
-// Created by fisk on 21/09/17.
-//
-
 #include <sstream>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Text.hpp>

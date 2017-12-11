@@ -1,9 +1,4 @@
-//
-// Created by fisk on 11/12/17.
-//
-
-#ifndef ASTEROIDS_SMALLASTEROID_H
-#define ASTEROIDS_SMALLASTEROID_H
+#pragma once
 
 #include "AsteroidBase.h"
 class SmallAsteroid : public AsteroidBase {
@@ -20,10 +15,8 @@ class SmallAsteroid : public AsteroidBase {
   }
 
   inline int getMaxHealth() override {
-    return 10;
+    return 15;
   }
 
   void onDestroyed() override;
 };
-
-#endif //ASTEROIDS_SMALLASTEROID_H

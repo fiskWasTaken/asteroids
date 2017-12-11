@@ -1,7 +1,3 @@
-//
-// Created by fisk on 09/12/17.
-//
-
 #include <utility/vector.h>
 #include "SATCollisionModel.h"
 

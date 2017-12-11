@@ -1,7 +1,3 @@
-//
-// Created by fisk on 24/09/17.
-//
-
 #include "Asteroids.h"
 #include "input/KeyboardController.h"
 void Asteroids::main() {

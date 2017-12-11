@@ -1,7 +1,3 @@
-//
-// Created by fisk on 24/09/17.
-//
-
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
 #include "Bullet.h"

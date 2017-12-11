@@ -1,7 +1,3 @@
-//
-// Created by Fisk on 13/10/2017.
-//
-
 #include <sstream>
 #include <SFML/Graphics/Text.hpp>
 #include "HighScoreTableScene.h"

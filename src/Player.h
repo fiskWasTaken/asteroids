@@ -1,9 +1,4 @@
-//
-// Created by fisk on 21/09/17.
-//
-
-#ifndef ASTEROIDS_PLAYER_H
-#define ASTEROIDS_PLAYER_H
+#pragma once
 
 #include <string>
 #include "input/ControllerInterface.h"
@@ -28,5 +23,3 @@ class Player {
   std::string name;
   ControllerInterface *controller = nullptr;
 };
-
-#endif //ASTEROIDS_PLAYER_H

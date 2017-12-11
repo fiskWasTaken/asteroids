@@ -1,9 +1,4 @@
-//
-// Created by fisk on 24/09/17.
-//
-
-#ifndef ASTEROIDS_BULLET_H
-#define ASTEROIDS_BULLET_H
+#pragma once
 
 #include "AbstractWorldObject.h"
 #include "Ship.h"
@@ -51,5 +46,3 @@ class Bullet : public AbstractWorldObject {
   void renderTo(sf::RenderWindow *renderWindow) override;
 
 };
-
-#endif //ASTEROIDS_BULLET_H

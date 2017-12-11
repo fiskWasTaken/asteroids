@@ -1,7 +1,3 @@
-//
-// Created by Fisk on 09/10/2017.
-//
-
 #include <SFML/Window/Keyboard.hpp>
 #include "KeyboardController.h"
 

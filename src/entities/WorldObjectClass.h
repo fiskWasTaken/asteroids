@@ -1,9 +1,4 @@
-//
-// Created by fisk on 24/09/17.
-//
-
-#ifndef ASTEROIDS_WORLDOBJECTCLASS_H
-#define ASTEROIDS_WORLDOBJECTCLASS_H
+#pragma once
 
 enum WorldObjectClass {
   SHIP,
@@ -11,5 +6,3 @@ enum WorldObjectClass {
   BULLET,
   NONE
 };
-
-#endif //ASTEROIDS_WORLDOBJECTCLASS_H

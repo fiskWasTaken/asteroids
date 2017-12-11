@@ -1,9 +1,4 @@
-//
-// Created by fisk on 21/09/17.
-//
-
-#ifndef ASTEROIDS_SCENES_GAMESCENE_H
-#define ASTEROIDS_SCENES_GAMESCENE_H
+#pragma once
 
 #include <Asteroids.h>
 #include "SceneInterface.h"
@@ -41,5 +36,3 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   void onShipDestroyed(PlayerSession *playerSession);
   void drawDebug(RendererInterface *renderer);
 };
-
-#endif //ASTEROIDS_SCENES_GAMESCENE_H

@@ -1,7 +1,3 @@
-//
-// Created by fisk on 24/09/17.
-//
-
 #include "World.h"
 
 void World::wrapObject(WorldObjectInterface *object) {

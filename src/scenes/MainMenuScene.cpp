@@ -1,7 +1,3 @@
-//
-// Created by fisk on 21/09/17.
-//
-
 #include <SFML/Graphics/Text.hpp>
 #include <entities/asteroids/LargeAsteroid.h>
 #include "MainMenuScene.h"
@@ -47,7 +43,7 @@ void MainMenuScene::onAction(InputAction action) {
 void MainMenuScene::onVisible() {
   controller->setDelegate(this);
 
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < 40; i++) {
     auto ast = new LargeAsteroid(world);
     ast->pos.x = 50 * rand() % 600;
     ast->pos.y = -50 * rand() % 400;

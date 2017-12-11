@@ -1,9 +1,4 @@
-//
-// Created by Fisk on 13/10/2017.
-//
-
-#ifndef ASTEROIDS_HIGHSCORES_H
-#define ASTEROIDS_HIGHSCORES_H
+#pragma once
 
 #include <string>
 #include <vector>
@@ -41,5 +36,3 @@ class HighScores {
   void sort() {
   }
 };
-
-#endif //ASTEROIDS_HIGHSCORES_H

@@ -1,9 +1,4 @@
-//
-// Created by fisk on 21/09/17.
-//
-
-#ifndef ASTEROIDS_ASTEROID_H
-#define ASTEROIDS_ASTEROID_H
+#pragma once
 
 #include "entities/AbstractWorldObject.h"
 #include "AsteroidBase.h"
@@ -22,10 +17,8 @@ class LargeAsteroid : public AsteroidBase {
   }
 
   inline int getMaxHealth() override {
-    return 50;
+    return 60;
   }
 
   void onDestroyed() override;
 };
-
-#endif //ASTEROIDS_ASTEROID_H

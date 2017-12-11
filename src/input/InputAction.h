@@ -1,12 +1,5 @@
-//
-// Created by Fisk on 09/10/2017.
-//
-
-#ifndef ASTEROIDS_INPUTACTION_H
-#define ASTEROIDS_INPUTACTION_H
+#pragma once
 
 enum InputAction {
   PAUSE, ACCELERATE, BRAKE, LEFT, RIGHT, FIRE, ALTFIRE, PANIC
 };
-
-#endif //ASTEROIDS_INPUTACTION_H

@@ -1,7 +1,3 @@
-//
-// Created by fisk on 21/09/17.
-//
-
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <utility/vector.h>
 #include "LargeAsteroid.h"

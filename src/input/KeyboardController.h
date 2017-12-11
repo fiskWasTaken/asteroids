@@ -1,9 +1,4 @@
-//
-// Created by Fisk on 09/10/2017.
-//
-
-#ifndef ASTEROIDS_KEYBOARDCONTROLLER_H
-#define ASTEROIDS_KEYBOARDCONTROLLER_H
+#pragma once
 
 #include "ControllerInterface.h"
 #include "ControllerListenerInterface.h"
@@ -18,5 +13,3 @@ class KeyboardController : public ControllerInterface {
     map[action] = key;
   }
 };
-
-#endif //ASTEROIDS_KEYBOARDCONTROLLER_H

@@ -201,60 +201,6 @@ src/GameInterface.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/GameInterface.cpp.s
 .PHONY : src/GameInterface.cpp.s
 
-src/HighScores.o: src/HighScores.cpp.o
-
-.PHONY : src/HighScores.o
-
-# target to build an object file
-src/HighScores.cpp.o:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/HighScores.cpp.o
-.PHONY : src/HighScores.cpp.o
-
-src/HighScores.i: src/HighScores.cpp.i
-
-.PHONY : src/HighScores.i
-
-# target to preprocess a source file
-src/HighScores.cpp.i:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/HighScores.cpp.i
-.PHONY : src/HighScores.cpp.i
-
-src/HighScores.s: src/HighScores.cpp.s
-
-.PHONY : src/HighScores.s
-
-# target to generate assembly for a file
-src/HighScores.cpp.s:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/HighScores.cpp.s
-.PHONY : src/HighScores.cpp.s
-
-src/Player.o: src/Player.cpp.o
-
-.PHONY : src/Player.o
-
-# target to build an object file
-src/Player.cpp.o:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Player.cpp.o
-.PHONY : src/Player.cpp.o
-
-src/Player.i: src/Player.cpp.i
-
-.PHONY : src/Player.i
-
-# target to preprocess a source file
-src/Player.cpp.i:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Player.cpp.i
-.PHONY : src/Player.cpp.i
-
-src/Player.s: src/Player.cpp.s
-
-.PHONY : src/Player.s
-
-# target to generate assembly for a file
-src/Player.cpp.s:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/Player.cpp.s
-.PHONY : src/Player.cpp.s
-
 src/PlayerSession.o: src/PlayerSession.cpp.o
 
 .PHONY : src/PlayerSession.o
@@ -785,12 +731,6 @@ help:
 	@echo "... src/GameInterface.o"
 	@echo "... src/GameInterface.i"
 	@echo "... src/GameInterface.s"
-	@echo "... src/HighScores.o"
-	@echo "... src/HighScores.i"
-	@echo "... src/HighScores.s"
-	@echo "... src/Player.o"
-	@echo "... src/Player.i"
-	@echo "... src/Player.s"
 	@echo "... src/PlayerSession.o"
 	@echo "... src/PlayerSession.i"
 	@echo "... src/PlayerSession.s"

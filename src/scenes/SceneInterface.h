@@ -1,9 +1,4 @@
-//
-// Created by fisk on 21/09/17.
-//
-
-#ifndef ASTEROIDS_SCENES_ISCENE_H
-#define ASTEROIDS_SCENES_ISCENE_H
+#pragma once
 
 #include "renderer/RendererInterface.h"
 
@@ -15,5 +10,3 @@ class SceneInterface {
   virtual void onDestroy() = 0;
   virtual void main() {}
 };
-
-#endif //ASTEROIDS_SCENES_ISCENE_H

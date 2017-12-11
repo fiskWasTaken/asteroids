@@ -1,7 +1,3 @@
-//
-// Created by fisk on 11/12/17.
-//
-
 #include <SFML/Graphics/RectangleShape.hpp>
 #include "drawing.h"
 
@@ -29,7 +25,7 @@ void drawHealthBar(
   healthBar.setSize(sf::Vector2f(maxHealth, height));
   healthBar.setOutlineThickness(1.0f);
   healthBar.setFillColor(sf::Color::Transparent);
-  healthBar.setOutlineColor(sf::Color::White);
+  healthBar.setOutlineColor(sf::Color(127, 127, 127));
 
   renderWindow->draw(healthBar);
   renderWindow->draw(remainingHealth);

@@ -1,9 +1,4 @@
-//
-// Created by fisk on 09/12/17.
-//
-
-#ifndef ASTEROIDS_RENDERERINTERFACE_H
-#define ASTEROIDS_RENDERERINTERFACE_H
+#pragma once
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/View.hpp>
@@ -21,5 +16,3 @@ class RendererInterface {
   virtual sf::Font *getFont() = 0;
   virtual sf::View getView() = 0;
 };
-
-#endif //ASTEROIDS_RENDERERINTERFACE_H

@@ -1,9 +1,4 @@
-//
-// Created by fisk on 21/09/17.
-//
-
-#ifndef ASTEROIDS_GAME_H
-#define ASTEROIDS_GAME_H
+#pragma once
 
 #include <scenes/SceneInterface.h>
 #include "world/World.h"
@@ -26,5 +21,3 @@ class GameInterface {
     return scene;
   }
 };
-
-#endif //ASTEROIDS_GAME_H

@@ -1,9 +1,4 @@
-//
-// Created by fisk on 11/12/17.
-//
-
-#ifndef ASTEROIDS_BASEASTEROID_H
-#define ASTEROIDS_BASEASTEROID_H
+#pragma once
 
 #include <entities/AbstractWorldObject.h>
 
@@ -47,5 +42,3 @@ class AsteroidBase : public AbstractWorldObject {
   void update() override;
   void onBulletHit(Bullet *bullet);
 };
-
-#endif //ASTEROIDS_BASEASTEROID_H

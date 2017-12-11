@@ -1,9 +1,4 @@
-//
-// Created by fisk on 21/09/17.
-//
-
-#ifndef ASTEROIDS_RENDERER_H
-#define ASTEROIDS_RENDERER_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
@@ -42,5 +37,3 @@ class Renderer : public RendererInterface {
     return view;
   }
 };
-
-#endif //ASTEROIDS_WINDOW_H

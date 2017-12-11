@@ -1,20 +1,16 @@
-//
-// Created by fisk on 09/12/17.
-//
-
 #include <cmath>
 #include "vector.h"
 
 namespace vector {
-float len(const sf::Vector2f vector ) {
+float len(const sf::Vector2f vector) {
   return std::sqrt(vector.x * vector.x + vector.y * vector.y);
 }
 
-float rot(const sf::Vector2f vector ) {
+float rot(const sf::Vector2f vector) {
   return float(atan2(vector.y, vector.x)) * 180 / 3.14159265F;
 }
 
-float dot(const sf::Vector2f a, const sf::Vector2f b ) {
+float dot(const sf::Vector2f a, const sf::Vector2f b) {
   return a.x * b.x + a.y * b.y;
 }
 
@@ -31,13 +27,13 @@ sf::Vector2f fromAngle(float angle) {
   return {std::cos(angle * r), std::sin(angle * r)};
 }
 
-sf::Vector2f normalise(const sf::Vector2f vector) {
+sf::Vector2f nor(const sf::Vector2f vector) {
   float length = len(vector);
   return {vector.x / length, vector.y / length};
 }
 
 sf::Vector2f len(const sf::Vector2f vector, float length) {
-  auto out = normalise(vector);
+  auto out = nor(vector);
   return {out.x * length, out.y * length};
 }
 
@@ -53,7 +49,7 @@ sf::Vector2f limit(sf::Vector2f vector, float length) {
   auto current = len(vector);
 
   if (current > length) {
-    vector = normalise(vector);
+    vector = nor(vector);
     vector.x *= length;
     vector.y *= length;
   }

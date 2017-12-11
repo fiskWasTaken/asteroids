@@ -1,7 +1,3 @@
-//
-// Created by Fisk on 13/10/2017.
-//
-
 #include <SFML/Graphics/Text.hpp>
 #include "GameOverScene.h"
 #include "GameScene.h"

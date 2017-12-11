@@ -1,9 +1,4 @@
-//
-// Created by fisk on 11/12/17.
-//
-
-#ifndef ASTEROIDS_MEDIUMASTEROID_H
-#define ASTEROIDS_MEDIUMASTEROID_H
+#pragma once
 
 #include "AsteroidBase.h"
 class MediumAsteroid : public AsteroidBase {
@@ -26,4 +21,3 @@ class MediumAsteroid : public AsteroidBase {
   void onDestroyed() override;
 };
 
-#endif //ASTEROIDS_MEDIUMASTEROID_H

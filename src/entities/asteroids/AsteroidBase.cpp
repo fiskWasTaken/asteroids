@@ -1,7 +1,3 @@
-//
-// Created by fisk on 11/12/17.
-//
-
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <entities/Bullet.h>
 #include <PlayerSession.h>
@@ -67,7 +63,12 @@ void AsteroidBase::onCollision(AbstractWorldObject *other) {
 
   if (other->getClass() == WorldObjectClass::ASTEROID) {
     // bounce
-    vel = -vel;
+    auto diff = vel - other->vel;
+    diff.x /= 2;
+    diff.y /= 2;
+
+    vel -= diff;
+    other->vel += diff;
   }
 
   if (other->getClass() == WorldObjectClass::SHIP) {

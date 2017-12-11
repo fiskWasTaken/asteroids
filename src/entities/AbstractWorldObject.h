@@ -1,9 +1,4 @@
-//
-// Created by fisk on 21/09/17.
-//
-
-#ifndef ASTEROIDS_WORLDOBJECT_H
-#define ASTEROIDS_WORLDOBJECT_H
+#pragma once
 
 #include <SFML/System/Vector2.hpp>
 #include <utility>
@@ -43,5 +38,3 @@ class AbstractWorldObject : public WorldObjectInterface {
     return world;
   }
 };
-
-#endif //ASTEROIDS_WORLDOBJECT_H

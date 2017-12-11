@@ -1,7 +1,3 @@
-//
-// Created by fisk on 21/09/17.
-//
-
 #include <cmath>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/CircleShape.hpp>

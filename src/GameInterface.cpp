@@ -1,7 +1,3 @@
-//
-// Created by fisk on 21/09/17.
-//
-
 #include "GameInterface.h"
 
 void GameInterface::stop() {

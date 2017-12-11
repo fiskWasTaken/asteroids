@@ -1,6 +1,3 @@
-//
-// Created by fisk on 21/09/17.
-//
 #include <iostream>
 #include "Renderer.h"
 #include <cmath>

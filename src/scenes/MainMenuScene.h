@@ -1,9 +1,4 @@
-//
-// Created by fisk on 21/09/17.
-//
-
-#ifndef ASTEROIDS_SCENES_MAINMENU_H
-#define ASTEROIDS_SCENES_MAINMENU_H
+#pragma once
 
 #include <Asteroids.h>
 #include "SceneInterface.h"
@@ -26,5 +21,3 @@ class MainMenuScene : public SceneInterface, public ControllerListenerInterface 
   void drawWorld(RendererInterface *renderer);
   void main() override;
 };
-
-#endif //ASTEROIDS_MAINMENU_H

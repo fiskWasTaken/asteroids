@@ -1,9 +1,4 @@
-//
-// Created by fisk on 24/09/17.
-//
-
-#ifndef ASTEROIDS_ASTEROIDS_H
-#define ASTEROIDS_ASTEROIDS_H
+#pragma once
 
 #include <vector>
 #include <SFML/Window/Keyboard.hpp>
@@ -33,5 +28,3 @@ class Asteroids : public GameInterface {
 
   ControllerInterface *getDefaultController();
 };
-
-#endif //ASTEROIDS_ASTEROIDS_H

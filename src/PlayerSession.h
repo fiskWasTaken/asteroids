@@ -1,9 +1,4 @@
-//
-// Created by fisk on 21/09/17.
-//
-
-#ifndef ASTEROIDS_PLAYERSESSION_H
-#define ASTEROIDS_PLAYERSESSION_H
+#pragma once
 
 #include <entities/Ship.h>
 #include "Player.h"
@@ -39,5 +34,3 @@ class PlayerSession {
 
   void spawnShip(WorldInterface *world);
 };
-
-#endif //ASTEROIDS_PLAYERSESSION_H
