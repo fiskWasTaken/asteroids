@@ -8,3 +8,4 @@ asteroids_test
 /cmake_install.cmake
 /CTestTestfile.cmake
 /Makefile
+/CMakeCache.txt
