@@ -6,6 +6,9 @@
 #define ASTEROIDS_BASEASTEROID_H
 
 #include <entities/AbstractWorldObject.h>
+
+class Bullet;
+
 class AsteroidBase : public AbstractWorldObject {
  protected:
   int health = 100;
@@ -16,15 +19,16 @@ class AsteroidBase : public AbstractWorldObject {
   }
 
   explicit AsteroidBase(WorldInterface *world) : AbstractWorldObject(world) {
-    this->health = this->getMaxHealth();
   }
 
   inline int getHealth() {
     return health;
   }
 
-  inline int getMaxHealth() {
-    return 100;
+  virtual int getMaxHealth() = 0;
+
+  inline bool isDestroyed() {
+    return health <= 0;
   }
 
   inline void takeDamage(int damage) {
@@ -41,6 +45,7 @@ class AsteroidBase : public AbstractWorldObject {
   void onCollision(AbstractWorldObject *other) override;
   void renderTo(sf::RenderWindow *renderWindow) override;
   void update() override;
+  void onBulletHit(Bullet *bullet);
 };
 
 #endif //ASTEROIDS_BASEASTEROID_H

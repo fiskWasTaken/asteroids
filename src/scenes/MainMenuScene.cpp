@@ -49,8 +49,8 @@ void MainMenuScene::onVisible() {
 
   for (int i = 0; i < 10; i++) {
     auto ast = new LargeAsteroid(world);
-    ast->pos.x = 50 * rand() % 100;
-    ast->pos.y = -50 * rand() % 100;
+    ast->pos.x = 50 * rand() % 600;
+    ast->pos.y = -50 * rand() % 400;
     ast->vel.x = rand() % 100 / 80;
     ast->vel.y = rand() % 100 / 80;
 

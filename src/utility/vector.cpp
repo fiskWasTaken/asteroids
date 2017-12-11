@@ -6,15 +6,19 @@
 #include "vector.h"
 
 namespace vector {
-float len(sf::Vector2f *vector) {
-  return std::sqrt(vector->x * vector->x + vector->y * vector->y);
+float len(const sf::Vector2f vector ) {
+  return std::sqrt(vector.x * vector.x + vector.y * vector.y);
 }
 
-float dot(sf::Vector2f *a, sf::Vector2f *b) {
-  return a->x * b->x + a->y * b->y;
+float rot(const sf::Vector2f vector ) {
+  return float(atan2(vector.y, vector.x)) * 180 / 3.14159265F;
 }
 
-sf::Vector2f rot(sf::Vector2f vector, float degrees) {
+float dot(const sf::Vector2f a, const sf::Vector2f b ) {
+  return a.x * b.x + a.y * b.y;
+}
+
+sf::Vector2f rot(const sf::Vector2f vector, float degrees) {
   float r = 3.14159265F / 180;
   sf::Vector2f out;
   out.x = vector.x * std::cos(r * degrees) - vector.y * std::sin(r * degrees);
@@ -27,41 +31,31 @@ sf::Vector2f fromAngle(float angle) {
   return {std::cos(angle * r), std::sin(angle * r)};
 }
 
-sf::Vector2f *normalise(sf::Vector2f *vector) {
+sf::Vector2f normalise(const sf::Vector2f vector) {
   float length = len(vector);
-  vector->x = vector->x / length;
-  vector->y = vector->y / length;
-  return vector;
+  return {vector.x / length, vector.y / length};
 }
 
-sf::Vector2f *len(sf::Vector2f *vector, float length) {
-  vector = normalise(vector);
-  vector->x = vector->x * length;
-  vector->y = vector->y * length;
-  return vector;
+sf::Vector2f len(const sf::Vector2f vector, float length) {
+  auto out = normalise(vector);
+  return {out.x * length, out.y * length};
 }
 
-sf::Vector2f *perpL(sf::Vector2f *vector) {
-  float tmp = vector->x;
-  vector->x = -vector->y;
-  vector->y = tmp;
-  return vector;
+sf::Vector2f perpL(const sf::Vector2f vector) {
+  return {-vector.y, vector.x};
 }
 
-sf::Vector2f *perpR(sf::Vector2f *vector) {
-  float tmp = vector->y;
-  vector->y = -vector->x;
-  vector->x = tmp;
-  return vector;
+sf::Vector2f perpR(const sf::Vector2f vector) {
+  return {vector.y, -vector.x};
 }
 
-sf::Vector2f *limit(sf::Vector2f *vector, float length) {
+sf::Vector2f limit(sf::Vector2f vector, float length) {
   auto current = len(vector);
 
   if (current > length) {
     vector = normalise(vector);
-    vector->x *= length;
-    vector->y *= length;
+    vector.x *= length;
+    vector.y *= length;
   }
 
   return vector;

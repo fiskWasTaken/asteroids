@@ -16,7 +16,7 @@ void Ship::update() {
   } else if (isFiring) {
     auto thisRot = vector::fromAngle(rot);
     auto velocity = thisRot * 5.0F;
-    auto bullet = new Bullet(world);
+    auto bullet = new Bullet(world, this->getPlayerSession());
 
     bullet->pos.x = pos.x + thisRot.x * 10;
     bullet->pos.y = pos.y + thisRot.y * 10;
@@ -32,7 +32,7 @@ void Ship::update() {
 
   this->isFiring = false;
 
-  vel = *vector::limit(&vel, maxSpeed);
+  vel = vector::limit(vel, maxSpeed);
   this->pos += vel;
 }
 
@@ -48,7 +48,7 @@ void Ship::onAction(InputAction action) {
     auto rV = vector::fromAngle(rot);
 
     // get the current speed
-    auto speed = vector::len(&vel);
+    auto speed = vector::len(vel);
 
     speed += 0.1;
 

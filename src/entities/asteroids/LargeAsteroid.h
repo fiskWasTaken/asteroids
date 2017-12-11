@@ -18,9 +18,10 @@ class LargeAsteroid : public AsteroidBase {
     points.emplace_back(0, 37.5f);
     points.emplace_back(0, 12.5f);
     origin = sf::Vector2f(25, 25);
+    this->health = this->getMaxHealth();
   }
 
-  inline int getMaxHealth() {
+  inline int getMaxHealth() override {
     return 50;
   }
 

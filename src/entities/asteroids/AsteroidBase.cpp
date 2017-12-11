@@ -4,11 +4,12 @@
 
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <entities/Bullet.h>
-#include <entities/Ship.h>
+#include <PlayerSession.h>
+#include <utility/drawing.h>
 #include "AsteroidBase.h"
 
 bool AsteroidBase::isRecyclable() {
-  return health <= 0;
+  return isDestroyed();
 }
 
 void AsteroidBase::update() {
@@ -34,15 +35,34 @@ void AsteroidBase::renderTo(sf::RenderWindow *renderWindow) {
   shape.setRotation(rot);
 
   renderWindow->draw(shape);
+
+  if (health < getMaxHealth()) {
+    drawing::drawHealthBar(
+        renderWindow,
+        getHealth(),
+        getMaxHealth(),
+        sf::Vector2f(pos.x, pos.y + 40),
+        sf::Vector2f(origin.x, 20)
+    );
+  }
+}
+
+void AsteroidBase::onBulletHit(Bullet *bullet) {
+  // take damage
+  takeDamage(10);
+  vel.x += bullet->vel.x / 30;
+  vel.y += bullet->vel.y / 30;
+  bullet->setLifetime(0);
+
+  if (isDestroyed()) {
+    auto session = bullet->getOwner();
+    session->setScore(session->getScore() + 5);
+  }
 }
 
 void AsteroidBase::onCollision(AbstractWorldObject *other) {
   if (other->getClass() == WorldObjectClass::BULLET) {
-    // take damage
-    takeDamage(10);
-    vel.x += other->vel.x / 30;
-    vel.y += other->vel.y / 30;
-    ((Bullet *) other)->setLifetime(0);
+    onBulletHit((Bullet *) other);
   }
 
   if (other->getClass() == WorldObjectClass::ASTEROID) {

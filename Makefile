@@ -363,33 +363,6 @@ src/entities/Ship.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/Ship.cpp.s
 .PHONY : src/entities/Ship.cpp.s
 
-src/entities/ShipWeapon.o: src/entities/ShipWeapon.cpp.o
-
-.PHONY : src/entities/ShipWeapon.o
-
-# target to build an object file
-src/entities/ShipWeapon.cpp.o:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/ShipWeapon.cpp.o
-.PHONY : src/entities/ShipWeapon.cpp.o
-
-src/entities/ShipWeapon.i: src/entities/ShipWeapon.cpp.i
-
-.PHONY : src/entities/ShipWeapon.i
-
-# target to preprocess a source file
-src/entities/ShipWeapon.cpp.i:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/ShipWeapon.cpp.i
-.PHONY : src/entities/ShipWeapon.cpp.i
-
-src/entities/ShipWeapon.s: src/entities/ShipWeapon.cpp.s
-
-.PHONY : src/entities/ShipWeapon.s
-
-# target to generate assembly for a file
-src/entities/ShipWeapon.cpp.s:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/ShipWeapon.cpp.s
-.PHONY : src/entities/ShipWeapon.cpp.s
-
 src/entities/asteroids/AsteroidBase.o: src/entities/asteroids/AsteroidBase.cpp.o
 
 .PHONY : src/entities/asteroids/AsteroidBase.o
@@ -830,9 +803,6 @@ help:
 	@echo "... src/entities/Ship.o"
 	@echo "... src/entities/Ship.i"
 	@echo "... src/entities/Ship.s"
-	@echo "... src/entities/ShipWeapon.o"
-	@echo "... src/entities/ShipWeapon.i"
-	@echo "... src/entities/ShipWeapon.s"
 	@echo "... src/entities/asteroids/AsteroidBase.o"
 	@echo "... src/entities/asteroids/AsteroidBase.i"
 	@echo "... src/entities/asteroids/AsteroidBase.s"

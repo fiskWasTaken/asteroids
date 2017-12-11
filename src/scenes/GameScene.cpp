@@ -22,7 +22,7 @@ void GameScene::render(RendererInterface *renderer) {
 
   drawWorld(renderer);
   drawHud(renderer);
-  drawDebug(renderer);
+//  drawDebug(renderer);
 }
 
 void GameScene::drawDebug(RendererInterface *renderer) {
@@ -62,8 +62,8 @@ void GameScene::onVisible() {
 
   for (int i = 0; i < 10; i++) {
     auto ast = new LargeAsteroid(world);
-    ast->pos.x = 50 * rand() % 100;
-    ast->pos.y = -50 * rand() % 100;
+    ast->pos.x = 50 * rand() % 600;
+    ast->pos.y = -50 * rand() % 400;
     ast->vel.x = rand() % 100 / 80;
     ast->vel.y = rand() % 100 / 80;
 
@@ -126,6 +126,18 @@ void GameScene::drawHud(RendererInterface *renderer) {
     window->draw(livesText);
 
     offset += 64;
+  }
+
+  if (paused) {
+    auto view = renderer->getView();
+
+    sf::Text pausedText("Paused", *font, 16);
+
+    auto center = view.getSize().x / 2;
+    auto middle = view.getSize().y / 2;
+
+    pausedText.setPosition(center, middle - 14);
+    window->draw(pausedText);
   }
 }
 

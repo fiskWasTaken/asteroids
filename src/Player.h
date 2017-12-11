@@ -10,7 +10,7 @@
 
 class Player {
  public:
-  explicit Player(const std::string name) {
+  explicit Player(const std::string &name) {
     this->name = name;
   }
 

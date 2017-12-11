@@ -4,3 +4,4 @@
 *.cbp
 asteroids_test
 /CMakeFiles
+/asteroids

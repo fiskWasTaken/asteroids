@@ -19,18 +19,18 @@ inline std::vector<sf::Vector2f> getNormals(std::vector<sf::Vector2f> points) {
     auto next = points[i + 1 == size ? 0 : i + 1];
     auto edge = curr - next;
 
-    out.push_back(*vector::perpL(&edge));
+    out.push_back(vector::perpL(edge));
   }
   return out;
 }
 
 inline projection getProjection(sf::Vector2f axis, std::vector<sf::Vector2f> points) {
   auto size = points.size();
-  float min = vector::dot(&axis, &points[0]);
+  float min = vector::dot(axis, points[0]);
   float max = min;
 
   for (int i = 0; i < size; i++) {
-    float p = vector::dot(&axis, &points[i]);
+    float p = vector::dot(axis, points[i]);
 
     if (p < min) {
       min = p;
@@ -105,6 +105,6 @@ collisionResult SATCollisionModel::check(WorldObjectInterface *a, WorldObjectInt
 
   return {
       true,
-      *vector::len(&mtv, mtvLen)
+      vector::len(mtv, mtvLen)
   };
 }

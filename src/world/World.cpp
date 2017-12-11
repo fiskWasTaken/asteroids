@@ -25,6 +25,7 @@ void World::checkCollision(AbstractWorldObject *a) {
 
       if (result.isCollision) {
         a->onCollision(b);
+        b->pos += sf::Vector2f(result.mtv.x / 10, result.mtv.y / 10);
       }
     }
   }

@@ -32,6 +32,7 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
     points.emplace_back(0, 0);
     points.emplace_back(0, 20);
     origin = sf::Vector2f(10, 10);
+
   }
 
   void onAction(InputAction action) override;
@@ -41,6 +42,10 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
   void onDestroyed();
 
   void renderTo(sf::RenderWindow *renderWindow) override;
+
+  inline PlayerSession *getPlayerSession() {
+    return playerSession;
+  }
 };
 
 #endif //ASTEROIDS_SHIP_H
