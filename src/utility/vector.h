@@ -16,6 +16,8 @@ float dot(sf::Vector2f *a, sf::Vector2f *b);
 
 sf::Vector2f fromAngle(float angle);
 
+sf::Vector2f rot(sf::Vector2f vector, float degrees);
+
 sf::Vector2f *len(sf::Vector2f *vector, float length);
 sf::Vector2f *normalise(sf::Vector2f *vector);
 sf::Vector2f *limit(sf::Vector2f *vector, float length);

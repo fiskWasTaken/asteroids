@@ -28,19 +28,19 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
   explicit Ship(WorldInterface *world, PlayerSession *playerSession) : AbstractWorldObject(world) {
     this->playerSession = playerSession;
 
-    points.push_back(sf::Vector2f(20, 10));
-    points.push_back(sf::Vector2f(0, 0));
-    points.push_back(sf::Vector2f(0, 20));
+    points.emplace_back(20, 10);
+    points.emplace_back(0, 0);
+    points.emplace_back(0, 20);
+    origin = sf::Vector2f(10, 10);
   }
 
   void onAction(InputAction action) override;
   void update() override;
-  void limitSpeed();
-  float getSpeed();
   bool isRecyclable() override;
 
-  sf::Drawable *getDrawable() override;
   void onDestroyed();
+
+  void renderTo(sf::RenderWindow *renderWindow) override;
 };
 
 #endif //ASTEROIDS_SHIP_H

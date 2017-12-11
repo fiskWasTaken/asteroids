@@ -10,7 +10,7 @@ struct projection {
   float max;
 };
 
-std::vector<sf::Vector2f> getNormals(std::vector<sf::Vector2f> points) {
+inline std::vector<sf::Vector2f> getNormals(std::vector<sf::Vector2f> points) {
   auto size = points.size();
   std::vector<sf::Vector2f> out;
 
@@ -24,7 +24,7 @@ std::vector<sf::Vector2f> getNormals(std::vector<sf::Vector2f> points) {
   return out;
 }
 
-projection getProjection(sf::Vector2f axis, std::vector<sf::Vector2f> points) {
+inline projection getProjection(sf::Vector2f axis, std::vector<sf::Vector2f> points) {
   auto size = points.size();
   float min = vector::dot(&axis, &points[0]);
   float max = min;
@@ -42,48 +42,69 @@ projection getProjection(sf::Vector2f axis, std::vector<sf::Vector2f> points) {
   return {min, max};
 }
 
-bool overlap(projection a, projection b) {
+inline bool overlap(projection a, projection b) {
   return a.max > b.min || a.min > b.max;
 }
 
-// todo: actually offset the object points with its position...
+inline float getOverlap(projection a, projection b) {
+  return a.max > b.min ? a.max - b.min : b.max - a.min;
+}
+
 std::vector<sf::Vector2f> getOffsetPoints(WorldObjectInterface *object) {
   auto points = object->points;
   std::vector<sf::Vector2f> offsets;
 
   for (auto point : points) {
-    offsets.push_back(point + object->pos);
+    offsets.push_back(vector::rot(point - object->origin, object->rot) + object->pos);
   }
 
   return offsets;
 }
 
-bool SATCollisionModel::check(WorldObjectInterface *a, WorldObjectInterface *b) {
+collisionResult SATCollisionModel::check(WorldObjectInterface *a, WorldObjectInterface *b) {
   auto aOffsets = getOffsetPoints(a);
   auto bOffsets = getOffsetPoints(b);
+  sf::Vector2f mtv;
+  float mtvLen = -1;
 
-  auto aAxes = getNormals(aOffsets);
-  auto bAxes = getNormals(bOffsets);
-
-  for (auto axis: aAxes) {
+  for (auto axis: getNormals(aOffsets)) {
     auto p1 = getProjection(axis, aOffsets);
     auto p2 = getProjection(axis, bOffsets);
 
     if (!overlap(p1, p2)) {
-      return false;
+      return {
+          false,
+          mtv
+      };
+    } else {
+      float o = getOverlap(p1, p2);
+      if (mtvLen == -1 || o < mtvLen) {
+        mtvLen = o;
+        mtv = axis;
+      }
     }
   }
 
-  for (auto axis: bAxes) {
+  for (auto axis: getNormals(bOffsets)) {
     auto p1 = getProjection(axis, aOffsets);
     auto p2 = getProjection(axis, bOffsets);
 
     if (!overlap(p1, p2)) {
-      return false;
+      return {
+          false,
+          mtv
+      };
+    } else {
+      float o = getOverlap(p1, p2);
+      if (mtvLen == -1 || o < mtvLen) {
+        mtvLen = o;
+        mtv = axis;
+      }
     }
   }
 
-  printf("Collision detected\n");
-
-  return true;
+  return {
+      true,
+      *vector::len(&mtv, mtvLen)
+  };
 }

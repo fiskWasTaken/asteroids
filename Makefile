@@ -48,10 +48,10 @@ RM = /home/fisk/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/173.3727.114/bin/
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/fisk/CLionProjects/asteroids
+CMAKE_SOURCE_DIR = /home/fisk/c++/asteroids
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/fisk/CLionProjects/asteroids
+CMAKE_BINARY_DIR = /home/fisk/c++/asteroids
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -91,9 +91,9 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fisk/CLionProjects/asteroids/CMakeFiles /home/fisk/CLionProjects/asteroids/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fisk/c++/asteroids/CMakeFiles /home/fisk/c++/asteroids/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fisk/CLionProjects/asteroids/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fisk/c++/asteroids/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -309,33 +309,6 @@ src/collision/SATCollisionModel.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/collision/SATCollisionModel.cpp.s
 .PHONY : src/collision/SATCollisionModel.cpp.s
 
-src/entities/Asteroid.o: src/entities/Asteroid.cpp.o
-
-.PHONY : src/entities/Asteroid.o
-
-# target to build an object file
-src/entities/Asteroid.cpp.o:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/Asteroid.cpp.o
-.PHONY : src/entities/Asteroid.cpp.o
-
-src/entities/Asteroid.i: src/entities/Asteroid.cpp.i
-
-.PHONY : src/entities/Asteroid.i
-
-# target to preprocess a source file
-src/entities/Asteroid.cpp.i:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/Asteroid.cpp.i
-.PHONY : src/entities/Asteroid.cpp.i
-
-src/entities/Asteroid.s: src/entities/Asteroid.cpp.s
-
-.PHONY : src/entities/Asteroid.s
-
-# target to generate assembly for a file
-src/entities/Asteroid.cpp.s:
-	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/Asteroid.cpp.s
-.PHONY : src/entities/Asteroid.cpp.s
-
 src/entities/Bullet.o: src/entities/Bullet.cpp.o
 
 .PHONY : src/entities/Bullet.o
@@ -416,6 +389,114 @@ src/entities/ShipWeapon.s: src/entities/ShipWeapon.cpp.s
 src/entities/ShipWeapon.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/ShipWeapon.cpp.s
 .PHONY : src/entities/ShipWeapon.cpp.s
+
+src/entities/asteroids/AsteroidBase.o: src/entities/asteroids/AsteroidBase.cpp.o
+
+.PHONY : src/entities/asteroids/AsteroidBase.o
+
+# target to build an object file
+src/entities/asteroids/AsteroidBase.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/asteroids/AsteroidBase.cpp.o
+.PHONY : src/entities/asteroids/AsteroidBase.cpp.o
+
+src/entities/asteroids/AsteroidBase.i: src/entities/asteroids/AsteroidBase.cpp.i
+
+.PHONY : src/entities/asteroids/AsteroidBase.i
+
+# target to preprocess a source file
+src/entities/asteroids/AsteroidBase.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/asteroids/AsteroidBase.cpp.i
+.PHONY : src/entities/asteroids/AsteroidBase.cpp.i
+
+src/entities/asteroids/AsteroidBase.s: src/entities/asteroids/AsteroidBase.cpp.s
+
+.PHONY : src/entities/asteroids/AsteroidBase.s
+
+# target to generate assembly for a file
+src/entities/asteroids/AsteroidBase.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/asteroids/AsteroidBase.cpp.s
+.PHONY : src/entities/asteroids/AsteroidBase.cpp.s
+
+src/entities/asteroids/LargeAsteroid.o: src/entities/asteroids/LargeAsteroid.cpp.o
+
+.PHONY : src/entities/asteroids/LargeAsteroid.o
+
+# target to build an object file
+src/entities/asteroids/LargeAsteroid.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/asteroids/LargeAsteroid.cpp.o
+.PHONY : src/entities/asteroids/LargeAsteroid.cpp.o
+
+src/entities/asteroids/LargeAsteroid.i: src/entities/asteroids/LargeAsteroid.cpp.i
+
+.PHONY : src/entities/asteroids/LargeAsteroid.i
+
+# target to preprocess a source file
+src/entities/asteroids/LargeAsteroid.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/asteroids/LargeAsteroid.cpp.i
+.PHONY : src/entities/asteroids/LargeAsteroid.cpp.i
+
+src/entities/asteroids/LargeAsteroid.s: src/entities/asteroids/LargeAsteroid.cpp.s
+
+.PHONY : src/entities/asteroids/LargeAsteroid.s
+
+# target to generate assembly for a file
+src/entities/asteroids/LargeAsteroid.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/asteroids/LargeAsteroid.cpp.s
+.PHONY : src/entities/asteroids/LargeAsteroid.cpp.s
+
+src/entities/asteroids/MediumAsteroid.o: src/entities/asteroids/MediumAsteroid.cpp.o
+
+.PHONY : src/entities/asteroids/MediumAsteroid.o
+
+# target to build an object file
+src/entities/asteroids/MediumAsteroid.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/asteroids/MediumAsteroid.cpp.o
+.PHONY : src/entities/asteroids/MediumAsteroid.cpp.o
+
+src/entities/asteroids/MediumAsteroid.i: src/entities/asteroids/MediumAsteroid.cpp.i
+
+.PHONY : src/entities/asteroids/MediumAsteroid.i
+
+# target to preprocess a source file
+src/entities/asteroids/MediumAsteroid.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/asteroids/MediumAsteroid.cpp.i
+.PHONY : src/entities/asteroids/MediumAsteroid.cpp.i
+
+src/entities/asteroids/MediumAsteroid.s: src/entities/asteroids/MediumAsteroid.cpp.s
+
+.PHONY : src/entities/asteroids/MediumAsteroid.s
+
+# target to generate assembly for a file
+src/entities/asteroids/MediumAsteroid.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/asteroids/MediumAsteroid.cpp.s
+.PHONY : src/entities/asteroids/MediumAsteroid.cpp.s
+
+src/entities/asteroids/SmallAsteroid.o: src/entities/asteroids/SmallAsteroid.cpp.o
+
+.PHONY : src/entities/asteroids/SmallAsteroid.o
+
+# target to build an object file
+src/entities/asteroids/SmallAsteroid.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/asteroids/SmallAsteroid.cpp.o
+.PHONY : src/entities/asteroids/SmallAsteroid.cpp.o
+
+src/entities/asteroids/SmallAsteroid.i: src/entities/asteroids/SmallAsteroid.cpp.i
+
+.PHONY : src/entities/asteroids/SmallAsteroid.i
+
+# target to preprocess a source file
+src/entities/asteroids/SmallAsteroid.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/asteroids/SmallAsteroid.cpp.i
+.PHONY : src/entities/asteroids/SmallAsteroid.cpp.i
+
+src/entities/asteroids/SmallAsteroid.s: src/entities/asteroids/SmallAsteroid.cpp.s
+
+.PHONY : src/entities/asteroids/SmallAsteroid.s
+
+# target to generate assembly for a file
+src/entities/asteroids/SmallAsteroid.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/entities/asteroids/SmallAsteroid.cpp.s
+.PHONY : src/entities/asteroids/SmallAsteroid.cpp.s
 
 src/input/KeyboardController.o: src/input/KeyboardController.cpp.o
 
@@ -606,6 +687,33 @@ src/scenes/MainMenuScene.cpp.s:
 	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/scenes/MainMenuScene.cpp.s
 .PHONY : src/scenes/MainMenuScene.cpp.s
 
+src/utility/drawing.o: src/utility/drawing.cpp.o
+
+.PHONY : src/utility/drawing.o
+
+# target to build an object file
+src/utility/drawing.cpp.o:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/utility/drawing.cpp.o
+.PHONY : src/utility/drawing.cpp.o
+
+src/utility/drawing.i: src/utility/drawing.cpp.i
+
+.PHONY : src/utility/drawing.i
+
+# target to preprocess a source file
+src/utility/drawing.cpp.i:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/utility/drawing.cpp.i
+.PHONY : src/utility/drawing.cpp.i
+
+src/utility/drawing.s: src/utility/drawing.cpp.s
+
+.PHONY : src/utility/drawing.s
+
+# target to generate assembly for a file
+src/utility/drawing.cpp.s:
+	$(MAKE) -f CMakeFiles/asteroids.dir/build.make CMakeFiles/asteroids.dir/src/utility/drawing.cpp.s
+.PHONY : src/utility/drawing.cpp.s
+
 src/utility/vector.o: src/utility/vector.cpp.o
 
 .PHONY : src/utility/vector.o
@@ -716,9 +824,6 @@ help:
 	@echo "... src/collision/SATCollisionModel.o"
 	@echo "... src/collision/SATCollisionModel.i"
 	@echo "... src/collision/SATCollisionModel.s"
-	@echo "... src/entities/Asteroid.o"
-	@echo "... src/entities/Asteroid.i"
-	@echo "... src/entities/Asteroid.s"
 	@echo "... src/entities/Bullet.o"
 	@echo "... src/entities/Bullet.i"
 	@echo "... src/entities/Bullet.s"
@@ -728,6 +833,18 @@ help:
 	@echo "... src/entities/ShipWeapon.o"
 	@echo "... src/entities/ShipWeapon.i"
 	@echo "... src/entities/ShipWeapon.s"
+	@echo "... src/entities/asteroids/AsteroidBase.o"
+	@echo "... src/entities/asteroids/AsteroidBase.i"
+	@echo "... src/entities/asteroids/AsteroidBase.s"
+	@echo "... src/entities/asteroids/LargeAsteroid.o"
+	@echo "... src/entities/asteroids/LargeAsteroid.i"
+	@echo "... src/entities/asteroids/LargeAsteroid.s"
+	@echo "... src/entities/asteroids/MediumAsteroid.o"
+	@echo "... src/entities/asteroids/MediumAsteroid.i"
+	@echo "... src/entities/asteroids/MediumAsteroid.s"
+	@echo "... src/entities/asteroids/SmallAsteroid.o"
+	@echo "... src/entities/asteroids/SmallAsteroid.i"
+	@echo "... src/entities/asteroids/SmallAsteroid.s"
 	@echo "... src/input/KeyboardController.o"
 	@echo "... src/input/KeyboardController.i"
 	@echo "... src/input/KeyboardController.s"
@@ -749,6 +866,9 @@ help:
 	@echo "... src/scenes/MainMenuScene.o"
 	@echo "... src/scenes/MainMenuScene.i"
 	@echo "... src/scenes/MainMenuScene.s"
+	@echo "... src/utility/drawing.o"
+	@echo "... src/utility/drawing.i"
+	@echo "... src/utility/drawing.s"
 	@echo "... src/utility/vector.o"
 	@echo "... src/utility/vector.i"
 	@echo "... src/utility/vector.s"

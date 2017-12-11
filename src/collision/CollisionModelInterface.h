@@ -9,9 +9,14 @@
 #include <vector>
 #include <entities/WorldObjectInterface.h>
 
+struct collisionResult {
+  bool isCollision = false;
+  sf::Vector2f mtv;
+};
+
 class CollisionModelInterface {
  public:
-  virtual bool check(WorldObjectInterface *a, WorldObjectInterface *b) = 0;
+  virtual collisionResult check(WorldObjectInterface *a, WorldObjectInterface *b) = 0;
 };
 
 #endif //ASTEROIDS_COLLISION_H

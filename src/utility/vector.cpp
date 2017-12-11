@@ -14,6 +14,14 @@ float dot(sf::Vector2f *a, sf::Vector2f *b) {
   return a->x * b->x + a->y * b->y;
 }
 
+sf::Vector2f rot(sf::Vector2f vector, float degrees) {
+  float r = 3.14159265F / 180;
+  sf::Vector2f out;
+  out.x = vector.x * std::cos(r * degrees) - vector.y * std::sin(r * degrees);
+  out.y = vector.x * std::sin(r * degrees) + vector.y * std::cos(r * degrees);
+  return out;
+}
+
 sf::Vector2f fromAngle(float angle) {
   float r = 3.14159265F / 180;
   return {std::cos(angle * r), std::sin(angle * r)};

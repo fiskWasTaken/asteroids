@@ -3,6 +3,7 @@
 //
 
 #include <SFML/Graphics/Text.hpp>
+#include <entities/asteroids/LargeAsteroid.h>
 #include "MainMenuScene.h"
 #include "GameScene.h"
 #include "HighScoreTableScene.h"
@@ -23,6 +24,7 @@ void MainMenuScene::render(RendererInterface *renderer) {
   startPromptText.setPosition(center, middle);
   startLicenseText.setPosition(center, middle + 14);
 
+  drawWorld(renderer);
   window->draw(startTitleText);
   window->draw(startPromptText);
   window->draw(startLicenseText);
@@ -44,7 +46,29 @@ void MainMenuScene::onAction(InputAction action) {
 
 void MainMenuScene::onVisible() {
   controller->setDelegate(this);
+
+  for (int i = 0; i < 10; i++) {
+    auto ast = new LargeAsteroid(world);
+    ast->pos.x = 50 * rand() % 100;
+    ast->pos.y = -50 * rand() % 100;
+    ast->vel.x = rand() % 100 / 80;
+    ast->vel.y = rand() % 100 / 80;
+
+    world->pushObject(ast);
+  }
 }
 void MainMenuScene::onDestroy() {
   delete (controller);
+}
+
+void MainMenuScene::drawWorld(RendererInterface *renderer) {
+  auto window = renderer->getWindow();
+
+  for (auto entity: world->getObjects()) {
+    entity->renderTo(window);
+  }
+}
+
+void MainMenuScene::main() {
+  world->update();
 }

@@ -57,6 +57,7 @@ class World : public WorldInterface {
   }
 
   void checkCollision(AbstractWorldObject *a);
+  void recycle();
 };
 
 #endif //ASTEROIDS_WORLD_H

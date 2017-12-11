@@ -7,7 +7,6 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <scenes/GameScene.h>
-#include "Ship.h"
 #include "Bullet.h"
 #include "../utility/vector.h"
 
@@ -32,6 +31,8 @@ void Ship::update() {
   }
 
   this->isFiring = false;
+
+  vel = *vector::limit(&vel, maxSpeed);
   this->pos += vel;
 }
 
@@ -41,21 +42,13 @@ void Ship::onDestroyed() {
   scene->onShipDestroyed(playerSession);
 }
 
-float Ship::getSpeed() {
-  return vector::len(&vel);
-}
-
-void Ship::limitSpeed() {
-  vel = *vector::limit(&vel, maxSpeed);
-}
-
 void Ship::onAction(InputAction action) {
   if (action == InputAction::ACCELERATE) {
     // get the vector for the ship's rotation
     auto rV = vector::fromAngle(rot);
 
     // get the current speed
-    auto speed = getSpeed();
+    auto speed = vector::len(&vel);
 
     speed += 0.1;
 
@@ -68,14 +61,12 @@ void Ship::onAction(InputAction action) {
     // instead of immediately snapping to the target
     vel.x += diff.x;
     vel.y += diff.y;
-    limitSpeed();
   }
 
   if (action == InputAction::BRAKE) {
     // really we're just going in reverse
     vel.x /= 2;
     vel.y /= 2;
-    limitSpeed();
   }
 
   if (action == InputAction::LEFT) {
@@ -112,20 +103,21 @@ bool Ship::isRecyclable() {
   return isDestroyed;
 }
 
-sf::Drawable *Ship::getDrawable() {
-  auto shep = new sf::ConvexShape();
+void Ship::renderTo(sf::RenderWindow *renderWindow) {
+  auto shape = sf::ConvexShape();
 
-  shep->setPointCount(points.size());
+  shape.setPointCount(points.size());
 
   for (int i = 0; i < points.size(); i++) {
-    shep->setPoint(i, points[i]);
+    shape.setPoint(i, points[i]);
   }
 
-  shep->setFillColor(sf::Color::Transparent);
-  shep->setOutlineColor(sf::Color::Green);
-  shep->setOutlineThickness(1.0F);
-  shep->setPosition(pos);
-  shep->setOrigin(10, 10);
-  shep->setRotation(rot);
-  return shep;
+  shape.setFillColor(sf::Color::Transparent);
+  shape.setOutlineColor(sf::Color::Green);
+  shape.setOutlineThickness(1.0F);
+  shape.setPosition(pos);
+  shape.setOrigin(origin.x, origin.y);
+  shape.setRotation(rot);
+
+  renderWindow->draw(shape);
 }

@@ -15,22 +15,25 @@ class Bullet : public AbstractWorldObject {
     return WorldObjectClass::BULLET;
   }
 
-  sf::Drawable *getDrawable() override;
-
   explicit Bullet(WorldInterface *world) : AbstractWorldObject(world) {
-    points.push_back(sf::Vector2f(2, 1));
-    points.push_back(sf::Vector2f(0, 0));
-    points.push_back(sf::Vector2f(0, 2));
+    points.emplace_back(2, 1);
+    points.emplace_back(0, 0);
+    points.emplace_back(0, 2);
+    origin = sf::Vector2f(1, 1);
   }
 
   bool isRecyclable() override {
-    return lifetime < 0;
+    return lifetime <= 0;
   }
 
   void update() override {
     pos += vel;
     lifetime--;
   };
+
+  void setLifetime(int lifetime);
+
+  void renderTo(sf::RenderWindow *renderWindow) override;
 
 };
 

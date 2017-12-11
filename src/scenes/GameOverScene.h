@@ -8,7 +8,6 @@
 #include <Asteroids.h>
 #include "SceneInterface.h"
 
-
 class GameOverScene : public SceneInterface, public ControllerListenerInterface {
  private:
   Asteroids *game;

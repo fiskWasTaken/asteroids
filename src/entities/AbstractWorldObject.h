@@ -13,15 +13,12 @@
 #include "world/WorldInterface.h"
 #include "WorldObjectInterface.h"
 
-typedef std::pair<sf::Vector2f, sf::Vector2f> BoundingBox;
-
 class AbstractWorldObject : public WorldObjectInterface {
  protected:
   WorldInterface *world;
 
  public:
   virtual void update() = 0;
-  virtual sf::Drawable *getDrawable() = 0;
   virtual bool isRecyclable() = 0;
 
   /**

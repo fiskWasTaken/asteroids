@@ -21,22 +21,16 @@ void World::wrapObject(WorldObjectInterface *object) {
 void World::checkCollision(AbstractWorldObject *a) {
   for (auto b: objects) {
     if (a != b) {
-      bool result = collisionModel.check(a, b);
+      collisionResult result = collisionModel.check(a, b);
 
-      if (result) {
+      if (result.isCollision) {
         a->onCollision(b);
       }
     }
   }
 }
 
-void World::update() {
-  for (auto object: objects) {
-    wrapObject(object);
-    checkCollision(object);
-    object->update();
-  }
-
+void World::recycle() {
   std::set<AbstractWorldObject *>::iterator tmp;
 
   for (auto it = objects.begin(); it != objects.end();) {
@@ -52,4 +46,14 @@ void World::update() {
       ++it;
     }
   }
+}
+
+void World::update() {
+  for (auto object: objects) {
+    wrapObject(object);
+    checkCollision(object);
+    object->update();
+  }
+
+  recycle();
 }

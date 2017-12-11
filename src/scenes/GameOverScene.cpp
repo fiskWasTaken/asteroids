@@ -5,7 +5,6 @@
 #include <SFML/Graphics/Text.hpp>
 #include "GameOverScene.h"
 #include "GameScene.h"
-#include "HighScoreTableScene.h"
 
 void GameOverScene::render(RendererInterface *renderer) {
   auto window = renderer->getWindow();

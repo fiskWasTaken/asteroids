@@ -8,12 +8,11 @@
 #include <Asteroids.h>
 #include "SceneInterface.h"
 
-
 class GameScene : public SceneInterface, public ControllerListenerInterface {
  private:
   Asteroids *game;
   World *world;
-  std::map<PlayerSession*, int> respawnTimers;
+  std::map<PlayerSession *, int> respawnTimers;
   PlayerSession *pauseInitiator = nullptr;
   const int respawnTime = 50;
   bool paused = false;
@@ -40,6 +39,7 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
 
   void main() override;
   void onShipDestroyed(PlayerSession *playerSession);
+  void drawDebug(RendererInterface *renderer);
 };
 
 #endif //ASTEROIDS_SCENES_GAMESCENE_H

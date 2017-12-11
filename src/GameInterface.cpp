@@ -11,7 +11,7 @@ void GameInterface::stop() {
 void GameInterface::setScene(SceneInterface *scene) {
   if (this->scene != nullptr) {
     this->scene->onDestroy();
-    delete(this->scene);
+    delete (this->scene);
   }
 
   this->scene = scene;

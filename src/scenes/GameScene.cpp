@@ -5,8 +5,9 @@
 #include <sstream>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/ConvexShape.hpp>
 #include "GameScene.h"
-#include "../entities/Asteroid.h"
+#include "entities/asteroids/LargeAsteroid.h"
 #include "GameOverScene.h"
 
 void GameScene::render(RendererInterface *renderer) {
@@ -21,6 +22,28 @@ void GameScene::render(RendererInterface *renderer) {
 
   drawWorld(renderer);
   drawHud(renderer);
+  drawDebug(renderer);
+}
+
+void GameScene::drawDebug(RendererInterface *renderer) {
+  auto window = renderer->getWindow();
+
+  for (auto obj : world->getObjects()) {
+    auto points = getOffsetPoints(obj);
+    // create an empty shape
+    auto shep = new sf::ConvexShape();
+
+    shep->setPointCount(points.size());
+
+    for (int i = 0; i < points.size(); i++) {
+      shep->setPoint(i, points[i]);
+    }
+
+    shep->setFillColor(sf::Color::Transparent);
+    shep->setOutlineColor(sf::Color::Red);
+    shep->setOutlineThickness(1.0F);
+    window->draw(*shep);
+  }
 }
 
 void GameScene::handleEvents() {
@@ -37,30 +60,18 @@ void GameScene::onVisible() {
   auto player = new Player("Player 1");
   auto session = new PlayerSession(player);
 
-  auto ast = new Asteroid(world);
-  ast->pos.x = 5;
-  ast->pos.y = 5;
-  ast->vel.x = 2;
-  ast->vel.y = 1;
-//
-//  auto ast2 = new Asteroid(world);
-//  ast2->pos.x = 55;
-//  ast2->pos.y = 300;
-//  ast2->vel.x = -1.5F;
-//  ast2->vel.y = 1;
-//
-//  auto ast3 = new Asteroid(world);
-//  ast3->pos.x = 200;
-//  ast3->pos.y = 300;
-//  ast3->vel.x = -1.5F;
-//  ast3->vel.y = -1;
+  for (int i = 0; i < 10; i++) {
+    auto ast = new LargeAsteroid(world);
+    ast->pos.x = 50 * rand() % 100;
+    ast->pos.y = -50 * rand() % 100;
+    ast->vel.x = rand() % 100 / 80;
+    ast->vel.y = rand() % 100 / 80;
+
+    world->pushObject(ast);
+  }
 
   auto controller = game->getDefaultController();
   player->setController(controller);
-
-  world->pushObject(ast);
-//  world->pushObject(ast2);
-//  world->pushObject(ast3);
 
   session->spawnShip(world);
 
@@ -122,8 +133,7 @@ void GameScene::drawWorld(RendererInterface *renderer) {
   auto window = renderer->getWindow();
 
   for (auto entity: world->getObjects()) {
-    auto shape = entity->getDrawable();
-    window->draw(*shape);
+    entity->renderTo(window);
   }
 }
 

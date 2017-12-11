@@ -7,9 +7,11 @@
 
 #include "CollisionModelInterface.h"
 
+std::vector<sf::Vector2f> getOffsetPoints(WorldObjectInterface *object);
+
 class SATCollisionModel : public CollisionModelInterface {
  public:
-  bool check(WorldObjectInterface *a, WorldObjectInterface *b) override;
+  collisionResult check(WorldObjectInterface *a, WorldObjectInterface *b) override;
 };
 
 #endif //ASTEROIDS_SATCOLLISIONMODEL_H
