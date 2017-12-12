@@ -51,4 +51,6 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
     return playerSession;
   }
   void fireBullet();
+  void onCollision(AbstractWorldObject *other);
+  void onShipHit(Ship *other);
 };

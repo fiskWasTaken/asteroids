@@ -9,7 +9,7 @@ class GameOverScene : public SceneInterface, public ControllerListenerInterface 
   ControllerInterface *controller;
 
  public:
-  void render(RendererInterface *renderer) override;
+  void render(WindowRendererInterface *renderer) override;
   void handleEvents() override;
   void onVisible() override;
 

@@ -1,13 +1,13 @@
 #include <iostream>
-#include "Renderer.h"
+#include "WindowRenderer.h"
 #include <cmath>
 
-void Renderer::main() {
+void WindowRenderer::main() {
   handleEvents();
   renderFrame();
 }
 
-void Renderer::onResize() {
+void WindowRenderer::onResize() {
   auto windowSize = window->getSize();
   float desiredRatio = float(viewWidth) / viewHeight;
   float aspectRatio = float(windowSize.x) / windowSize.y;
@@ -22,7 +22,7 @@ void Renderer::onResize() {
   window->setView(view);
 }
 
-void Renderer::handleGlobalEvents() {
+void WindowRenderer::handleGlobalEvents() {
   sf::Event event{};
 
   while (window->pollEvent(event)) {
@@ -35,18 +35,18 @@ void Renderer::handleGlobalEvents() {
   }
 }
 
-void Renderer::handleEvents() {
+void WindowRenderer::handleEvents() {
   handleGlobalEvents();
   game->getScene()->handleEvents();
 }
 
-void Renderer::renderFrame() {
+void WindowRenderer::renderFrame() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   game->getScene()->render(this);
   window->display();
 }
 
-Renderer::Renderer(sf::RenderWindow *window, Asteroids *game) {
+WindowRenderer::WindowRenderer(sf::RenderWindow *window, Asteroids *game) {
   if (!font.loadFromFile("Monospace.ttf")) {
     std::cout << "Runtime error: could not load Monospace.ttf font file";
     exit(1);

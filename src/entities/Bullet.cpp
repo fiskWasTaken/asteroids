@@ -10,15 +10,16 @@ void Bullet::setLifetime(int lifetime) {
 void Bullet::renderTo(sf::RenderWindow *renderWindow) {
   // create an empty shape
   auto shape = sf::ConvexShape();
+  auto size = points.size();
 
-  shape.setPointCount(points.size());
+  shape.setPointCount(size);
 
-  for (size_t i = 0; i < points.size(); i++) {
+  for (size_t i = 0; i < size; i++) {
     shape.setPoint(i, points[i]);
   }
 
   shape.setFillColor(sf::Color::Transparent);
-  shape.setOutlineColor(sf::Color(173, 173, 173));
+  shape.setOutlineColor(outlineColor);
   shape.setOutlineThickness(1.0F);
   shape.setPosition(pos);
   shape.setOrigin(origin.x, origin.y);

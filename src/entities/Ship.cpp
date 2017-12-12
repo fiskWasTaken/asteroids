@@ -105,19 +105,37 @@ bool Ship::isRecyclable() {
 
 void Ship::renderTo(sf::RenderWindow *renderWindow) {
   auto shape = sf::ConvexShape();
+  auto size = points.size();
 
-  shape.setPointCount(points.size());
+  shape.setPointCount(size);
 
-  for (int i = 0; i < points.size(); i++) {
+  for (int i = 0; i < size; i++) {
     shape.setPoint(i, points[i]);
   }
 
   shape.setFillColor(sf::Color::Transparent);
-  shape.setOutlineColor(sf::Color::Green);
+  shape.setOutlineColor(getPlayerSession()->getPlayer()->getColor());
   shape.setOutlineThickness(1.0F);
   shape.setOrigin(origin.x, origin.y);
   shape.setRotation(rot);
 
   shape.setPosition(pos);
   renderWindow->draw(shape);
+}
+
+
+void Ship::onCollision(AbstractWorldObject *other) {
+  if (other->getClass() == WorldObjectClass::SHIP) {
+    onShipHit(dynamic_cast<Ship *>(other));
+  }
+}
+
+void Ship::onShipHit(Ship *other) {
+  // bounce
+  auto diff = vel - other->vel;
+  diff.x /= 1.1;
+  diff.y /= 1.1;
+
+  vel -= diff;
+  other->vel += diff;
 }

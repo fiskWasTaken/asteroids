@@ -19,7 +19,11 @@ class Player {
 
   inline std::string getName() { return name; }
 
+  inline sf::Color getColor() { return this->color; }
+  inline void setColor(sf::Color color) { this->color = color; }
+
  private:
+  sf::Color color = sf::Color(58, 163, 67);
   std::string name;
   ControllerInterface *controller = nullptr;
 };

@@ -2,7 +2,7 @@
 #include "GameOverScene.h"
 #include "GameScene.h"
 
-void GameOverScene::render(RendererInterface *renderer) {
+void GameOverScene::render(WindowRendererInterface *renderer) {
   auto window = renderer->getWindow();
   auto view = renderer->getView();
   auto font = renderer->getFont();

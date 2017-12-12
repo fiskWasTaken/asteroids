@@ -13,7 +13,7 @@ class HighScoreTableScene : public SceneInterface {
     this->game = game;
     this->controller = game->getDefaultController();
   }
-  void render(RendererInterface *renderer) override;
+  void render(WindowRendererInterface *renderer) override;
   void handleEvents() override;
   void onVisible() override;
 };

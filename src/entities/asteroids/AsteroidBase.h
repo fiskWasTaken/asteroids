@@ -6,6 +6,7 @@ class Bullet;
 
 class AsteroidBase : public AbstractWorldObject {
  protected:
+  const sf::Color outlineColor = sf::Color(244, 167, 66);
   int health = 100;
   float rotSpeed = 0.1f;
 
@@ -44,4 +45,5 @@ class AsteroidBase : public AbstractWorldObject {
   void renderTo(sf::RenderWindow *renderWindow) override;
   void update() override;
   void onBulletHit(Bullet *bullet);
+  void onAsteroidHit(AsteroidBase *other);
 };

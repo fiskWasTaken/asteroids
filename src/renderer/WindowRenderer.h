@@ -4,9 +4,9 @@
 #include <SFML/OpenGL.hpp>
 #include <iostream>
 #include "Asteroids.h"
-#include "RendererInterface.h"
+#include "WindowRendererInterface.h"
 
-class Renderer : public RendererInterface {
+class WindowRenderer : public WindowRendererInterface {
  private:
   Asteroids *game;
   sf::RenderWindow *window;
@@ -16,7 +16,7 @@ class Renderer : public RendererInterface {
   int viewHeight = 480;
 
  public:
-  Renderer(sf::RenderWindow *window, Asteroids *game);
+  WindowRenderer(sf::RenderWindow *window, Asteroids *game);
 
   void renderFrame() override;
   void handleEvents() override;

@@ -5,44 +5,16 @@
 #include <levels/Playlist.h>
 #include <entities/asteroids/SmallAsteroid.h>
 #include <levels/LevelLoader.h>
+#include <input/KeyboardController.h>
 #include "GameScene.h"
 #include "GameOverScene.h"
 
-void GameScene::render(RendererInterface *renderer) {
-  auto window = renderer->getWindow();
+void GameScene::render(WindowRendererInterface *renderer) {
+  worldRenderer.drawBg(renderer, world);
+  worldRenderer.drawWorld(renderer, world);
+  worldRenderer.drawTimings(renderer);
 
-  auto vec = sf::Vector2f((float) world->getWidth(), (float) world->getHeight());
-  sf::RectangleShape shape(vec);
-  shape.setFillColor(sf::Color::Black);
-  window->draw(shape);
-
-  auto session = game->getSessions()[0];
-
-  drawWorld(renderer);
   drawHud(renderer);
-//  drawDebug(renderer);
-  drawTimings(renderer);
-}
-
-void GameScene::drawDebug(RendererInterface *renderer) {
-  auto window = renderer->getWindow();
-
-  for (auto obj : world->getObjects()) {
-    auto points = getOffsetPoints(obj);
-    // create an empty shape
-    auto shape = sf::ConvexShape();
-
-    shape.setPointCount(points.size());
-
-    for (size_t i = 0; i < points.size(); i++) {
-      shape.setPoint(i, points[i]);
-    }
-
-    shape.setFillColor(sf::Color::Transparent);
-    shape.setOutlineColor(sf::Color::Red);
-    shape.setOutlineThickness(1.0F);
-    window->draw(shape);
-  }
 }
 
 void GameScene::handleEvents() {
@@ -72,29 +44,30 @@ void GameScene::onVisible() {
   game->getSessions()->push_back(session);
 
 //   playerSession 2 stuff -- cool, it works, but we don't want to do this just yet :>
-//  auto player2 = new Player("Player 2");
-//  auto session2 = new PlayerSession(player2);
-//  auto ship2 = new Ship(world, session2);
-//  ship2->pos.x = 200;
-//  ship2->pos.y = 100;
-//
-//  auto controller2 = new KeyboardController();
-//  controller2->assignKeyForAction(InputAction::ACCELERATE, sf::Keyboard::Up);
-//  controller2->assignKeyForAction(InputAction::BRAKE, sf::Keyboard::Down);
-//  controller2->assignKeyForAction(InputAction::LEFT, sf::Keyboard::Left);
-//  controller2->assignKeyForAction(InputAction::RIGHT, sf::Keyboard::Right);
-//  controller2->assignKeyForAction(InputAction::FIRE, sf::Keyboard::RShift);
-//  controller2->setDelegate(ship2);
-//
-//  player2->setController(controller2);
-//
-//  world->pushObject(ship2);
-//  game->getSessions()->push_back(session2);
+  auto player2 = new Player("Player 2");
+  player2->setColor(sf::Color(58, 144, 163));
+  auto session2 = new PlayerSession(player2);
+  auto ship2 = new Ship(world, session2);
+  ship2->pos.x = 200;
+  ship2->pos.y = 100;
+
+  auto controller2 = new KeyboardController();
+  controller2->assignKeyForAction(InputAction::ACCELERATE, sf::Keyboard::Up);
+  controller2->assignKeyForAction(InputAction::BRAKE, sf::Keyboard::Down);
+  controller2->assignKeyForAction(InputAction::LEFT, sf::Keyboard::Left);
+  controller2->assignKeyForAction(InputAction::RIGHT, sf::Keyboard::Right);
+  controller2->assignKeyForAction(InputAction::FIRE, sf::Keyboard::RShift);
+  controller2->setDelegate(ship2);
+
+  player2->setController(controller2);
+
+  world->pushObject(ship2);
+  game->getSessions()->push_back(session2);
 
   loadCurrentLevel();
 }
 
-void GameScene::drawHud(RendererInterface *renderer) {
+void GameScene::drawHud(WindowRendererInterface *renderer) {
   auto font = renderer->getFont();
   auto window = renderer->getWindow();
   auto view = renderer->getView();
@@ -109,6 +82,8 @@ void GameScene::drawHud(RendererInterface *renderer) {
     sf::Text nameText(session->getPlayer()->getName(), font, 16);
     sf::Text scoreText(score.str(), font, 16);
     sf::Text livesText(lives.str(), font, 16);
+
+    nameText.setFillColor(session->getPlayer()->getColor());
 
     nameText.setPosition(offset, 0);
     scoreText.setPosition(offset, 14);
@@ -142,14 +117,6 @@ void GameScene::drawHud(RendererInterface *renderer) {
     window->draw(levelText);
 
     showLevelTextTimeout--;
-  }
-}
-
-void GameScene::drawWorld(RendererInterface *renderer) {
-  auto window = renderer->getWindow();
-
-  for (auto entity: world->getObjects()) {
-    entity->renderTo(window);
   }
 }
 
@@ -205,8 +172,8 @@ void GameScene::onAction(InputAction action) {
 }
 
 void GameScene::onGameOver(PlayerSession *playerSession) {
-  // todo: support multiple players (wait until everyone dies for good)
-  game->setScene(new GameOverScene(game));
+  if (getRemainingPlayerCount() == 0)
+    game->setScene(new GameOverScene(game));
 }
 
 void GameScene::onShipDestroyed(PlayerSession *playerSession) {
@@ -218,15 +185,12 @@ void GameScene::startRespawnTimer(PlayerSession *playerSession) {
   respawnTimers[playerSession] = RESPAWN_TIME;
 }
 
-void GameScene::drawTimings(RendererInterface *renderer) {
-  auto font = renderer->getFont();
-  auto window = renderer->getWindow();
-  auto view = renderer->getView();
-  auto newTime = clock.getElapsedTime();
-  std::stringstream frameTime;
-  frameTime << "Frame time: " << (newTime.asMicroseconds() - lastFrameTime.asMicroseconds());
-  sf::Text timingText(frameTime.str(), font, 16);
-  timingText.setPosition(4, view.getSize().y - 16);
-  window->draw(timingText);
-  lastFrameTime = newTime;
+int GameScene::getRemainingPlayerCount() {
+  int count = 0;
+
+  for (auto session : *game->getSessions())
+    if (session->getLives() == 0)
+      count++;
+
+  return count;
 }

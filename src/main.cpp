@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
 #include "GameInterface.h"
-#include "renderer/Renderer.h"
+#include "renderer/WindowRenderer.h"
 #include "scenes/MainMenuScene.h"
 
 void engine(Asteroids *game) {
@@ -23,7 +23,7 @@ void renderer(Asteroids *game) {
   auto settings = getContextSettings();
   auto videoMode = sf::VideoMode(640, 480);
   auto window = new sf::RenderWindow(videoMode, "Asteroids", sf::Style::Default, settings);
-  auto renderer = Renderer(window, game);
+  auto renderer = WindowRenderer(window, game);
 
   glEnable(GL_TEXTURE_2D);
   while (window->isOpen()) {

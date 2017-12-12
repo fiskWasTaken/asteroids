@@ -46,4 +46,5 @@ class Bullet : public AbstractWorldObject {
 
   void renderTo(sf::RenderWindow *renderWindow) override;
 
+  const sf::Color outlineColor = sf::Color(173, 173, 173);
 };
