@@ -3,6 +3,7 @@
 #include <entities/AbstractWorldObject.h>
 
 class Bullet;
+class Ship;
 
 class AsteroidBase : public AbstractWorldObject {
  protected:
@@ -46,4 +47,5 @@ class AsteroidBase : public AbstractWorldObject {
   void update() override;
   void onBulletHit(Bullet *bullet);
   void onAsteroidHit(AsteroidBase *other);
+  void onShipHit(Ship *other);
 };

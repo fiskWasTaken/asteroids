@@ -14,7 +14,6 @@ void AsteroidBase::update() {
 }
 
 void AsteroidBase::renderTo(sf::RenderWindow *renderWindow) {
-  // create an empty shape
   auto shape = sf::ConvexShape();
   auto size = points.size();
 
@@ -73,6 +72,12 @@ void AsteroidBase::onAsteroidHit(AsteroidBase *other) {
   other->rotSpeed += rotDiff;
 }
 
+void AsteroidBase::onShipHit(Ship *other) {
+  if (!other->isOnInvincibilityCooldown()) {
+    other->onDestroyed();
+  }
+}
+
 void AsteroidBase::onCollision(AbstractWorldObject *other) {
   if (other->getClass() == WorldObjectClass::BULLET) {
     onBulletHit(dynamic_cast<Bullet *>(other));
@@ -83,7 +88,6 @@ void AsteroidBase::onCollision(AbstractWorldObject *other) {
   }
 
   if (other->getClass() == WorldObjectClass::SHIP) {
-    // kill ship
-    ((Ship *) other)->onDestroyed();
+    onShipHit(dynamic_cast<Ship *>(other));
   }
 }

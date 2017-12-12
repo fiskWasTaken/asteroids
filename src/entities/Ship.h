@@ -16,6 +16,7 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
   bool isFiring = false;
   bool isDestroyed = false;
   bool isThrusting = false;
+  int invincibilityTimer = 100; // initial invincibility time on spawn in frames
 
  public:
   WorldObjectClass getClass() override {
@@ -55,4 +56,14 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
   void fireBullet();
   void onCollision(AbstractWorldObject *other);
   void onShipHit(Ship *other);
+  void renderThruster(sf::RenderWindow *renderWindow);
+  void renderShip(sf::RenderWindow *renderWindow);
+
+  inline bool isOnInvincibilityCooldown() {
+    return invincibilityTimer > 0;
+  }
+
+  inline void setInvincibilityCooldown(int cooldown) {
+    invincibilityTimer = cooldown;
+  }
 };

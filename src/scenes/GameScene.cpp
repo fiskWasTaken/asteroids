@@ -32,6 +32,10 @@ void GameScene::loadCurrentLevel() {
   auto level = game->getPlaylist().getLevel();
   loader.load(world, level);
   showLevelTextTimeout = LEVEL_TEXT_DISPLAY_TIME;
+
+  for (auto session : *game->getSessions()) {
+    session->getShip()->setInvincibilityCooldown(100);
+  }
 }
 
 void GameScene::onVisible() {
@@ -47,9 +51,6 @@ void GameScene::onVisible() {
   auto player2 = new Player("Player 2");
   player2->setColor(sf::Color(58, 144, 163));
   auto session2 = new PlayerSession(player2);
-  auto ship2 = new Ship(world, session2);
-  ship2->pos.x = 200;
-  ship2->pos.y = 100;
 
   auto controller2 = new KeyboardController();
   controller2->assignKeyForAction(InputAction::ACCELERATE, sf::Keyboard::Up);
@@ -57,11 +58,9 @@ void GameScene::onVisible() {
   controller2->assignKeyForAction(InputAction::LEFT, sf::Keyboard::Left);
   controller2->assignKeyForAction(InputAction::RIGHT, sf::Keyboard::Right);
   controller2->assignKeyForAction(InputAction::FIRE, sf::Keyboard::RShift);
-  controller2->setDelegate(ship2);
 
   player2->setController(controller2);
-
-  world->pushObject(ship2);
+  session2->spawnShip(world);
   game->getSessions()->push_back(session2);
 
   loadCurrentLevel();

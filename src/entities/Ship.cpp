@@ -38,6 +38,10 @@ void Ship::update() {
   this->pos += vel;
 
   vel *= 0.99F;
+
+  if (isOnInvincibilityCooldown()) {
+    invincibilityTimer--;
+  }
 }
 
 void Ship::onDestroyed() {
@@ -107,6 +111,15 @@ bool Ship::isRecyclable() {
 }
 
 void Ship::renderTo(sf::RenderWindow *renderWindow) {
+  renderShip(renderWindow);
+
+  if (isThrusting) {
+    renderThruster(renderWindow);
+    isThrusting = false;
+  }
+}
+
+void Ship::renderShip(sf::RenderWindow *renderWindow) {
   auto shape = sf::ConvexShape();
   auto size = points.size();
 
@@ -117,32 +130,37 @@ void Ship::renderTo(sf::RenderWindow *renderWindow) {
   }
 
   shape.setFillColor(sf::Color::Transparent);
-  shape.setOutlineColor(getPlayerSession()->getPlayer()->getColor());
+
+  bool invisible = (invincibilityTimer / 4 % 2 != 0);
+
+  if (invisible) {
+    shape.setOutlineColor(sf::Color(127, 127, 127));
+  } else {
+    shape.setOutlineColor(getPlayerSession()->getPlayer()->getColor());
+  }
+
   shape.setOutlineThickness(1.0F);
   shape.setOrigin(origin.x, origin.y);
   shape.setRotation(rot);
 
   shape.setPosition(pos);
   renderWindow->draw(shape);
-
-  if (isThrusting) {
-    auto thruster = sf::ConvexShape();
-    thruster.setPointCount(3);
-    thruster.setPoint(0, {-2, 8});
-    thruster.setPoint(1, {0, 7});
-    thruster.setPoint(2, {0, 9});
-    thruster.setOutlineColor(sf::Color(255, 93, 0));
-    thruster.setOutlineThickness(1.0F);
-    thruster.setFillColor(sf::Color::Transparent);
-    thruster.setOrigin(origin.x, origin.y);
-    thruster.setRotation(rot);
-    thruster.setPosition(pos);
-    renderWindow->draw(thruster);
-
-    isThrusting = false;
-  }
 }
 
+void Ship::renderThruster(sf::RenderWindow *renderWindow) {
+  auto thruster = sf::ConvexShape();
+  thruster.setPointCount(3);
+  thruster.setPoint(0, {-2, 8});
+  thruster.setPoint(1, {0, 7});
+  thruster.setPoint(2, {0, 9});
+  thruster.setOutlineColor(sf::Color(255, 93, 0));
+  thruster.setOutlineThickness(1.0F);
+  thruster.setFillColor(sf::Color::Transparent);
+  thruster.setOrigin(origin.x, origin.y);
+  thruster.setRotation(rot);
+  thruster.setPosition(pos);
+  renderWindow->draw(thruster);
+}
 
 void Ship::onCollision(AbstractWorldObject *other) {
   if (other->getClass() == WorldObjectClass::SHIP) {
