@@ -19,7 +19,7 @@ void AsteroidBase::renderTo(sf::RenderWindow *renderWindow) {
 
   shape.setPointCount(points.size());
 
-  for (int i = 0; i < points.size(); i++) {
+  for (size_t i = 0; i < points.size(); i++) {
     shape.setPoint(i, points[i]);
   }
 
@@ -58,14 +58,14 @@ void AsteroidBase::onBulletHit(Bullet *bullet) {
 
 void AsteroidBase::onCollision(AbstractWorldObject *other) {
   if (other->getClass() == WorldObjectClass::BULLET) {
-    onBulletHit((Bullet *) other);
+    onBulletHit(dynamic_cast<Bullet *>(other));
   }
 
   if (other->getClass() == WorldObjectClass::ASTEROID) {
     // bounce
     auto diff = vel - other->vel;
-    diff.x /= 2;
-    diff.y /= 2;
+    diff.x /= 1.1;
+    diff.y /= 1.1;
 
     vel -= diff;
     other->vel += diff;

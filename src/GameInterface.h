@@ -7,7 +7,6 @@ class GameInterface {
  protected:
   SceneInterface *scene = nullptr;
   long tick = 0;
-  bool running = false;
 
  public:
   void stop();

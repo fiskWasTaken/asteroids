@@ -6,6 +6,8 @@ struct projection {
   float max;
 };
 
+// TODO: cache normals in AbstractWorldObject
+
 inline std::vector<sf::Vector2f> getNormals(std::vector<sf::Vector2f> points) {
   auto size = points.size();
   std::vector<sf::Vector2f> out;

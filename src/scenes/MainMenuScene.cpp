@@ -1,6 +1,7 @@
 #include <SFML/Graphics/Text.hpp>
 #include <entities/asteroids/LargeAsteroid.h>
 #include <levels/LevelLoader.h>
+#include <sstream>
 #include "MainMenuScene.h"
 #include "GameScene.h"
 #include "HighScoreTableScene.h"
@@ -22,6 +23,7 @@ void MainMenuScene::render(RendererInterface *renderer) {
   startLicenseText.setPosition(center, middle + 14);
 
   drawWorld(renderer);
+  drawTimings(renderer);
   window->draw(startTitleText);
   window->draw(startPromptText);
   window->draw(startLicenseText);
@@ -63,4 +65,17 @@ void MainMenuScene::drawWorld(RendererInterface *renderer) {
 
 void MainMenuScene::main() {
   world->update();
+}
+
+void MainMenuScene::drawTimings(RendererInterface *renderer) {
+  auto font = renderer->getFont();
+  auto window = renderer->getWindow();
+  auto view = renderer->getView();
+  auto newTime = clock.getElapsedTime();
+  std::stringstream frameTime;
+  frameTime << "Frame time: " << (newTime.asMicroseconds() - lastFrameTime.asMicroseconds());
+  sf::Text timingText(frameTime.str(), font, 16);
+  timingText.setPosition(4, view.getSize().y - 16);
+  window->draw(timingText);
+  lastFrameTime = newTime;
 }

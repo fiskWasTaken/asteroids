@@ -1,7 +1,6 @@
 #include "GameInterface.h"
 
 void GameInterface::stop() {
-  running = false;
 }
 
 void GameInterface::setScene(SceneInterface *scene) {

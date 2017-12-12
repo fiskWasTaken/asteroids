@@ -5,20 +5,21 @@ void Playlist::init() {
 
   levels[0].name = "Level 1";
   levels[0].small_asteroid_count = 3;
-  levels[0].medium_asteroid_count = 2;
+  levels[0].medium_asteroid_count = 3;
   levels[0].large_asteroid_count = 0;
 
-  levels[1] = {
-      "Level 2",
-      3,
-      5,
-      0
-  };
+  levels[1].name = "Level 2";
+  levels[1].small_asteroid_count = 3;
+  levels[1].medium_asteroid_count = 3;
+  levels[1].large_asteroid_count = 1;
 
-  levels[2] = {
-      "Level 3",
-      3,
-      2,
-      1
-  };
+  levels[2].name = "Level 3";
+  levels[2].small_asteroid_count = 3;
+  levels[2].medium_asteroid_count = 3;
+  levels[2].large_asteroid_count = 3;
+
+  levels[3].name = "Level 4";
+  levels[3].small_asteroid_count = 3;
+  levels[3].medium_asteroid_count = 3;
+  levels[3].large_asteroid_count = 5;
 }

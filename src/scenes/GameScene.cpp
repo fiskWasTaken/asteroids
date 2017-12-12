@@ -4,10 +4,8 @@
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <levels/Playlist.h>
 #include <entities/asteroids/SmallAsteroid.h>
-#include <entities/asteroids/MediumAsteroid.h>
 #include <levels/LevelLoader.h>
 #include "GameScene.h"
-#include "entities/asteroids/LargeAsteroid.h"
 #include "GameOverScene.h"
 
 void GameScene::render(RendererInterface *renderer) {
@@ -23,6 +21,7 @@ void GameScene::render(RendererInterface *renderer) {
   drawWorld(renderer);
   drawHud(renderer);
 //  drawDebug(renderer);
+  drawTimings(renderer);
 }
 
 void GameScene::drawDebug(RendererInterface *renderer) {
@@ -35,7 +34,7 @@ void GameScene::drawDebug(RendererInterface *renderer) {
 
     shape.setPointCount(points.size());
 
-    for (int i = 0; i < points.size(); i++) {
+    for (size_t i = 0; i < points.size(); i++) {
       shape.setPoint(i, points[i]);
     }
 
@@ -98,6 +97,7 @@ void GameScene::onVisible() {
 void GameScene::drawHud(RendererInterface *renderer) {
   auto font = renderer->getFont();
   auto window = renderer->getWindow();
+  auto view = renderer->getView();
   int offset = 4;
 
   for (auto session: *game->getSessions()) {
@@ -118,11 +118,10 @@ void GameScene::drawHud(RendererInterface *renderer) {
     window->draw(scoreText);
     window->draw(livesText);
 
-    offset += 64;
+    offset += 96;
   }
 
   if (paused) {
-    auto view = renderer->getView();
     sf::Text pausedText("Paused", font, 16);
 
     auto center = view.getSize().x / 2;
@@ -217,4 +216,17 @@ void GameScene::onShipDestroyed(PlayerSession *playerSession) {
 
 void GameScene::startRespawnTimer(PlayerSession *playerSession) {
   respawnTimers[playerSession] = RESPAWN_TIME;
+}
+
+void GameScene::drawTimings(RendererInterface *renderer) {
+  auto font = renderer->getFont();
+  auto window = renderer->getWindow();
+  auto view = renderer->getView();
+  auto newTime = clock.getElapsedTime();
+  std::stringstream frameTime;
+  frameTime << "Frame time: " << (newTime.asMicroseconds() - lastFrameTime.asMicroseconds());
+  sf::Text timingText(frameTime.str(), font, 16);
+  timingText.setPosition(4, view.getSize().y - 16);
+  window->draw(timingText);
+  lastFrameTime = newTime;
 }

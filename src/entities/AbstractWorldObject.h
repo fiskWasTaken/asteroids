@@ -33,8 +33,4 @@ class AbstractWorldObject : public WorldObjectInterface {
     acc = sf::Vector2f(0, 0);
     rot = 0.0F;
   }
-
-  WorldInterface *getWorld() const {
-    return world;
-  }
 };

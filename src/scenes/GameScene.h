@@ -8,6 +8,9 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   const int RESPAWN_TIME = 50;
   const int LEVEL_TEXT_DISPLAY_TIME = 100;
 
+  sf::Time lastFrameTime;
+  sf::Clock clock;
+
   Asteroids *game;
   World *world;
   std::map<PlayerSession *, int> respawnTimers;
@@ -22,6 +25,8 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   explicit GameScene(Asteroids *game) {
     this->game = game;
     world = new World(game, 640, 480);
+    clock = sf::Clock();
+    lastFrameTime = clock.getElapsedTime();
   }
 
   void handleEvents() override;
@@ -44,4 +49,5 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   void loadCurrentLevel();
 
   void updateRespawnTimers();
+  void drawTimings(RendererInterface *pInterface);
 };

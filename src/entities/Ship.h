@@ -23,10 +23,19 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
   explicit Ship(WorldInterface *world, PlayerSession *playerSession) : AbstractWorldObject(world) {
     this->playerSession = playerSession;
 
-    points.emplace_back(20, 10);
+    points.emplace_back(20, 8);
     points.emplace_back(0, 0);
-    points.emplace_back(0, 20);
-    origin = sf::Vector2f(10, 10);
+    points.emplace_back(0, 3);
+    points.emplace_back(2, 3);
+    points.emplace_back(2, 5);
+    points.emplace_back(0, 5);
+    points.emplace_back(0, 11);
+    points.emplace_back(2, 11);
+    points.emplace_back(2, 13);
+    points.emplace_back(0, 13);
+    points.emplace_back(0, 16);
+
+    origin = sf::Vector2f(10, 8);
 
   }
 
