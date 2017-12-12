@@ -7,13 +7,15 @@ class PlayerSession;
 
 class Ship : public AbstractWorldObject, public ControllerListenerInterface {
  private:
+  const float MAX_SPEED = 3.0F;
+  const float MAX_ROTATE_SPEED = 5.0F;
+  const int FIRE_RATE = 10;
+
   PlayerSession *playerSession;
-  float maxSpeed = 5.0F;
-  float maxRotateSpeed = 5.0F;
-  int fireRate = 10;
   int fireCooldown = 0;
   bool isFiring = false;
   bool isDestroyed = false;
+  bool isThrusting = false;
 
  public:
   WorldObjectClass getClass() override {

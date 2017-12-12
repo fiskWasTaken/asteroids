@@ -8,3 +8,14 @@ void KeyboardController::poll() {
     }
   }
 }
+
+std::string KeyboardController::getKeyString(InputAction action) {
+  auto key = map[action];
+
+  if (key == sf::Keyboard::Key::LShift) {
+    return "Shift";
+  }
+
+  auto letter = 'A' + map[action];
+  return std::string({letter});
+}

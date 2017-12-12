@@ -24,4 +24,6 @@ class ControllerInterface {
     if (delegate != nullptr)
       delegate->onAction(action);
   }
+
+  virtual std::string getKeyString(InputAction action) = 0;
 };

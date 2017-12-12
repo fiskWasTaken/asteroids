@@ -12,8 +12,11 @@ void MainMenuScene::render(WindowRendererInterface *renderer) {
   auto view = renderer->getView();
   auto font = renderer->getFont();
 
+  std::stringstream startPromptString;
+  startPromptString << "Press " << controller->getKeyString(InputAction::FIRE) << " to start";
+
   sf::Text startTitleText("Asteroids", font, 16);
-  sf::Text startPromptText("Press C to start", font, 16);
+  sf::Text startPromptText(startPromptString.str(), font, 16);
   sf::Text startLicenseText("fisk, 2017", font, 16);
 
   auto center = view.getSize().x / 2;

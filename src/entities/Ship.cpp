@@ -27,13 +27,17 @@ void Ship::update() {
     fireCooldown--;
   } else if (isFiring) {
     fireBullet();
-    fireCooldown = fireRate;
+    fireCooldown = FIRE_RATE;
   }
 
-  this->isFiring = false;
+  isFiring = false;
 
-  vel = vector::limit(vel, maxSpeed);
+  vel += acc;
+  acc = {0, 0};
+  vel = vector::limit(vel, MAX_SPEED);
   this->pos += vel;
+
+  vel *= 0.99F;
 }
 
 void Ship::onDestroyed() {
@@ -44,33 +48,32 @@ void Ship::onDestroyed() {
 
 void Ship::onAction(InputAction action) {
   if (action == InputAction::ACCELERATE) {
-    // get the vector for the ship's rotation
-    auto rV = vector::fromAngle(rot);
-
     // get the current speed
-    auto speed = vector::len(vel);
+    auto target = vector::fromAngle(rot) * MAX_SPEED;
+    auto diff = target - acc;
 
-    speed += 0.1;
+    diff *= 0.10F;
 
-    // the target vector, which is the rotation multiplied by the current speed
-    auto target = rV * speed;
+    acc.x = diff.x;
+    acc.y = diff.y;
 
-    auto diff = target - vel;
-
-    // todo: the new velocity should be a step towards the target
-    // instead of immediately snapping to the target
-    vel.x += diff.x;
-    vel.y += diff.y;
+//    printf("pos: %.2f, %.2f vel: %.2f, %.2f acc: %.2f, %.2f\n", pos.x, pos.y, vel.x, vel.y, acc.x, acc.y);
+    isThrusting = true;
   }
 
   if (action == InputAction::BRAKE) {
     // really we're just going in reverse
-    vel.x /= 2;
-    vel.y /= 2;
+    auto target = vector::fromAngle(rot) * MAX_SPEED;
+    auto diff = target - acc;
+
+    diff *= 0.10F;
+
+    acc.x = -diff.x;
+    acc.y = -diff.y;
   }
 
   if (action == InputAction::LEFT) {
-    rot -= maxRotateSpeed;
+    rot -= MAX_ROTATE_SPEED;
 
     if (rot < -180) {
       rot += 360;
@@ -78,7 +81,7 @@ void Ship::onAction(InputAction action) {
   }
 
   if (action == InputAction::RIGHT) {
-    rot += maxRotateSpeed;
+    rot += MAX_ROTATE_SPEED;
 
     if (rot > 180) {
       rot -= 360;
@@ -109,7 +112,7 @@ void Ship::renderTo(sf::RenderWindow *renderWindow) {
 
   shape.setPointCount(size);
 
-  for (int i = 0; i < size; i++) {
+  for (size_t i = 0; i < size; i++) {
     shape.setPoint(i, points[i]);
   }
 
@@ -121,6 +124,23 @@ void Ship::renderTo(sf::RenderWindow *renderWindow) {
 
   shape.setPosition(pos);
   renderWindow->draw(shape);
+
+  if (isThrusting) {
+    auto thruster = sf::ConvexShape();
+    thruster.setPointCount(3);
+    thruster.setPoint(0, {-2, 8});
+    thruster.setPoint(1, {0, 7});
+    thruster.setPoint(2, {0, 9});
+    thruster.setOutlineColor(sf::Color(255, 93, 0));
+    thruster.setOutlineThickness(1.0F);
+    thruster.setFillColor(sf::Color::Transparent);
+    thruster.setOrigin(origin.x, origin.y);
+    thruster.setRotation(rot);
+    thruster.setPosition(pos);
+    renderWindow->draw(thruster);
+
+    isThrusting = false;
+  }
 }
 
 

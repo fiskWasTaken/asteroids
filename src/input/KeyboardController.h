@@ -12,4 +12,6 @@ class KeyboardController : public ControllerInterface {
   void assignKeyForAction(InputAction action, sf::Keyboard::Key key) {
     map[action] = key;
   }
+
+  std::string getKeyString(InputAction action) override;
 };
