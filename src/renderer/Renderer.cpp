@@ -46,18 +46,15 @@ void Renderer::renderFrame() {
   window->display();
 }
 
-void Renderer::setGame(Asteroids *game) {
-  this->game = game;
-}
-
-Renderer::Renderer(sf::RenderWindow *window) {
-  if (!font->loadFromFile("Monospace.ttf")) {
+Renderer::Renderer(sf::RenderWindow *window, Asteroids *game) {
+  if (!font.loadFromFile("Monospace.ttf")) {
     std::cout << "Runtime error: could not load Monospace.ttf font file";
     exit(1);
   }
 
   view.reset(sf::FloatRect(0, 0, 640, 480));
   this->window = window;
+  this->game = game;
 
   onResize();
 }

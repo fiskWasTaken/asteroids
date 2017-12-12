@@ -7,9 +7,9 @@ void GameOverScene::render(RendererInterface *renderer) {
   auto view = renderer->getView();
   auto font = renderer->getFont();
 
-  sf::Text startTitleText("Game Over", *font, 16);
-  sf::Text startPromptText("Press C to retry", *font, 16);
-  sf::Text highScorePromptText("Press E to view high score tables", *font, 16);
+  sf::Text startTitleText("Game Over", font, 16);
+  sf::Text startPromptText("Press C to retry", font, 16);
+  sf::Text highScorePromptText("Press E to view high score tables", font, 16);
 
   auto center = view.getSize().x / 2;
   auto middle = view.getSize().y / 2;

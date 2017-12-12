@@ -4,7 +4,7 @@
 void HighScoreTableScene::render(RendererInterface *renderer) {
   auto window = renderer->getWindow();
   auto font = renderer->getFont();
-  sf::Text titleText("High scores", *font, 16);
+  sf::Text titleText("High scores", font, 16);
   titleText.setPosition(0, 0);
 
   window->draw(titleText);
@@ -15,7 +15,7 @@ void HighScoreTableScene::render(RendererInterface *renderer) {
     std::stringstream text;
     text << highscore.name << " " << highscore.score;
 
-    sf::Text lineText(text.str(), *font, 16);
+    sf::Text lineText(text.str(), font, 16);
     lineText.setPosition(0, offset);
 
     window->draw(lineText);

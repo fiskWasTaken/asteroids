@@ -31,18 +31,18 @@ void GameScene::drawDebug(RendererInterface *renderer) {
   for (auto obj : world->getObjects()) {
     auto points = getOffsetPoints(obj);
     // create an empty shape
-    auto shape = new sf::ConvexShape();
+    auto shape = sf::ConvexShape();
 
-    shape->setPointCount(points.size());
+    shape.setPointCount(points.size());
 
     for (int i = 0; i < points.size(); i++) {
-      shape->setPoint(i, points[i]);
+      shape.setPoint(i, points[i]);
     }
 
-    shape->setFillColor(sf::Color::Transparent);
-    shape->setOutlineColor(sf::Color::Red);
-    shape->setOutlineThickness(1.0F);
-    window->draw(*shape);
+    shape.setFillColor(sf::Color::Transparent);
+    shape.setOutlineColor(sf::Color::Red);
+    shape.setOutlineThickness(1.0F);
+    window->draw(shape);
   }
 }
 
@@ -106,9 +106,9 @@ void GameScene::drawHud(RendererInterface *renderer) {
     score << "Score: " << session->getScore();
     lives << "Lives: " << session->getLives();
 
-    sf::Text nameText(session->getPlayer()->getName(), *font, 16);
-    sf::Text scoreText(score.str(), *font, 16);
-    sf::Text livesText(lives.str(), *font, 16);
+    sf::Text nameText(session->getPlayer()->getName(), font, 16);
+    sf::Text scoreText(score.str(), font, 16);
+    sf::Text livesText(lives.str(), font, 16);
 
     nameText.setPosition(offset, 0);
     scoreText.setPosition(offset, 14);
@@ -123,7 +123,7 @@ void GameScene::drawHud(RendererInterface *renderer) {
 
   if (paused) {
     auto view = renderer->getView();
-    sf::Text pausedText("Paused", *font, 16);
+    sf::Text pausedText("Paused", font, 16);
 
     auto center = view.getSize().x / 2;
     auto middle = view.getSize().y / 2;
@@ -134,7 +134,7 @@ void GameScene::drawHud(RendererInterface *renderer) {
 
   if (showLevelTextTimeout > 0) {
     auto view = renderer->getView();
-    sf::Text levelText(game->getPlaylist().getLevel().name, *font, 16);
+    sf::Text levelText(game->getPlaylist().getLevel().name, font, 16);
 
     auto center = view.getSize().x / 2;
     auto middle = view.getSize().y / 2;

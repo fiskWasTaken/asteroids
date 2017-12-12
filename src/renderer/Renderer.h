@@ -11,14 +11,13 @@ class Renderer : public RendererInterface {
   Asteroids *game;
   sf::RenderWindow *window;
   sf::View view;
-  sf::Font *font = new sf::Font();
+  sf::Font font;
   int viewWidth = 640;
   int viewHeight = 480;
 
  public:
-  explicit Renderer(sf::RenderWindow *window);
+  Renderer(sf::RenderWindow *window, Asteroids *game);
 
-  void setGame(Asteroids *game);
   void renderFrame() override;
   void handleEvents() override;
   void handleGlobalEvents() override;
@@ -29,7 +28,7 @@ class Renderer : public RendererInterface {
     return window;
   }
 
-  inline sf::Font *getFont() override {
+  inline sf::Font getFont() override {
     return font;
   }
 

@@ -10,9 +10,9 @@ void MainMenuScene::render(RendererInterface *renderer) {
   auto view = renderer->getView();
   auto font = renderer->getFont();
 
-  sf::Text startTitleText("Asteroids", *font, 16);
-  sf::Text startPromptText("Press C to start", *font, 16);
-  sf::Text startLicenseText("fisk, 2017", *font, 16);
+  sf::Text startTitleText("Asteroids", font, 16);
+  sf::Text startPromptText("Press C to start", font, 16);
+  sf::Text startLicenseText("fisk, 2017", font, 16);
 
   auto center = view.getSize().x / 2;
   auto middle = view.getSize().y / 2;

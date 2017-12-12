@@ -23,13 +23,11 @@ void renderer(Asteroids *game) {
   auto settings = getContextSettings();
   auto videoMode = sf::VideoMode(640, 480);
   auto window = new sf::RenderWindow(videoMode, "Asteroids", sf::Style::Default, settings);
-  auto renderer = new Renderer(window);
-
-  renderer->setGame(game);
+  auto renderer = Renderer(window, game);
 
   glEnable(GL_TEXTURE_2D);
   while (window->isOpen()) {
-    renderer->main();
+    renderer.main();
     game->main();
 
     struct timespec tim{}, tim2{};

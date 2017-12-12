@@ -13,6 +13,6 @@ class RendererInterface {
   virtual void main() = 0;
 
   virtual sf::RenderWindow *getWindow() = 0;
-  virtual sf::Font *getFont() = 0;
+  virtual sf::Font getFont() = 0;
   virtual sf::View getView() = 0;
 };
