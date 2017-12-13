@@ -1,5 +1,4 @@
 #include <SFML/Graphics/Text.hpp>
-#include <entities/asteroids/LargeAsteroid.h>
 #include <levels/LevelLoader.h>
 #include <sstream>
 #include <SFML/Graphics/ConvexShape.hpp>

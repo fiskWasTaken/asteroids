@@ -8,6 +8,8 @@
 #include "world/WorldInterface.h"
 #include "WorldObjectInterface.h"
 
+class WorldInterface;
+
 class AbstractWorldObject : public WorldObjectInterface {
  protected:
   WorldInterface *world;

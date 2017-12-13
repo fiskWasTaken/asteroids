@@ -3,7 +3,6 @@
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <levels/Playlist.h>
-#include <entities/asteroids/SmallAsteroid.h>
 #include <levels/LevelLoader.h>
 #include <input/KeyboardController.h>
 #include "GameScene.h"
@@ -91,7 +90,6 @@ void GameScene::drawHud(WindowRendererInterface *renderer) {
   }
 
   if (showLevelTextTimeout > 0) {
-    auto view = renderer->getView();
     sf::Text levelText(game->getPlaylist().getLevel().name, font, 16);
 
     auto center = view.getSize().x / 2;

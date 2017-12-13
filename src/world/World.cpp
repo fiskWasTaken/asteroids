@@ -14,19 +14,6 @@ void World::wrapObject(WorldObjectInterface *object) {
     pos->y -= h;
 }
 
-void World::checkCollision(AbstractWorldObject *a) {
-  for (auto b: objects) {
-    if (a != b) {
-      collision_result_t result = collisionModel.check(a, b);
-
-      if (result.isCollision) {
-        a->onCollision(b);
-        b->pos += sf::Vector2f(result.mtv.x / 100, result.mtv.y / 100);
-      }
-    }
-  }
-}
-
 void World::recycle() {
   auto it = objects.begin();
 

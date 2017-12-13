@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
-#include <entities/asteroids/LargeAsteroid.cpp>
+#include <entities/Asteroid.cpp>
 #include <Asteroids.h>
 
 TEST(game_world, obj_wrap) {
   auto game = Asteroids();
   auto world = World(&game, 10, 10);
 
-  auto object = new LargeAsteroid(&world);
+  auto object = new Asteroid(&world, 50);
   object->pos.x = 5;
   object->pos.y = 5;
 
@@ -39,8 +39,8 @@ TEST(game_world, obj_management) {
   auto game = Asteroids();
   auto world = World(&game, 10, 10);
 
-  auto object = LargeAsteroid(&world);
-  auto object2 = LargeAsteroid(&world);
+  auto object = Asteroid(&world, 50);
+  auto object2 = Asteroid(&world, 50);
 
   EXPECT_TRUE(world.pushObject(&object));
   EXPECT_FALSE(world.pushObject(&object));

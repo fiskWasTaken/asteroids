@@ -1,6 +1,4 @@
-#include <entities/asteroids/SmallAsteroid.h>
-#include <entities/asteroids/MediumAsteroid.h>
-#include <entities/asteroids/LargeAsteroid.h>
+#include <entities/Asteroid.h>
 #include "LevelLoader.h"
 
 void placeRandomly(WorldInterface *world, AbstractWorldObject *object) {
@@ -13,14 +11,14 @@ void placeRandomly(WorldInterface *world, AbstractWorldObject *object) {
 
 void LevelLoader::load(WorldInterface *world, level_t level) {
   for (int i = 0; i < level.small_asteroid_count; i++) {
-    placeRandomly(world, new SmallAsteroid(world));
+    placeRandomly(world, new Asteroid(world, 12.5));
   }
 
   for (int i = 0; i < level.medium_asteroid_count; i++) {
-    placeRandomly(world, new MediumAsteroid(world));
+    placeRandomly(world, new Asteroid(world, 25));
   }
 
   for (int i = 0; i < level.large_asteroid_count; i++) {
-    placeRandomly(world, new LargeAsteroid(world));
+    placeRandomly(world, new Asteroid(world, 50));
   }
 }

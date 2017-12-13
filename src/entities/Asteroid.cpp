@@ -1,19 +1,38 @@
+#include <utility/vector.h>
 #include <SFML/Graphics/ConvexShape.hpp>
-#include <entities/Bullet.h>
-#include <player/PlayerSession.h>
 #include <utility/drawing.h>
-#include "AsteroidBase.h"
+#include "Asteroid.h"
+#include "player/PlayerSession.h"
 
-bool AsteroidBase::isRecyclable() {
+void Asteroid::onDestroyed() {
+  if (size > 13) {
+    auto ast1 = new Asteroid(world, size / 2);
+    ast1->pos.x = pos.x - 6;
+    ast1->pos.y = pos.y;
+    ast1->vel = vector::rot(vel, vector::rot(vel) + 5);
+
+    world->pushObject(ast1);
+
+    auto ast2 = new Asteroid(world, size / 2);
+    ast2->pos.x = pos.x + 6;
+    ast2->pos.y = pos.y;
+    ast2->vel = vector::rot(vel, vector::rot(vel) - 5);
+
+    world->pushObject(ast2);
+  }
+}
+
+
+bool Asteroid::isRecyclable() {
   return isDestroyed();
 }
 
-void AsteroidBase::update() {
+void Asteroid::update() {
   this->pos += vel;
   this->rot += rotSpeed;
 }
 
-void AsteroidBase::renderTo(sf::RenderWindow *renderWindow) {
+void Asteroid::renderTo(sf::RenderWindow *renderWindow) {
   auto shape = sf::ConvexShape();
   auto size = points.size();
 
@@ -43,7 +62,7 @@ void AsteroidBase::renderTo(sf::RenderWindow *renderWindow) {
   }
 }
 
-void AsteroidBase::onBulletHit(Bullet *bullet) {
+void Asteroid::onBulletHit(Bullet *bullet) {
   // take damage
   takeDamage(10);
   vel.x += bullet->vel.x / 30;
@@ -56,7 +75,7 @@ void AsteroidBase::onBulletHit(Bullet *bullet) {
   }
 }
 
-void AsteroidBase::onAsteroidHit(AsteroidBase *other) {
+void Asteroid::onAsteroidHit(Asteroid *other) {
   // bounce
   auto diff = vel - other->vel;
   diff.x /= 1.1;
@@ -72,19 +91,19 @@ void AsteroidBase::onAsteroidHit(AsteroidBase *other) {
   other->rotSpeed += rotDiff;
 }
 
-void AsteroidBase::onShipHit(Ship *other) {
+void Asteroid::onShipHit(Ship *other) {
   if (!other->isOnInvincibilityCooldown()) {
     other->onDestroyed();
   }
 }
 
-void AsteroidBase::onCollision(AbstractWorldObject *other) {
+void Asteroid::onCollision(AbstractWorldObject *other) {
   if (other->getClass() == WorldObjectClass::BULLET) {
     onBulletHit(dynamic_cast<Bullet *>(other));
   }
 
   if (other->getClass() == WorldObjectClass::ASTEROID) {
-    onAsteroidHit(dynamic_cast<AsteroidBase *>(other));
+    onAsteroidHit(dynamic_cast<Asteroid *>(other));
   }
 
   if (other->getClass() == WorldObjectClass::SHIP) {

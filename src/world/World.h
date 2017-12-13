@@ -22,6 +22,7 @@ class World : public WorldInterface {
     this->w = w;
     this->h = h;
     this->collisionModel = SATCollisionModel();
+    objects.reserve(2048);
   }
 
   void update() override;
@@ -54,7 +55,6 @@ class World : public WorldInterface {
     return game;
   }
 
-  void checkCollision(AbstractWorldObject *a);
   void recycle();
 
   ~World() {
