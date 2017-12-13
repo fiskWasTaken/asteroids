@@ -1,9 +1,11 @@
 #pragma once
 
 #include "level_t.h"
+#include <list>
 
 class Playlist {
  private:
+  const int LEVEL_COUNT = 4;
   level_t *levels;
   int pos = 0;
 
@@ -11,7 +13,7 @@ class Playlist {
   void init();
 
   Playlist() {
-    levels = new level_t[4];
+    levels = new level_t[LEVEL_COUNT];
     init();
   }
 
@@ -20,11 +22,17 @@ class Playlist {
   }
 
   bool next() {
+    if (pos >= LEVEL_COUNT - 1)
+      return false;
+
     pos++;
     return true;
   }
 
   bool prev() {
+    if (pos <= 0)
+      return false;
+
     pos--;
     return true;
   }

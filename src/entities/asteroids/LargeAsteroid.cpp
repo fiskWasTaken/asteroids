@@ -1,4 +1,3 @@
-#include <SFML/Graphics/RectangleShape.hpp>
 #include <utility/vector.h>
 #include "LargeAsteroid.h"
 #include "MediumAsteroid.h"

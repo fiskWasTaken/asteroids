@@ -12,11 +12,10 @@ void MainMenuScene::render(WindowRendererInterface *renderer) {
   auto view = renderer->getView();
   auto font = renderer->getFont();
 
-  std::stringstream startPromptString;
-  startPromptString << "Press " << controller->getKeyString(InputAction::FIRE) << " to start";
+  std::string startPromptString = "Press " + game->getControllers().getFirst()->getKeyString(InputAction::FIRE) + " to start";
 
   sf::Text startTitleText("Asteroids", font, 16);
-  sf::Text startPromptText(startPromptString.str(), font, 16);
+  sf::Text startPromptText(startPromptString, font, 16);
   sf::Text startLicenseText("fisk, 2017", font, 16);
 
   auto center = view.getSize().x / 2;
@@ -35,7 +34,7 @@ void MainMenuScene::render(WindowRendererInterface *renderer) {
 }
 
 void MainMenuScene::handleEvents() {
-  controller->poll();
+  game->getControllers().getFirst()->poll();
 }
 
 void MainMenuScene::onAction(InputAction action) {
@@ -49,7 +48,7 @@ void MainMenuScene::onAction(InputAction action) {
 }
 
 void MainMenuScene::onVisible() {
-  controller->setDelegate(this);
+  game->getControllers().getFirst()->setDelegate(this);
 
   LevelLoader loader;
   loader.load(world, {

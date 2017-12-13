@@ -32,6 +32,21 @@ void Ship::update() {
 
   isFiring = false;
 
+  if (isFiringAltWeapon) {
+    for (int i = 0; i < 360; i++) {
+      auto thisRot = vector::fromAngle(i);
+      auto velocity = thisRot * 5.0F;
+      auto bullet = new Bullet(world, this->getPlayerSession());
+      bullet->pos.x = pos.x + thisRot.x * 10;
+      bullet->pos.y = pos.y + thisRot.y * 10;
+      bullet->vel = velocity + vel;
+      bullet->rot = rot;
+      world->pushObject(bullet);
+    }
+  }
+
+  isFiringAltWeapon = false;
+
   vel += acc;
   acc = {0, 0};
   vel = vector::limit(vel, MAX_SPEED);
@@ -94,6 +109,10 @@ void Ship::onAction(InputAction action) {
 
   if (action == InputAction::FIRE) {
     isFiring = true;
+  }
+
+  if (action == InputAction::ALTFIRE) {
+    isFiringAltWeapon = true;
   }
 
   if (action == InputAction::PANIC) {

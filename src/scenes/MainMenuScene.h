@@ -2,20 +2,26 @@
 
 #include <Asteroids.h>
 #include <renderer/WorldRenderer.h>
+#include <functional>
 #include "SceneInterface.h"
+
+struct menu_option_t {
+  std::string string;
+  std::function<void(void)> onSelect;
+};
+
 class MainMenuScene : public SceneInterface, public ControllerListenerInterface {
  private:
   Asteroids *game;
-  ControllerInterface *controller;
   World *world;
 
   WorldRenderer worldRenderer;
 
-  std::vector<int> menuOptions;
+  std::vector<menu_option_t> menuOptions;
+  int selectedMenuOption = 0;
  public:
   explicit MainMenuScene(Asteroids *game) {
     this->game = game;
-    controller = game->getDefaultJoystickController();
     world = new World(game, 640, 480);
   }
   void render(WindowRendererInterface *renderer) override;
@@ -25,7 +31,7 @@ class MainMenuScene : public SceneInterface, public ControllerListenerInterface 
   void main() override;
 
   ~MainMenuScene() override {
-    delete controller;
+    game->getControllers().getFirst()->setDelegate(nullptr);
     delete world;
   }
 };

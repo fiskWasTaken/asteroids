@@ -12,10 +12,7 @@ void HighScoreTableScene::render(WindowRendererInterface *renderer) {
   int offset = 14;
 
   for (auto highscore : game->getHighScores().getScores()) {
-    std::stringstream text;
-    text << highscore.name << " " << highscore.score;
-
-    sf::Text lineText(text.str(), font, 16);
+    sf::Text lineText(highscore.name + " " + std::to_string(highscore.score), font, 16);
     lineText.setPosition(0, offset);
 
     window->draw(lineText);

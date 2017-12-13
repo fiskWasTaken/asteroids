@@ -49,9 +49,8 @@ void WorldRenderer::drawTimings(WindowRendererInterface *renderer) {
   auto window = renderer->getWindow();
   auto view = renderer->getView();
   auto newTime = clock.getElapsedTime();
-  std::stringstream frameTime;
-  frameTime << "Frame time: " << (newTime.asMicroseconds() - lastFrameTime.asMicroseconds());
-  sf::Text timingText(frameTime.str(), font, 16);
+  auto text = "Frame time: " + std::to_string(newTime.asMicroseconds() - lastFrameTime.asMicroseconds());
+  sf::Text timingText(text, font, 16);
   timingText.setPosition(4, view.getSize().y - 16);
   window->draw(timingText);
   lastFrameTime = newTime;

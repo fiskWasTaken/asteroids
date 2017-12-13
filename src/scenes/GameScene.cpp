@@ -41,28 +41,18 @@ void GameScene::loadCurrentLevel() {
 void GameScene::onVisible() {
   auto player = new Player("Player 1");
   auto session = new PlayerSession(player);
-  auto controller = game->getDefaultJoystickController();
-
-  player->setController(controller);
+  player->setController(game->getControllers().getFirstAvailable());
   session->spawnShip(world);
   game->getSessions()->push_back(session);
 
-//   playerSession 2 stuff -- cool, it works, but we don't want to do this just yet :>
   auto player2 = new Player("Player 2");
   player2->setColor(sf::Color(58, 144, 163));
   auto session2 = new PlayerSession(player2);
-
-  auto controller2 = new KeyboardController();
-  controller2->assignKeyToAction(InputAction::ACCELERATE, sf::Keyboard::Up);
-  controller2->assignKeyToAction(InputAction::BRAKE, sf::Keyboard::Down);
-  controller2->assignKeyToAction(InputAction::LEFT, sf::Keyboard::Left);
-  controller2->assignKeyToAction(InputAction::RIGHT, sf::Keyboard::Right);
-  controller2->assignKeyToAction(InputAction::FIRE, sf::Keyboard::RShift);
-
-  player2->setController(controller2);
+  player2->setController(game->getControllers().getFirstAvailable());
   session2->spawnShip(world);
   game->getSessions()->push_back(session2);
 
+  game->getPlaylist().rewind();
   loadCurrentLevel();
 }
 
@@ -73,14 +63,9 @@ void GameScene::drawHud(WindowRendererInterface *renderer) {
   int offset = 4;
 
   for (auto session: *game->getSessions()) {
-    std::stringstream score;
-    std::stringstream lives;
-    score << "Score: " << session->getScore();
-    lives << "Lives: " << session->getLives();
-
     sf::Text nameText(session->getPlayer()->getName(), font, 16);
-    sf::Text scoreText(score.str(), font, 16);
-    sf::Text livesText(lives.str(), font, 16);
+    sf::Text scoreText("Score: " + std::to_string(session->getScore()), font, 16);
+    sf::Text livesText("Lives: " + std::to_string(session->getLives()), font, 16);
 
     nameText.setFillColor(session->getPlayer()->getColor());
 
@@ -139,8 +124,13 @@ void GameScene::main() {
     }
 
     if (remainingAsteroids == 0) {
-      game->getPlaylist().next();
-      loadCurrentLevel();
+      auto next = game->getPlaylist().next();
+
+      if (!next) {
+        game->setScene(new GameOverScene(game));
+      } else {
+        loadCurrentLevel();
+      }
     }
   }
 }

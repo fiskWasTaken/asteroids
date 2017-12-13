@@ -22,12 +22,12 @@ void GameOverScene::render(WindowRendererInterface *renderer) {
 }
 
 void GameOverScene::handleEvents() {
-  controller->poll();
+  game->getControllers().getFirstAvailable()->poll();
 }
 
 void GameOverScene::onVisible() {
   game->getSessions()->clear();
-  controller->setDelegate(this);
+  game->getControllers().getFirstAvailable()->setDelegate(this);
 }
 
 void GameOverScene::onAction(InputAction action) {
