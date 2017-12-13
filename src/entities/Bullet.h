@@ -33,13 +33,13 @@ class Bullet : public AbstractWorldObject {
     return this->owner;
   }
 
+  bool isRecyclable() override {
+    return lifetime <= 0;
+  }
+
   void update() override {
     pos += vel;
     lifetime--;
-
-    if (lifetime <= 0) {
-      world->popObject(this);
-    }
   };
 
   void setLifetime(int lifetime);

@@ -22,7 +22,6 @@ class World : public WorldInterface {
     this->w = w;
     this->h = h;
     this->collisionModel = SATCollisionModel();
-    objects.reserve(1024);
   }
 
   void update() override;
@@ -44,7 +43,6 @@ class World : public WorldInterface {
 
   bool popObject(AbstractWorldObject *object) override {
     objects.erase(std::remove(objects.begin(), objects.end(), object), objects.end());
-    delete(object);
     return true;
   }
 
@@ -55,6 +53,9 @@ class World : public WorldInterface {
   GameInterface *getGame() override {
     return game;
   }
+
+  void checkCollision(AbstractWorldObject *a);
+  void recycle();
 
   ~World() {
     for (auto object: objects) {

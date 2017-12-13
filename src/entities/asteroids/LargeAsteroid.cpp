@@ -16,6 +16,4 @@ void LargeAsteroid::onDestroyed() {
   ast2->vel = vector::rot(vel, vector::rot(vel) - 5);
 
   world->pushObject(ast2);
-
-  world->popObject(this);
 }

@@ -14,6 +14,7 @@ class AbstractWorldObject : public WorldObjectInterface {
 
  public:
   virtual void update() = 0;
+  virtual bool isRecyclable() = 0;
 
   /**
    * Invoked when this object is colliding with another object
@@ -31,9 +32,5 @@ class AbstractWorldObject : public WorldObjectInterface {
     vel = sf::Vector2f(0, 0);
     acc = sf::Vector2f(0, 0);
     rot = 0.0F;
-  }
-
-  virtual void onDestroyed() {
-    world->popObject(this);
   }
 };

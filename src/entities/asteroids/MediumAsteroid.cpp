@@ -17,5 +17,4 @@ void MediumAsteroid::onDestroyed() {
 
   world->pushObject(ast2);
 
-  world->popObject(this);
 }

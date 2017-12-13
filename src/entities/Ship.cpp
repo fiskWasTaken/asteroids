@@ -61,8 +61,8 @@ void Ship::update() {
 
 void Ship::onDestroyed() {
   auto scene = dynamic_cast<GameScene *>(world->getGame()->getScene());
+  isDestroyed = true;
   scene->onShipDestroyed(playerSession);
-  world->popObject(this);
 }
 
 void Ship::onAction(InputAction action) {
@@ -123,6 +123,10 @@ void Ship::onAction(InputAction action) {
     auto scene = dynamic_cast<GameScene *>(world->getGame()->getScene());
     scene->pause(this->playerSession);
   }
+}
+
+bool Ship::isRecyclable() {
+  return isDestroyed;
 }
 
 void Ship::renderTo(sf::RenderWindow *renderWindow) {
