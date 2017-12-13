@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <set>
 #include <collision/SATCollisionModel.h>
 #include "collision/CollisionModelInterface.h"
@@ -9,7 +10,7 @@
 
 class World : public WorldInterface {
  private:
-  std::set<AbstractWorldObject *> objects;
+  std::vector<AbstractWorldObject *> objects;
   double w;
   double h;
   SATCollisionModel collisionModel;
@@ -36,14 +37,16 @@ class World : public WorldInterface {
   void wrapObject(WorldObjectInterface *object) override;
 
   bool pushObject(AbstractWorldObject *object) override {
-    return objects.insert(object).second;
+    objects.push_back(object);
+    return true;
   }
 
   bool popObject(AbstractWorldObject *object) override {
-    return objects.erase(object) != 0;
+    objects.erase(std::remove(objects.begin(), objects.end(), object), objects.end());
+    return true;
   }
 
-  const std::set<AbstractWorldObject *> &getObjects() const {
+  const std::vector<AbstractWorldObject *> &getObjects() const {
     return objects;
   }
 

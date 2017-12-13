@@ -28,17 +28,12 @@ void World::checkCollision(AbstractWorldObject *a) {
 }
 
 void World::recycle() {
-  std::set<AbstractWorldObject *>::iterator tmp;
+  auto it = objects.begin();
 
-  for (auto it = objects.begin(); it != objects.end();) {
-    auto object = *it;
+  while(it != objects.end()) {
 
-    if (object->isRecyclable()) {
-      tmp = it;
-      ++tmp;
-      objects.erase(it);
-      delete (object);
-      it = tmp;
+    if((*it)->isRecyclable()) {
+      it = objects.erase(it);
     } else {
       ++it;
     }
@@ -48,8 +43,25 @@ void World::recycle() {
 void World::update() {
   for (auto object: objects) {
     wrapObject(object);
-    checkCollision(object);
     object->update();
+  }
+
+  auto size = objects.size();
+
+  for (int a = 0; a < size; a++) {
+    for (int b = a + 1; b < size; b++) {
+      collision_result_t result = collisionModel.check(objects[a], objects[b]);
+
+      if (result.isCollision) {
+        objects[a]->onCollision(objects[b]);
+        objects[b]->onCollision(objects[a]);
+
+        auto offset = sf::Vector2f(result.mtv.x / 100, result.mtv.y / 100);
+
+        objects[a]->pos -= offset;
+        objects[b]->pos += offset;
+      }
+    }
   }
 
   recycle();
