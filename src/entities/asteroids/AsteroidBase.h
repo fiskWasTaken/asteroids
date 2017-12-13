@@ -36,12 +36,9 @@ class AsteroidBase : public AbstractWorldObject {
 
     if (health <= 0) {
       health = 0;
-      this->onDestroyed();
     }
   }
 
-  virtual void onDestroyed() = 0;
-  bool isRecyclable() override;
   void onCollision(AbstractWorldObject *other) override;
   void renderTo(sf::RenderWindow *renderWindow) override;
   void update() override;

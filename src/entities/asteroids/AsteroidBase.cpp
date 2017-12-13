@@ -4,10 +4,6 @@
 #include <utility/drawing.h>
 #include "AsteroidBase.h"
 
-bool AsteroidBase::isRecyclable() {
-  return isDestroyed();
-}
-
 void AsteroidBase::update() {
   this->pos += vel;
   this->rot += rotSpeed;
@@ -53,6 +49,7 @@ void AsteroidBase::onBulletHit(Bullet *bullet) {
   if (isDestroyed()) {
     auto session = bullet->getOwner();
     session->setScore(session->getScore() + getScoreValue());
+    this->onDestroyed();
   }
 }
 

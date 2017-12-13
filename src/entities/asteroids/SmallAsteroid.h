@@ -22,5 +22,7 @@ class SmallAsteroid : public AsteroidBase {
     return 3;
   }
 
-  void onDestroyed() override;
+  void onDestroyed() override {
+      world->popObject(this);
+  };
 };

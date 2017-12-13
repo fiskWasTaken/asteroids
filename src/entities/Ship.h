@@ -15,7 +15,6 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
   int fireCooldown = 0;
   bool isFiring = false;
   bool isFiringAltWeapon;
-  bool isDestroyed = false;
   bool isThrusting = false;
   int invincibilityTimer = 100; // initial invincibility time on spawn in frames
 
@@ -45,7 +44,6 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
 
   void onAction(InputAction action) override;
   void update() override;
-  bool isRecyclable() override;
 
   void onDestroyed();
 
