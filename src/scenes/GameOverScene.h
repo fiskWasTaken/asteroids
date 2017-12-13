@@ -19,7 +19,7 @@ class GameOverScene : public SceneInterface, public ControllerListenerInterface 
 
   explicit GameOverScene(Asteroids *game) {
     this->game = game;
-    this->controller = game->getDefaultController();
+    this->controller = game->getDefaultJoystickController();
   }
 
   void onAction(InputAction action) override;

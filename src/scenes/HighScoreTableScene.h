@@ -11,7 +11,7 @@ class HighScoreTableScene : public SceneInterface {
  public:
   explicit HighScoreTableScene(Asteroids *game) {
     this->game = game;
-    this->controller = game->getDefaultController();
+    this->controller = game->getDefaultJoystickController();
   }
   void render(WindowRendererInterface *renderer) override;
   void handleEvents() override;

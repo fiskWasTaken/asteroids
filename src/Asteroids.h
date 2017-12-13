@@ -28,7 +28,8 @@ class Asteroids : public GameInterface {
     return highScores;
   }
 
-  ControllerInterface *getDefaultController();
+  ControllerInterface *getDefaultKeyboardController();
 
   Playlist &getPlaylist();
+  ControllerInterface *getDefaultJoystickController();
 };

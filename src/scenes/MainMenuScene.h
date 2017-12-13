@@ -15,7 +15,7 @@ class MainMenuScene : public SceneInterface, public ControllerListenerInterface 
  public:
   explicit MainMenuScene(Asteroids *game) {
     this->game = game;
-    controller = game->getDefaultController();
+    controller = game->getDefaultJoystickController();
     world = new World(game, 640, 480);
   }
   void render(WindowRendererInterface *renderer) override;

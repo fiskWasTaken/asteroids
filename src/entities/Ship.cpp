@@ -131,10 +131,10 @@ void Ship::renderShip(sf::RenderWindow *renderWindow) {
 
   shape.setFillColor(sf::Color::Transparent);
 
-  bool invisible = (invincibilityTimer / 4 % 2 != 0);
+  bool invisible = (invincibilityTimer / 3 % 2 != 0);
 
   if (invisible) {
-    shape.setOutlineColor(sf::Color(127, 127, 127));
+    shape.setOutlineColor(sf::Color(50, 50, 50));
   } else {
     shape.setOutlineColor(getPlayerSession()->getPlayer()->getColor());
   }

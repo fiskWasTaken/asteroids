@@ -21,7 +21,7 @@ class ControllerInterface {
   }
 
   void emit(InputAction action) {
-    if (delegate != nullptr)
+    if (action != InputAction::NIL && delegate != nullptr)
       delegate->onAction(action);
   }
 

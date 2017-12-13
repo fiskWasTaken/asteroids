@@ -41,7 +41,7 @@ void GameScene::loadCurrentLevel() {
 void GameScene::onVisible() {
   auto player = new Player("Player 1");
   auto session = new PlayerSession(player);
-  auto controller = game->getDefaultController();
+  auto controller = game->getDefaultJoystickController();
 
   player->setController(controller);
   session->spawnShip(world);
@@ -53,11 +53,11 @@ void GameScene::onVisible() {
   auto session2 = new PlayerSession(player2);
 
   auto controller2 = new KeyboardController();
-  controller2->assignKeyForAction(InputAction::ACCELERATE, sf::Keyboard::Up);
-  controller2->assignKeyForAction(InputAction::BRAKE, sf::Keyboard::Down);
-  controller2->assignKeyForAction(InputAction::LEFT, sf::Keyboard::Left);
-  controller2->assignKeyForAction(InputAction::RIGHT, sf::Keyboard::Right);
-  controller2->assignKeyForAction(InputAction::FIRE, sf::Keyboard::RShift);
+  controller2->assignKeyToAction(InputAction::ACCELERATE, sf::Keyboard::Up);
+  controller2->assignKeyToAction(InputAction::BRAKE, sf::Keyboard::Down);
+  controller2->assignKeyToAction(InputAction::LEFT, sf::Keyboard::Left);
+  controller2->assignKeyToAction(InputAction::RIGHT, sf::Keyboard::Right);
+  controller2->assignKeyToAction(InputAction::FIRE, sf::Keyboard::RShift);
 
   player2->setController(controller2);
   session2->spawnShip(world);
