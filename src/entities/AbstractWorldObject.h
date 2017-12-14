@@ -28,6 +28,8 @@ class AbstractWorldObject : public WorldObjectInterface {
 
   }
 
+  virtual ~AbstractWorldObject() {}
+
   explicit AbstractWorldObject(WorldInterface *world) {
     this->world = world;
     pos = sf::Vector2f(0, 0);

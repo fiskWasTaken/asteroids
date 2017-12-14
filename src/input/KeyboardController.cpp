@@ -16,6 +16,6 @@ std::string KeyboardController::getKeyString(InputAction action) {
     return "Shift";
   }
 
-  auto letter = 'A' + map[action];
+  char letter = 'A' + map[action];
   return std::string({letter});
 }

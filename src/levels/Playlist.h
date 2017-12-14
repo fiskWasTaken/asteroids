@@ -37,7 +37,7 @@ class Playlist {
     return true;
   }
 
-  bool rewind() {
+  void rewind() {
     pos = 0;
   }
 };

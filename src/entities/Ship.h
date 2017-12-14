@@ -55,7 +55,7 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
     return playerSession;
   }
   void fireBullet();
-  void onCollision(AbstractWorldObject *other);
+  void onCollision(AbstractWorldObject *other) override;
   void onShipHit(Ship *other);
   void renderThruster(sf::RenderWindow *renderWindow);
   void renderShip(sf::RenderWindow *renderWindow);
