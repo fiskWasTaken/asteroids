@@ -9,7 +9,6 @@ class GameOverScene : public SceneInterface, public ControllerListenerInterface 
 
  public:
   void render(WindowRendererInterface *renderer) override;
-  void handleEvents() override;
   void onVisible() override;
 
   ~GameOverScene() override {}
@@ -18,5 +17,5 @@ class GameOverScene : public SceneInterface, public ControllerListenerInterface 
     this->game = game;
   }
 
-  void onAction(InputAction action) override;
+  void onAction(InputAction action, bool once) override;
 };

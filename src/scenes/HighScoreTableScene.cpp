@@ -21,9 +21,6 @@ void HighScoreTableScene::render(WindowRendererInterface *renderer) {
   }
 }
 
-void HighScoreTableScene::handleEvents() {
-
-}
 void HighScoreTableScene::onVisible() {
 
 }

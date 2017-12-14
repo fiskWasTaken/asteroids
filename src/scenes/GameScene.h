@@ -27,10 +27,9 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
     world = new World(game, 640, 480);
   }
 
-  void handleEvents() override;
   void render(WindowRendererInterface *renderer) override;
   void onVisible() override;
-  void onAction(InputAction action) override;
+  void onAction(InputAction action, bool once) override;
 
   void pause(PlayerSession *initiator);
 

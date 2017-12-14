@@ -3,19 +3,27 @@
 
 void KeyboardController::poll() {
   for (auto &it : map) {
-    if (sf::Keyboard::isKeyPressed(it.second)) {
-      emit(it.first);
+    if (it.second.pressed) {
+      emit(it.second.action, false);
     }
   }
 }
 
 std::string KeyboardController::getKeyString(InputAction action) {
-  auto key = map[action];
+  // todo
+  return "[NOT BOUND]";
+}
 
-  if (key == sf::Keyboard::Key::LShift) {
-    return "Shift";
+bool KeyboardController::pass(sf::Event event) {
+  if (map.count(event.key.code) == 0)
+    return false;
+
+  if (event.type == event.KeyPressed) {
+    map[event.key.code].pressed = true;
+    emit(map[event.key.code].action, true);
+  } else if (event.type == event.KeyReleased) {
+    map[event.key.code].pressed = false;
   }
 
-  char letter = 'A' + map[action];
-  return std::string({letter});
+  return true;
 }

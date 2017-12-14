@@ -8,7 +8,6 @@ class WindowRendererInterface {
  public:
   virtual void renderFrame() = 0;
   virtual void handleEvents() = 0;
-  virtual void handleGlobalEvents() = 0;
   virtual void onResize() = 0;
   virtual void main() = 0;
 

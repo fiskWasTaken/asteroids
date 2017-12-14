@@ -6,9 +6,10 @@ struct projection {
   float max;
 };
 
-inline std::vector<sf::Vector2f> getNormals(std::vector<sf::Vector2f> points) {
+std::vector<sf::Vector2f> getNormals(std::vector<sf::Vector2f> points) {
   auto size = points.size();
   std::vector<sf::Vector2f> out;
+  out.reserve(size);
 
   for (int i = 0; i < size; i++) {
     auto curr = points[i];
@@ -20,7 +21,7 @@ inline std::vector<sf::Vector2f> getNormals(std::vector<sf::Vector2f> points) {
   return out;
 }
 
-inline projection getProjection(sf::Vector2f axis, std::vector<sf::Vector2f> points) {
+projection getProjection(sf::Vector2f axis, std::vector<sf::Vector2f> points) {
   auto size = points.size();
   float min = vector::dot(axis, points[0]);
   float max = min;
@@ -38,17 +39,18 @@ inline projection getProjection(sf::Vector2f axis, std::vector<sf::Vector2f> poi
   return {min, max};
 }
 
-inline bool overlap(projection a, projection b) {
+bool overlap(projection a, projection b) {
   return a.max > b.min || a.min > b.max;
 }
 
-inline float getOverlap(projection a, projection b) {
+float getOverlap(projection a, projection b) {
   return a.max > b.min ? a.max - b.min : b.max - a.min;
 }
 
 std::vector<sf::Vector2f> getOffsetPoints(WorldObjectInterface *object) {
   auto points = object->points;
   std::vector<sf::Vector2f> offsets;
+  offsets.reserve(points.size());
 
   for (auto point : points) {
     offsets.push_back(vector::rot(point - object->origin, object->rot) + object->pos);

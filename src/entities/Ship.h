@@ -7,11 +7,13 @@ class PlayerSession;
 
 class Ship : public AbstractWorldObject, public ControllerListenerInterface {
  private:
-  const float MAX_SPEED = 3.0F;
+  const float MAX_SPEED = 4.0F;
   const float MAX_ROTATE_SPEED = 5.0F;
   const int FIRE_RATE = 10;
+  const int ALT_FIRE_RATE = 20;
 
   PlayerSession *playerSession;
+  int altFireCooldown = 0;
   int fireCooldown = 0;
   bool isFiring = false;
   bool isFiringAltWeapon = false;
@@ -43,7 +45,7 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
 
   }
 
-  void onAction(InputAction action) override;
+  void onAction(InputAction action, bool once) override;
   void update() override;
   bool isRecyclable() override;
 
@@ -51,7 +53,7 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
 
   void renderTo(sf::RenderWindow *renderWindow) override;
 
-  inline PlayerSession *getPlayerSession() {
+  PlayerSession *getPlayerSession() {
     return playerSession;
   }
   void fireBullet();
@@ -60,12 +62,13 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
   void renderThruster(sf::RenderWindow *renderWindow);
   void renderShip(sf::RenderWindow *renderWindow);
 
-  inline bool isOnInvincibilityCooldown() {
+  bool isOnInvincibilityCooldown() {
     return invincibilityTimer > 0;
   }
 
-  inline void setInvincibilityCooldown(int cooldown) {
+  void setInvincibilityCooldown(int cooldown) {
     invincibilityTimer = cooldown;
   }
 
+  void fireAltWeapon();
 };

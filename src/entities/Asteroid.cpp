@@ -22,7 +22,6 @@ void Asteroid::onDestroyed() {
   }
 }
 
-
 bool Asteroid::isRecyclable() {
   return isDestroyed();
 }

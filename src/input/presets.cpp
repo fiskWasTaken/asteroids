@@ -3,7 +3,7 @@
 
 namespace presets {
 
-ControllerInterface * getDefaultK0Controller() {
+ControllerInterface *getDefaultK0Controller() {
   auto controller = new KeyboardController();
   controller->assignKeyToAction(InputAction::ACCELERATE, sf::Keyboard::W);
   controller->assignKeyToAction(InputAction::BRAKE, sf::Keyboard::S);
@@ -17,7 +17,7 @@ ControllerInterface * getDefaultK0Controller() {
   return controller;
 }
 
-ControllerInterface * getDefaultK1Controller() {
+ControllerInterface *getDefaultK1Controller() {
   auto controller = new KeyboardController();
   controller->assignKeyToAction(InputAction::ACCELERATE, sf::Keyboard::Up);
   controller->assignKeyToAction(InputAction::BRAKE, sf::Keyboard::Down);
@@ -28,7 +28,7 @@ ControllerInterface * getDefaultK1Controller() {
   return controller;
 }
 
-ControllerInterface * getDefaultJoystickController(unsigned int index = 0) {
+ControllerInterface *getDefaultJoystickController(unsigned int index = 0) {
   auto controller = new JoystickController(index);
 
   controller->assignAxisToActions(sf::Joystick::Axis::X, {

@@ -13,6 +13,5 @@ class HighScoreTableScene : public SceneInterface {
   }
 
   void render(WindowRendererInterface *renderer) override;
-  void handleEvents() override;
   void onVisible() override;
 };

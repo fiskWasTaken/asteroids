@@ -1,9 +1,11 @@
 #pragma once
 
+#include <SFML/Window/Event.hpp>
 #include "ControllerInterface.h"
+
 class ControllerManager {
  private:
-  std::map<std::string, ControllerInterface*> map;
+  std::map<std::string, ControllerInterface *> map;
 
  public:
   /**
@@ -11,7 +13,7 @@ class ControllerManager {
    * @param id The unique key for this controller
    * @param controller The controller
    */
-  inline void registerController(const std::string &id, ControllerInterface *controller) {
+  void registerController(const std::string &id, ControllerInterface *controller) {
     map[id] = controller;
   }
 
@@ -19,7 +21,7 @@ class ControllerManager {
    * @param id
    * @return The controller identified by this key, or the best available if not found
    */
-  inline ControllerInterface* getController(std::string id) {
+  ControllerInterface *getController(std::string id) {
     if (map[id] == nullptr) {
       return getFirstAvailable();
     }
@@ -27,15 +29,15 @@ class ControllerManager {
     return map[id];
   }
 
-  inline std::map<std::string, ControllerInterface*> getControllers() {
+  std::map<std::string, ControllerInterface *> getControllers() {
     return map;
   };
 
   /**
    * @return The first available controller.
    */
-  inline ControllerInterface* getFirstAvailable() {
-    for (auto const& controller : map) {
+  ControllerInterface *getFirstAvailable() {
+    for (auto const &controller : map) {
       if (controller.second->getDelegate() == nullptr) {
         return controller.second;
       }
@@ -49,7 +51,9 @@ class ControllerManager {
    * Caution: use getFirstAvailable to prevent overwriting a
    * delegate for something else using the controller.
    */
-  inline ControllerInterface* getFirst() {
+  ControllerInterface *getFirst() {
     return map.begin()->second;
   }
+
+  void delegateEvent(sf::Event event);
 };

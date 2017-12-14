@@ -16,16 +16,6 @@ void GameScene::render(WindowRendererInterface *renderer) {
   drawHud(renderer);
 }
 
-void GameScene::handleEvents() {
-  for (auto session : *game->getSessions()) {
-    auto controller = session->getPlayer()->getController();
-
-    if (controller != nullptr) {
-      controller->poll();
-    }
-  }
-}
-
 void GameScene::loadCurrentLevel() {
   LevelLoader loader;
   auto level = game->getPlaylist().getLevel();
@@ -151,8 +141,8 @@ void GameScene::updateRespawnTimers() {
   }
 }
 
-void GameScene::onAction(InputAction action) {
-  if (action == InputAction::PAUSE) {
+void GameScene::onAction(InputAction action, bool once) {
+  if (action == InputAction::PAUSE && once) {
     paused = false;
     pauseInitiator->getPlayer()->getController()->setDelegate(pauseInitiator->getShip());
   }

@@ -12,18 +12,20 @@ class ControllerInterface {
  public:
   virtual void poll() = 0;
 
-  inline void setDelegate(ControllerListenerInterface *listenerInterface) {
+  void setDelegate(ControllerListenerInterface *listenerInterface) {
     delegate = listenerInterface;
   }
 
-  inline ControllerListenerInterface *getDelegate() {
+  ControllerListenerInterface *getDelegate() {
     return delegate;
   }
 
-  void emit(InputAction action) {
+  void emit(InputAction action, bool once) {
     if (action != InputAction::NIL && delegate != nullptr)
-      delegate->onAction(action);
+      delegate->onAction(action, once);
   }
 
   virtual std::string getKeyString(InputAction action) = 0;
+
+  virtual bool pass(sf::Event) = 0;
 };

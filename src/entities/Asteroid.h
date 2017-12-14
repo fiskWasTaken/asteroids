@@ -26,30 +26,31 @@ class Asteroid : public AbstractWorldObject {
     return WorldObjectClass::ASTEROID;
   }
 
-  inline int getMaxHealth() {
+  int getMaxHealth() {
     return static_cast<int>(size);
   }
 
-  inline int getScoreValue() {
+  int getScoreValue() {
     return static_cast<int>(size / 10);
   }
 
   void onDestroyed();
 
-  inline int getHealth() {
+  int getHealth() {
     return health;
   }
 
-  inline bool isDestroyed() {
+  bool isDestroyed() {
     return health <= 0;
   }
 
-  inline void takeDamage(int damage) {
-    health -= damage;
+  void takeDamage(int damage) {
+    // guards against triggering onDestroyed() multiple times if hit again before entity recycle
+    if (health > 1) {
+      health -= damage;
 
-    if (health <= 0) {
-      health = 0;
-      this->onDestroyed();
+      if (health <= 0)
+        this->onDestroyed();
     }
   }
 

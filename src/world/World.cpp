@@ -17,9 +17,9 @@ void World::wrapObject(WorldObjectInterface *object) {
 void World::recycle() {
   auto it = objects.begin();
 
-  while(it != objects.end()) {
+  while (it != objects.end()) {
 
-    if((*it)->isRecyclable()) {
+    if ((*it)->isRecyclable()) {
       it = objects.erase(it);
     } else {
       ++it;

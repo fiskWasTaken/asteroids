@@ -20,19 +20,18 @@ class WindowRenderer : public WindowRendererInterface {
 
   void renderFrame() override;
   void handleEvents() override;
-  void handleGlobalEvents() override;
   void onResize() override;
   void main() override;
 
-  inline sf::RenderWindow *getWindow() override {
+  sf::RenderWindow *getWindow() override {
     return window;
   }
 
-  inline sf::Font getFont() override {
+  sf::Font getFont() override {
     return font;
   }
 
-  inline sf::View getView() override {
+  sf::View getView() override {
     return view;
   }
 };

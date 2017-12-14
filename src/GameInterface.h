@@ -16,7 +16,7 @@ class GameInterface {
 
   void setScene(SceneInterface *scene);
 
-  inline SceneInterface *getScene() {
+  SceneInterface *getScene() {
     return scene;
   }
 };

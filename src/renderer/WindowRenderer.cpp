@@ -9,20 +9,30 @@ void WindowRenderer::main() {
 
 void WindowRenderer::onResize() {
   auto windowSize = window->getSize();
-  float desiredRatio = float(viewWidth) / viewHeight;
-  float aspectRatio = float(windowSize.x) / windowSize.y;
 
-  float ySize = 1 / (desiredRatio / aspectRatio);
-  float yMargin = (1 - ySize) / 2;
+  // retain the aspect ratio of the game when resized
+  // todo: can we deduplicate this?
 
-  float xSize = 1;
-  float xMargin = (1 - xSize) / 2;
+  if (windowSize.y > windowSize.x) {
+    float desiredRatio = float(viewWidth) / viewHeight;
+    float aspectRatio = float(windowSize.x) / windowSize.y;
+    float ySize = 1 / (desiredRatio / aspectRatio);
+    float yMargin = (1 - ySize) / 2;
 
-  view.setViewport(sf::FloatRect(xMargin, yMargin, xSize, ySize));
+    view.setViewport(sf::FloatRect(0, yMargin, 1, ySize));
+  } else {
+    float desiredRatio = float(viewHeight) / viewWidth;
+    float aspectRatio = float(windowSize.y) / windowSize.x;
+    float xSize = 1 / (desiredRatio / aspectRatio);
+    float xMargin = (1 - xSize) / 2;
+
+    view.setViewport(sf::FloatRect(xMargin, 0, xSize, 1));
+  }
+
   window->setView(view);
 }
 
-void WindowRenderer::handleGlobalEvents() {
+void WindowRenderer::handleEvents() {
   sf::Event event{};
 
   while (window->pollEvent(event)) {
@@ -31,13 +41,15 @@ void WindowRenderer::handleGlobalEvents() {
       game->stop();
     } else if (event.type == sf::Event::Resized) {
       onResize();
+    } else {
+      // Other events are sent to the controller manager for delegation
+      game->getControllers().delegateEvent(event);
     }
   }
-}
 
-void WindowRenderer::handleEvents() {
-  handleGlobalEvents();
-  game->getScene()->handleEvents();
+  for (auto controller : game->getControllers().getControllers()) {
+    controller.second->poll();
+  }
 }
 
 void WindowRenderer::renderFrame() {

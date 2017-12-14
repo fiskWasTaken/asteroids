@@ -21,17 +21,13 @@ void GameOverScene::render(WindowRendererInterface *renderer) {
   window->draw(startPromptText);
 }
 
-void GameOverScene::handleEvents() {
-  game->getControllers().getFirstAvailable()->poll();
-}
-
 void GameOverScene::onVisible() {
   game->getSessions()->clear();
   game->getControllers().getFirstAvailable()->setDelegate(this);
 }
 
-void GameOverScene::onAction(InputAction action) {
-  if (action == InputAction::FIRE) {
+void GameOverScene::onAction(InputAction action, bool once) {
+  if (action == InputAction::FIRE && once) {
     game->setScene(new GameScene(game));
   }
 }

@@ -4,6 +4,7 @@
 namespace shape {
 std::vector<sf::Vector2f> generateShape(unsigned long points, float size, float noise) {
   auto vectors = std::vector<sf::Vector2f>();
+  vectors.reserve(points);
 
   for (int i = 0; i < points; i++) {
     float angle = (360.0F / points) * i;

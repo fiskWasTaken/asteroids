@@ -22,6 +22,19 @@ void Ship::fireBullet() {
   world->pushObject(bullet);
 }
 
+void Ship::fireAltWeapon() {
+  for (int i = 0; i < 20; i++) {
+    auto thisRot = vector::fromAngle(rot + i * 2 - 20);
+    auto velocity = thisRot * 5.0F;
+    auto bullet = new Bullet(world, this->getPlayerSession());
+    bullet->pos.x = pos.x + thisRot.x * 10;
+    bullet->pos.y = pos.y + thisRot.y * 10;
+    bullet->vel = velocity + vel;
+    bullet->rot = rot;
+    world->pushObject(bullet);
+  }
+}
+
 void Ship::update() {
   if (fireCooldown != 0) {
     fireCooldown--;
@@ -32,17 +45,11 @@ void Ship::update() {
 
   isFiring = false;
 
-  if (isFiringAltWeapon) {
-    for (int i = 0; i < 360; i++) {
-      auto thisRot = vector::fromAngle(i);
-      auto velocity = thisRot * 5.0F;
-      auto bullet = new Bullet(world, this->getPlayerSession());
-      bullet->pos.x = pos.x + thisRot.x * 10;
-      bullet->pos.y = pos.y + thisRot.y * 10;
-      bullet->vel = velocity + vel;
-      bullet->rot = rot;
-      world->pushObject(bullet);
-    }
+  if (altFireCooldown != 0) {
+    altFireCooldown--;
+  } else if (isFiringAltWeapon) {
+    fireAltWeapon();
+    altFireCooldown = ALT_FIRE_RATE;
   }
 
   isFiringAltWeapon = false;
@@ -65,7 +72,7 @@ void Ship::onDestroyed() {
   scene->onShipDestroyed(playerSession);
 }
 
-void Ship::onAction(InputAction action) {
+void Ship::onAction(InputAction action, bool once) {
   if (action == InputAction::ACCELERATE) {
     // get the current speed
     auto target = vector::fromAngle(rot) * MAX_SPEED;
@@ -115,11 +122,11 @@ void Ship::onAction(InputAction action) {
     isFiringAltWeapon = true;
   }
 
-  if (action == InputAction::PANIC) {
+  if (action == InputAction::PANIC && once) {
     onDestroyed();
   }
 
-  if (action == InputAction::PAUSE) {
+  if (action == InputAction::PAUSE && once) {
     auto scene = dynamic_cast<GameScene *>(world->getGame()->getScene());
     scene->pause(this->playerSession);
   }

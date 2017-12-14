@@ -7,7 +7,7 @@
 class PlayerSession;
 
 class Bullet : public AbstractWorldObject {
-  int lifetime = 100;
+  int lifetime = 80;
   /*
    * we use the PlayerSession and not the Ship
    * as the ship is prone to be garbage collected,
@@ -27,7 +27,7 @@ class Bullet : public AbstractWorldObject {
     this->owner = owner;
   }
 
-  inline PlayerSession *getOwner() const {
+  PlayerSession *getOwner() const {
     return this->owner;
   }
 

@@ -9,18 +9,18 @@ class Player {
     this->name = name;
   }
 
-  inline void setController(ControllerInterface *controller) {
+  void setController(ControllerInterface *controller) {
     this->controller = controller;
   }
 
-  inline ControllerInterface *getController() {
+  ControllerInterface *getController() {
     return controller;
   }
 
-  inline std::string getName() { return name; }
+  std::string getName() { return name; }
 
-  inline sf::Color getColor() { return this->color; }
-  inline void setColor(sf::Color color) { this->color = color; }
+  sf::Color getColor() { return this->color; }
+  void setColor(sf::Color color) { this->color = color; }
 
  private:
   sf::Color color = sf::Color(58, 163, 67);

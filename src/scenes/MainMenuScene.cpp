@@ -5,13 +5,15 @@
 #include "MainMenuScene.h"
 #include "GameScene.h"
 #include "HighScoreTableScene.h"
+#include "StressTestScene.h"
 
 void MainMenuScene::render(WindowRendererInterface *renderer) {
   auto window = renderer->getWindow();
   auto view = renderer->getView();
   auto font = renderer->getFont();
 
-  std::string startPromptString = "Press " + game->getControllers().getFirst()->getKeyString(InputAction::FIRE) + " to start";
+  std::string
+      startPromptString = "Press " + game->getControllers().getFirst()->getKeyString(InputAction::FIRE) + " to start";
 
   sf::Text startTitleText("Asteroids", font, 16);
   sf::Text startPromptText(startPromptString, font, 16);
@@ -32,17 +34,17 @@ void MainMenuScene::render(WindowRendererInterface *renderer) {
   window->draw(startLicenseText);
 }
 
-void MainMenuScene::handleEvents() {
-  game->getControllers().getFirst()->poll();
-}
-
-void MainMenuScene::onAction(InputAction action) {
-  if (action == InputAction::FIRE) {
+void MainMenuScene::onAction(InputAction action, bool once) {
+  if (action == InputAction::FIRE && once) {
     game->setScene(new GameScene(game));
   }
 
-  if (action == InputAction::ALTFIRE) {
+  if (action == InputAction::ALTFIRE && once) {
     game->setScene(new HighScoreTableScene(game));
+  }
+
+  if (action == InputAction::PANIC && once) {
+    game->setScene(new StressTestScene(game));
   }
 }
 
@@ -51,11 +53,11 @@ void MainMenuScene::onVisible() {
 
   LevelLoader loader;
   loader.load(world, {
-      "Main menu background/stress test",
+      "Main menu background",
       0,
-      40,
-      40,
-      40
+      30,
+      30,
+      30
   });
 }
 

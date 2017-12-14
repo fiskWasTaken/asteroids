@@ -5,7 +5,6 @@
 #include <sstream>
 #include "WorldRenderer.h"
 
-
 void WorldRenderer::drawBg(WindowRendererInterface *renderer, World *world) {
   auto window = renderer->getWindow();
 
@@ -14,7 +13,6 @@ void WorldRenderer::drawBg(WindowRendererInterface *renderer, World *world) {
   shape.setFillColor(sf::Color::Black);
   window->draw(shape);
 }
-
 
 void WorldRenderer::drawCollisionOffsets(WindowRendererInterface *renderer, World *world) {
   auto window = renderer->getWindow();

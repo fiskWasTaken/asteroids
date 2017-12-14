@@ -20,15 +20,15 @@ class PlayerSession {
     this->score = 0;
   }
 
-  inline Player *getPlayer() const { return player; }
+  Player *getPlayer() const { return player; }
 
-  inline int getScore() const { return score; }
-  inline void setScore(int score) { this->score = score; }
+  int getScore() const { return score; }
+  void setScore(int score) { this->score = score; }
 
-  inline int getLives() const { return lives; }
-  inline void setLives(int lives) { this->lives = lives; }
+  int getLives() const { return lives; }
+  void setLives(int lives) { this->lives = lives; }
 
-  inline Ship *getShip() {
+  Ship *getShip() {
     return ship;
   }
 

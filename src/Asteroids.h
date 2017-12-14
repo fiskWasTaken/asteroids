@@ -17,7 +17,7 @@ class Asteroids : public GameInterface {
   ControllerManager controllerManager;
 
  public:
-  inline Asteroids() : GameInterface() {
+  Asteroids() : GameInterface() {
     sessions = new std::vector<PlayerSession *>();
 
     // update() needs to be called as this is instantiated before the window
@@ -33,14 +33,13 @@ class Asteroids : public GameInterface {
     controllerManager.registerController("k1", presets::getDefaultK1Controller());
   }
 
-
-  inline std::vector<PlayerSession *> *getSessions() const {
+  std::vector<PlayerSession *> *getSessions() const {
     return sessions;
   }
 
   void main() override;
 
-  inline HighScores getHighScores() const {
+  HighScores getHighScores() const {
     return highScores;
   }
 

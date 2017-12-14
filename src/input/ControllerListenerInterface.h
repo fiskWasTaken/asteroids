@@ -3,5 +3,5 @@
 #include "InputAction.h"
 class ControllerListenerInterface {
  public:
-  virtual void onAction(InputAction action) = 0;
+  virtual void onAction(InputAction action, bool once) = 0;
 };
