@@ -21,4 +21,8 @@ void LevelLoader::load(WorldInterface *world, level_t level) {
   for (int i = 0; i < level.large_asteroid_count; i++) {
     placeRandomly(world, new Asteroid(world, 50));
   }
+
+  for (int i = 0; i < level.huge_asteroid_count; i++) {
+    placeRandomly(world, new Asteroid(world, 100));
+  }
 }

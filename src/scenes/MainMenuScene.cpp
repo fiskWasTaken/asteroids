@@ -52,9 +52,10 @@ void MainMenuScene::onVisible() {
   LevelLoader loader;
   loader.load(world, {
       "Main menu background/stress test",
-      50,
-      50,
-      50
+      0,
+      40,
+      40,
+      40
   });
 }
 
