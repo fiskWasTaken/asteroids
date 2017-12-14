@@ -2,6 +2,7 @@
 
 #include <entities/AbstractWorldObject.h>
 #include <entities/Bullet.h>
+#include <utility/shape.h>
 
 class Asteroid : public AbstractWorldObject {
  private:
@@ -14,12 +15,9 @@ class Asteroid : public AbstractWorldObject {
   explicit Asteroid(WorldInterface *world, float size) : AbstractWorldObject(world) {
     this->size = size;
     rotSpeed = (-5 + float(random() % 10)) / 10;
-    points.emplace_back(size * 0.5, 0);
-    points.emplace_back(size, size * 0.25);
-    points.emplace_back(size, size * 0.75);
-    points.emplace_back(size * 0.5, size);
-    points.emplace_back(0, size * 0.75);
-    points.emplace_back(0, size * 0.25);
+
+    auto edges = 5 + size / 20;
+    points = shape::generateShape(static_cast<unsigned long>(edges), size);
     origin = sf::Vector2f(size / 2, size / 2);
     this->health = this->getMaxHealth();
   }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <utility/shape.h>
 #include "AbstractWorldObject.h"
 #include "Ship.h"
 
@@ -21,10 +22,7 @@ class Bullet : public AbstractWorldObject {
   }
 
   explicit Bullet(WorldInterface *world, PlayerSession *owner) : AbstractWorldObject(world) {
-    points.emplace_back(0, 1);
-    points.emplace_back(1, 2);
-    points.emplace_back(2, 1);
-    points.emplace_back(1, 0);
+    points = shape::generateShape(3, 2);
     origin = sf::Vector2f(1, 1);
     this->owner = owner;
   }
