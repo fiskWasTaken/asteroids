@@ -146,17 +146,6 @@ void Ship::renderTo(sf::RenderWindow *renderWindow) {
 }
 
 void Ship::renderShip(sf::RenderWindow *renderWindow) {
-  auto shape = sf::ConvexShape();
-  auto size = points.size();
-
-  shape.setPointCount(size);
-
-  for (size_t i = 0; i < size; i++) {
-    shape.setPoint(i, points[i]);
-  }
-
-  shape.setFillColor(sf::Color::Transparent);
-
   bool invisible = (invincibilityTimer / 3 % 2 != 0);
 
   if (invisible) {
@@ -165,24 +154,12 @@ void Ship::renderShip(sf::RenderWindow *renderWindow) {
     shape.setOutlineColor(getPlayerSession()->getPlayer()->getColor());
   }
 
-  shape.setOutlineThickness(1.0F);
-  shape.setOrigin(origin.x, origin.y);
   shape.setRotation(rot);
-
   shape.setPosition(pos);
   renderWindow->draw(shape);
 }
 
 void Ship::renderThruster(sf::RenderWindow *renderWindow) {
-  auto thruster = sf::ConvexShape();
-  thruster.setPointCount(3);
-  thruster.setPoint(0, {-2, 8});
-  thruster.setPoint(1, {0, 7});
-  thruster.setPoint(2, {0, 9});
-  thruster.setOutlineColor(sf::Color(255, 93, 0));
-  thruster.setOutlineThickness(1.0F);
-  thruster.setFillColor(sf::Color::Transparent);
-  thruster.setOrigin(origin.x, origin.y);
   thruster.setRotation(rot);
   thruster.setPosition(pos);
   renderWindow->draw(thruster);

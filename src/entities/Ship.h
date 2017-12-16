@@ -2,6 +2,7 @@
 
 #include "AbstractWorldObject.h"
 #include "player/Player.h"
+#include <SFML/Graphics/ConvexShape.hpp>
 
 class PlayerSession;
 
@@ -11,6 +12,9 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
   const float MAX_ROTATE_SPEED = 5.0F;
   const int FIRE_RATE = 10;
   const int ALT_FIRE_RATE = 20;
+
+  sf::ConvexShape shape;
+  sf::ConvexShape thruster;
 
   PlayerSession *playerSession;
   int altFireCooldown = 0;
@@ -42,6 +46,27 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
     points.emplace_back(0, 16);
 
     origin = sf::Vector2f(10, 8);
+
+    auto size = points.size();
+
+    shape.setPointCount(size);
+
+    for (size_t i = 0; i < size; i++) {
+      shape.setPoint(i, points[i]);
+    }
+
+    shape.setFillColor(sf::Color::Transparent);
+    shape.setOutlineThickness(1.0F);
+    shape.setOrigin(origin.x, origin.y);
+
+    thruster.setPointCount(3);
+    thruster.setPoint(0, {-2, 8});
+    thruster.setPoint(1, {0, 7});
+    thruster.setPoint(2, {0, 9});
+    thruster.setOutlineColor(sf::Color(255, 93, 0));
+    thruster.setOutlineThickness(1.0F);
+    thruster.setFillColor(sf::Color::Transparent);
+    thruster.setOrigin(origin.x, origin.y);
 
   }
 

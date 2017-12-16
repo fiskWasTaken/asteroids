@@ -3,6 +3,7 @@
 #include <entities/AbstractWorldObject.h>
 #include <entities/Bullet.h>
 #include <utility/shape.h>
+#include <SFML/Graphics/ConvexShape.hpp>
 
 class Asteroid : public AbstractWorldObject {
  private:
@@ -10,6 +11,7 @@ class Asteroid : public AbstractWorldObject {
   const sf::Color outlineColor = sf::Color(244, 167, 66);
   int health = 100;
   float rotSpeed = 0.1f;
+  sf::ConvexShape shape;
 
  public:
   explicit Asteroid(WorldInterface *world, float size) : AbstractWorldObject(world) {
@@ -20,6 +22,17 @@ class Asteroid : public AbstractWorldObject {
     points = shape::generateShape(static_cast<unsigned long>(edges), size);
     origin = sf::Vector2f(size / 2, size / 2);
     this->health = this->getMaxHealth();
+
+    shape.setPointCount(points.size());
+
+    for (size_t i = 0; i < points.size(); i++) {
+      shape.setPoint(i, points[i]);
+    }
+
+    shape.setFillColor(sf::Color::Transparent);
+    shape.setOutlineColor(outlineColor);
+    shape.setOutlineThickness(1.0F);
+    shape.setOrigin(origin.x, origin.y);
   }
 
   WorldObjectClass getClass() override {
