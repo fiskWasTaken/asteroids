@@ -23,7 +23,7 @@ class Player {
   void setColor(sf::Color color) { this->color = color; }
 
  private:
-  sf::Color color = sf::Color(58, 163, 67);
+  sf::Color color = sf::Color(212, 66, 244);
   std::string name;
   ControllerInterface *controller = nullptr;
 };

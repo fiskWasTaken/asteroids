@@ -4,7 +4,6 @@
 #include <SFML/Graphics/ConvexShape.hpp>
 #include "MainMenuScene.h"
 #include "GameScene.h"
-#include "HighScoreTableScene.h"
 #include "StressTestScene.h"
 
 void MainMenuScene::render(WindowRendererInterface *renderer) {
@@ -27,7 +26,6 @@ void MainMenuScene::render(WindowRendererInterface *renderer) {
   startLicenseText.setPosition(center, middle + 14);
 
   worldRenderer.drawWorld(renderer, world);
-  worldRenderer.drawTimings(renderer);
 
   window->draw(startTitleText);
   window->draw(startPromptText);
@@ -37,10 +35,6 @@ void MainMenuScene::render(WindowRendererInterface *renderer) {
 void MainMenuScene::onAction(InputAction action, bool once) {
   if (action == InputAction::FIRE && once) {
     game->setScene(new GameScene(game));
-  }
-
-  if (action == InputAction::ALTFIRE && once) {
-    game->setScene(new HighScoreTableScene(game));
   }
 
   if (action == InputAction::PANIC && once) {

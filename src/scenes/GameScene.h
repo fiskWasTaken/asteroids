@@ -6,6 +6,7 @@
 
 class GameScene : public SceneInterface, public ControllerListenerInterface {
  private:
+  const int BASE_WAVE_INTERVAL_TIME = 1000;
   const int RESPAWN_TIME = 50;
   const int LEVEL_TEXT_DISPLAY_TIME = 100;
 
@@ -14,6 +15,8 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   std::map<PlayerSession *, int> respawnTimers;
   PlayerSession *pauseInitiator = nullptr;
   WorldRenderer worldRenderer;
+
+  int waveTimer = 0;
 
   bool paused = false;
   int showLevelTextTimeout = 0;

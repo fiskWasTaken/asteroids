@@ -53,6 +53,7 @@ class ParticleSystem
   void setDissolve( bool enable ) { dissolve = enable; }
   void setDissolutionRate( unsigned char rate ) { dissolutionRate = rate; }
   void setShape( unsigned char shape ) { this->shape = shape; }
+  void setColor(sf::Color color) { this->color = color; }
 
   unsigned long getCount() { return particles.size(); }
   sf::Sprite& getSprite() { return sprite; }
@@ -66,6 +67,7 @@ class ParticleSystem
   sf::Texture texture;
   Randomizer  randomizer;
   sf::Sprite  sprite;   // Connected to image
+  sf::Color   color;
   float       particleSpeed;// Pixels per second (at most)
   bool        dissolve; // Dissolution enabled?
   unsigned char   dissolutionRate;

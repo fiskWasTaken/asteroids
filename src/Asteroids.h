@@ -7,12 +7,10 @@
 #include <input/presets.h>
 #include "GameInterface.h"
 #include "player/PlayerSession.h"
-#include "HighScores.h"
 
 class Asteroids : public GameInterface {
  private:
   std::vector<PlayerSession *> *sessions;
-  HighScores highScores;
   Playlist playlist;
   ControllerManager controllerManager;
 
@@ -38,10 +36,6 @@ class Asteroids : public GameInterface {
   }
 
   void main() override;
-
-  HighScores getHighScores() const {
-    return highScores;
-  }
 
   Playlist &getPlaylist();
   ControllerManager &getControllers();

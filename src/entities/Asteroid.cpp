@@ -2,7 +2,7 @@
 #include <utility/drawing.h>
 #include "Asteroid.h"
 #include "player/PlayerSession.h"
-#include "ParticleEmitter.h"
+#include "TemporaryParticle.h"
 
 void Asteroid::onDestroyed() {
   if (size > 13) {
@@ -21,12 +21,14 @@ void Asteroid::onDestroyed() {
     world->pushObject(ast2);
   }
 
-  auto explosion = new ParticleSystem(128, 128);
-  explosion->fuel(200);
+  auto explosion = new ParticleSystem(128, 128);;
+  explosion->setColor(sf::Color(255, 255, 255));
+  explosion->setParticleSpeed(20);
+  explosion->fuel(25);
   explosion->setDissolve(true);
   explosion->setDissolutionRate(10);
   explosion->setShape(Shape::CIRCLE);
-  auto emitter = new ParticleEmitter(world, explosion);
+  auto emitter = new TemporaryParticle(world, explosion);
   emitter->pos.x = pos.x;
   emitter->pos.y = pos.y;
   world->pushObject(emitter);
@@ -69,6 +71,18 @@ void Asteroid::onBulletHit(Bullet *bullet) {
     auto session = bullet->getOwner();
     session->setScore(session->getScore() + getScoreValue());
   }
+
+  auto ricochet = new ParticleSystem(128, 128);
+  ricochet->setColor(bullet->getOwner()->getPlayer()->getColor());
+  ricochet->setParticleSpeed(20);
+  ricochet->fuel(10);
+  ricochet->setDissolve(true);
+  ricochet->setDissolutionRate(10);
+  ricochet->setShape(Shape::CIRCLE);
+  auto emitter = new TemporaryParticle(world, ricochet);
+  emitter->pos.x = bullet->pos.x;
+  emitter->pos.y = bullet->pos.y;
+  world->pushObject(emitter);
 }
 
 void Asteroid::onAsteroidHit(Asteroid *other) {

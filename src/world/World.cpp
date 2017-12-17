@@ -14,6 +14,28 @@ void World::wrapObject(WorldObjectInterface *object) {
     pos->y -= h;
 }
 
+void World::containObject(WorldObjectInterface *object) {
+  auto pos = &object->pos;
+  auto vel = &object->vel;
+
+  if (pos->x < 0) {
+    pos->x = 0;
+    vel->x = -vel->x;
+  } else if (pos->x > w) {
+    pos->x = w;
+    vel->x = -vel->x;
+  }
+
+  if (pos->y < 0) {
+    pos->y = 0;
+    vel->y = -vel->y;
+  } else if (pos->y > h) {
+    pos->y = h;
+    vel->y = -vel->y;
+  }
+
+}
+
 void World::recycle() {
   auto it = objects.begin();
 

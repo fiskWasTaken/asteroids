@@ -2,6 +2,7 @@
 #include <sstream>
 
 ParticleSystem::ParticleSystem(int width, int height) {
+  color = sf::Color(255, 255, 255, 255);
   transparent = sf::Color(0, 0, 0, 0);
   image.create(width, height, transparent);
   texture.loadFromImage(image);
@@ -40,9 +41,9 @@ void ParticleSystem::fuel(int count) {
       continue;
     }
 
-    particle.color.r = static_cast<sf::Uint8>(randomizer.rnd(233, 255));
-    particle.color.g = static_cast<sf::Uint8>(randomizer.rnd(147, 167));
-    particle.color.b = static_cast<sf::Uint8>(randomizer.rnd(55, 77));
+    particle.color.r = color.r;
+    particle.color.g = color.g;
+    particle.color.b = color.b;
     particle.color.a = 255;
     particles.push_back(std::make_unique<Particle>(particle));
   }

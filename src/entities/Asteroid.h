@@ -8,7 +8,7 @@
 class Asteroid : public AbstractWorldObject {
  private:
   float size;
-  const sf::Color outlineColor = sf::Color(244, 167, 66);
+  const sf::Color outlineColor = sf::Color(127, 127, 127);
   int health = 100;
   float rotSpeed = 0.1f;
   sf::ConvexShape shape;

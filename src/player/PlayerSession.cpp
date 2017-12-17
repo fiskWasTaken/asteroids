@@ -4,9 +4,8 @@
 
 void PlayerSession::spawnShip(WorldInterface *world) {
   ship = new Ship(world, this);
-  // todo: place ship somewhere with no collisions
-  ship->pos.x = 100;
-  ship->pos.y = 100;
+  ship->pos.x = world->getWidth() / 2;
+  ship->pos.y = world->getHeight() / 2;
 
   player->getController()->setDelegate(ship);
   world->pushObject(ship);

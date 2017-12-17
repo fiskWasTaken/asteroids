@@ -5,10 +5,9 @@
 #include "Ship.h"
 #include <SFML/Graphics/ConvexShape.hpp>
 
-class PlayerSession;
-
 class Bullet : public AbstractWorldObject {
  private:
+  ParticleSystem particleSystem;
   sf::ConvexShape shape;
   int lifetime = 80;
   /*
@@ -24,25 +23,7 @@ class Bullet : public AbstractWorldObject {
     return WorldObjectClass::BULLET;
   }
 
-  explicit Bullet(WorldInterface *world, PlayerSession *owner) : AbstractWorldObject(world) {
-    points = shape::generateShape(3, 2);
-    origin = sf::Vector2f(1, 1);
-    this->owner = owner;
-
-    // create an empty shape
-    auto size = points.size();
-
-    shape.setPointCount(size);
-
-    for (size_t i = 0; i < size; i++) {
-      shape.setPoint(i, points[i]);
-    }
-
-    shape.setFillColor(sf::Color::Transparent);
-    shape.setOutlineColor(outlineColor);
-    shape.setOutlineThickness(1.0F);
-    shape.setOrigin(origin.x, origin.y);
-  }
+  explicit Bullet(WorldInterface *world, PlayerSession *owner);
 
   PlayerSession *getOwner() const {
     return this->owner;
@@ -61,5 +42,5 @@ class Bullet : public AbstractWorldObject {
 
   void renderTo(sf::RenderWindow *renderWindow) override;
 
-  const sf::Color outlineColor = sf::Color(173, 173, 173);
+  const sf::Color outlineColor = sf::Color(150, 150, 150);
 };

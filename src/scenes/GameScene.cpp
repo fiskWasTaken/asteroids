@@ -11,7 +11,6 @@
 void GameScene::render(WindowRendererInterface *renderer) {
   worldRenderer.drawBg(renderer, world);
   worldRenderer.drawWorld(renderer, world);
-  worldRenderer.drawTimings(renderer);
 
   drawHud(renderer);
 }
@@ -34,12 +33,12 @@ void GameScene::onVisible() {
   session->spawnShip(world);
   game->getSessions()->push_back(session);
 
-  auto player2 = new Player("Player 2");
-  player2->setColor(sf::Color(58, 144, 163));
-  auto session2 = new PlayerSession(player2);
-  player2->setController(game->getControllers().getFirstAvailable());
-  session2->spawnShip(world);
-  game->getSessions()->push_back(session2);
+//  auto player2 = new Player("Player 2");
+//  player2->setColor(sf::Color(58, 144, 163));
+//  auto session2 = new PlayerSession(player2);
+//  player2->setController(game->getControllers().getFirstAvailable());
+//  session2->spawnShip(world);
+//  game->getSessions()->push_back(session2);
 
   game->getPlaylist().rewind();
   loadCurrentLevel();
@@ -52,9 +51,16 @@ void GameScene::drawHud(WindowRendererInterface *renderer) {
   int offset = 4;
 
   for (auto session: *game->getSessions()) {
-    sf::Text nameText(session->getPlayer()->getName(), font, 16);
-    sf::Text scoreText("Score: " + std::to_string(session->getScore()), font, 16);
-    sf::Text livesText("Lives: " + std::to_string(session->getLives()), font, 16);
+    sf::Text nameText(session->getPlayer()->getName(), font, 14);
+    sf::Text scoreText("Score: " + std::to_string(session->getScore()), font, 14);
+
+    std::stringstream marios;
+
+    for (int i = 0; i < session->getLives(); i++) {
+      marios << "^";
+    }
+
+    sf::Text livesText(marios.str(), font, 14);
 
     nameText.setFillColor(session->getPlayer()->getColor());
 

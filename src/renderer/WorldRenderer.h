@@ -1,6 +1,7 @@
 #pragma once
 
 #include <world/World.h>
+#include <particles/ParticleSystem.h>
 #include "WindowRendererInterface.h"
 
 class WorldRenderer {

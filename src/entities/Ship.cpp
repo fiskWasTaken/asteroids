@@ -6,7 +6,7 @@
 #include <caca_conio.h>
 #include "Bullet.h"
 #include "../utility/vector.h"
-#include "ParticleEmitter.h"
+#include "TemporaryParticle.h"
 
 void Ship::fireBullet() {
   auto thisRot = vector::fromAngle(rot);
@@ -25,8 +25,8 @@ void Ship::fireBullet() {
 }
 
 void Ship::fireAltWeapon() {
-  for (int i = 0; i < 20; i++) {
-    auto thisRot = vector::fromAngle(rot + i * 2 - 20);
+  for (int i = 0; i < 10; i++) {
+    auto thisRot = vector::fromAngle(rot + i * 2 - 10);
     auto velocity = thisRot * 5.0F;
     auto bullet = new Bullet(world, this->getPlayerSession());
     bullet->pos.x = pos.x + thisRot.x * 10;
@@ -74,11 +74,13 @@ void Ship::onDestroyed() {
   scene->onShipDestroyed(playerSession);
 
   auto explosion = new ParticleSystem(128, 128);
-  explosion->fuel(200);
+  explosion->setColor(playerSession->getPlayer()->getColor());
+  explosion->setParticleSpeed(40);
+  explosion->fuel(50);
   explosion->setDissolve(true);
   explosion->setDissolutionRate(10);
   explosion->setShape(Shape::CIRCLE);
-  auto emitter = new ParticleEmitter(world, explosion);
+  auto emitter = new TemporaryParticle(world, explosion);
   emitter->pos.x = pos.x;
   emitter->pos.y = pos.y;
   world->pushObject(emitter);
@@ -161,8 +163,10 @@ void Ship::renderTo(sf::RenderWindow *renderWindow) {
   particleSystem.update();
   particleSystem.render();
 
+  auto offset = vector::fromAngle(rot) * -origin.x;
+
   auto sprite = particleSystem.getSprite();
-  sprite.setPosition(pos.x - 64, pos.y - 64);
+  sprite.setPosition(pos.x + offset.x - 64, pos.y + offset.y - 64);
   renderWindow->draw(sprite);
 }
 
@@ -181,10 +185,6 @@ void Ship::renderShip(sf::RenderWindow *renderWindow) {
 }
 
 void Ship::renderThruster(sf::RenderWindow *renderWindow) {
-  thruster.setRotation(rot);
-  thruster.setPosition(pos);
-  renderWindow->draw(thruster);
-
   particleSystem.fuel(1);
 }
 

@@ -1,14 +1,14 @@
-#include "ParticleEmitter.h"
+#include "TemporaryParticle.h"
 
-void ParticleEmitter::update() {
+void TemporaryParticle::update() {
 
 }
 
-bool ParticleEmitter::isRecyclable() {
+bool TemporaryParticle::isRecyclable() {
   return particle->getCount() == 0;
 }
 
-void ParticleEmitter::renderTo(sf::RenderWindow *renderWindow) {
+void TemporaryParticle::renderTo(sf::RenderWindow *renderWindow) {
   particle->remove();
   particle->update();
   particle->render();
@@ -18,6 +18,6 @@ void ParticleEmitter::renderTo(sf::RenderWindow *renderWindow) {
   renderWindow->draw(sprite);
 }
 
-ParticleEmitter::~ParticleEmitter() {
+TemporaryParticle::~TemporaryParticle() {
   delete particle;
 }

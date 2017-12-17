@@ -62,4 +62,5 @@ class World : public WorldInterface {
       delete object;
     }
   }
+  void containObject(WorldObjectInterface *object);
 };
