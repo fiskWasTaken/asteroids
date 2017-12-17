@@ -25,6 +25,7 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
   bool isDestroyed = false;
   bool isThrusting = false;
   int invincibilityTimer = 100; // initial invincibility time on spawn in frames
+  const sf::Color fillColor = sf::Color(255, 255, 255, 25);
 
  public:
   WorldObjectClass getClass() override {
@@ -56,7 +57,7 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
       shape.setPoint(i, points[i]);
     }
 
-    shape.setFillColor(sf::Color::Transparent);
+    shape.setFillColor(fillColor);
     shape.setOutlineThickness(1.0F);
     shape.setOrigin(origin.x, origin.y);
 

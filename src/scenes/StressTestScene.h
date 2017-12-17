@@ -7,13 +7,12 @@
 
 class StressTestScene : public SceneInterface, public ControllerListenerInterface {
   Asteroids *game;
-  World *world;
+  World world;
 
   WorldRenderer worldRenderer;
  public:
-  explicit StressTestScene(Asteroids *game) {
+  explicit StressTestScene(Asteroids *game) : world(game, 640, 480) {
     this->game = game;
-    world = new World(game, 640, 480);
   }
 
   void render(WindowRendererInterface *renderer) override;
@@ -23,7 +22,6 @@ class StressTestScene : public SceneInterface, public ControllerListenerInterfac
 
   ~StressTestScene() override {
     game->getControllers().getFirst()->setDelegate(nullptr);
-    delete world;
   }
 };
 

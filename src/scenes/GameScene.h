@@ -11,7 +11,7 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   const int LEVEL_TEXT_DISPLAY_TIME = 100;
 
   Asteroids *game;
-  World *world;
+  World world;
   std::map<PlayerSession *, int> respawnTimers;
   PlayerSession *pauseInitiator = nullptr;
   WorldRenderer worldRenderer;
@@ -25,9 +25,8 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   void startRespawnTimer(PlayerSession *playerSession);
 
  public:
-  explicit GameScene(Asteroids *game) {
+  explicit GameScene(Asteroids *game) : world(game, 640, 480) {
     this->game = game;
-    world = new World(game, 640, 480);
   }
 
   void render(WindowRendererInterface *renderer) override;
@@ -41,11 +40,12 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   void main() override;
   void onShipDestroyed(PlayerSession *playerSession);
 
-  ~GameScene() override {
-    delete world;
-  }
   void loadCurrentLevel();
 
   void updateRespawnTimers();
   int getRemainingPlayerCount();
+
+  ~GameScene() override {
+    game->getControllers().getFirst()->setDelegate(nullptr);
+  }
 };

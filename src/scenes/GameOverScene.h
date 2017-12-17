@@ -11,7 +11,9 @@ class GameOverScene : public SceneInterface, public ControllerListenerInterface 
   void render(WindowRendererInterface *renderer) override;
   void onVisible() override;
 
-  ~GameOverScene() override {}
+  ~GameOverScene() override {
+    game->getControllers().getFirst()->setDelegate(nullptr);
+  }
 
   explicit GameOverScene(Asteroids *game) {
     this->game = game;

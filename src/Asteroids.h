@@ -10,14 +10,12 @@
 
 class Asteroids : public GameInterface {
  private:
-  std::vector<PlayerSession *> *sessions;
+  std::vector<std::shared_ptr<PlayerSession>> *sessions;
   Playlist playlist;
   ControllerManager controllerManager;
 
  public:
   Asteroids() : GameInterface() {
-    sessions = new std::vector<PlayerSession *>();
-
     // update() needs to be called as this is instantiated before the window
     sf::Joystick::update();
 
@@ -29,9 +27,10 @@ class Asteroids : public GameInterface {
 
     controllerManager.registerController("k0", presets::getDefaultK0Controller());
     controllerManager.registerController("k1", presets::getDefaultK1Controller());
+    sessions = new std::vector<std::shared_ptr<PlayerSession>>();
   }
 
-  std::vector<PlayerSession *> *getSessions() const {
+  std::vector<std::shared_ptr<PlayerSession>> *getSessions() {
     return sessions;
   }
 

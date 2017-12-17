@@ -9,8 +9,8 @@
 #include "GameOverScene.h"
 
 void GameScene::render(WindowRendererInterface *renderer) {
-  worldRenderer.drawBg(renderer, world);
-  worldRenderer.drawWorld(renderer, world);
+  worldRenderer.drawBg(renderer, &world);
+  worldRenderer.drawWorld(renderer, &world);
 
   drawHud(renderer);
 }
@@ -18,7 +18,7 @@ void GameScene::render(WindowRendererInterface *renderer) {
 void GameScene::loadCurrentLevel() {
   LevelLoader loader;
   auto level = game->getPlaylist().getLevel();
-  loader.load(world, level);
+  loader.load(&world, level);
   showLevelTextTimeout = LEVEL_TEXT_DISPLAY_TIME;
 
   for (auto session : *game->getSessions()) {
@@ -28,10 +28,11 @@ void GameScene::loadCurrentLevel() {
 
 void GameScene::onVisible() {
   auto player = new Player("Player 1");
-  auto session = new PlayerSession(player);
+  PlayerSession session(player);
+  auto sessionPtr = std::make_shared<PlayerSession>(session);
   player->setController(game->getControllers().getFirstAvailable());
-  session->spawnShip(world);
-  game->getSessions()->push_back(session);
+  sessionPtr->spawnShip(&world);
+  game->getSessions()->push_back(sessionPtr);
 
 //  auto player2 = new Player("Player 2");
 //  player2->setColor(sf::Color(58, 144, 163));
@@ -106,12 +107,11 @@ void GameScene::pause(PlayerSession *initiator) {
 
 void GameScene::main() {
   if (!paused) {
-    world->update();
-    updateRespawnTimers();
+    world.update();
 
     int remainingAsteroids = 0;
 
-    for (auto object : world->getObjects()) {
+    for (auto object : world.getObjects()) {
       if (object->getClass() == WorldObjectClass::ASTEROID) {
         remainingAsteroids++;
       }
@@ -126,6 +126,8 @@ void GameScene::main() {
         loadCurrentLevel();
       }
     }
+
+    updateRespawnTimers();
   }
 }
 
@@ -140,10 +142,9 @@ void GameScene::updateRespawnTimers() {
       if (session->getLives() == 0) {
         onGameOver(session);
       } else {
-        session->spawnShip(world);
+        session->spawnShip(&world);
+        respawnTimers.erase(session);
       }
-
-      respawnTimers.erase(session);
     }
   }
 }
@@ -157,6 +158,7 @@ void GameScene::onAction(InputAction action, bool once) {
 
 void GameScene::onGameOver(PlayerSession *playerSession) {
   if (getRemainingPlayerCount() == 0)
+    world.clear();
     game->setScene(new GameOverScene(game));
 }
 
@@ -173,7 +175,7 @@ int GameScene::getRemainingPlayerCount() {
   int count = 0;
 
   for (auto session : *game->getSessions())
-    if (session->getLives() == 0)
+    if (session->getLives() > 0)
       count++;
 
   return count;

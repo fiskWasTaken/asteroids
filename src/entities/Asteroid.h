@@ -9,6 +9,7 @@ class Asteroid : public AbstractWorldObject {
  private:
   float size;
   const sf::Color outlineColor = sf::Color(127, 127, 127);
+  const sf::Color fillColor = sf::Color(255, 255, 255, 25);
   int health = 100;
   float rotSpeed = 0.1f;
   sf::ConvexShape shape;
@@ -29,7 +30,7 @@ class Asteroid : public AbstractWorldObject {
       shape.setPoint(i, points[i]);
     }
 
-    shape.setFillColor(sf::Color::Transparent);
+    shape.setFillColor(fillColor);
     shape.setOutlineColor(outlineColor);
     shape.setOutlineThickness(1.0F);
     shape.setOrigin(origin.x, origin.y);

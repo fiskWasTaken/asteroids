@@ -22,14 +22,14 @@ sf::ContextSettings getContextSettings() {
 void renderer(Asteroids *game) {
   auto settings = getContextSettings();
   auto videoMode = sf::VideoMode(640, 480);
-  auto window = new sf::RenderWindow(videoMode, "Asteroids", sf::Style::Default, settings);
-  auto renderer = WindowRenderer(window, game);
+  sf::RenderWindow window(videoMode, "Asteroids", sf::Style::Default, settings);
+  auto renderer = WindowRenderer(&window, game);
   sf::Clock clock;
 
-  window->setVerticalSyncEnabled(true);
+  window.setVerticalSyncEnabled(true);
 
   glEnable(GL_TEXTURE_2D);
-  while (window->isOpen()) {
+  while (window.isOpen()) {
     auto beforeRender = clock.getElapsedTime();
     renderer.main();
     game->main();
@@ -45,8 +45,8 @@ void renderer(Asteroids *game) {
 }
 
 int main() {
-  auto game = new Asteroids();
-  engine(game);
-  renderer(game);
+  auto game = Asteroids();
+  engine(&game);
+  renderer(&game);
   return 0;
 }

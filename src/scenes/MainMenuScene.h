@@ -13,16 +13,15 @@ struct menu_option_t {
 class MainMenuScene : public SceneInterface, public ControllerListenerInterface {
  private:
   Asteroids *game;
-  World *world;
+  World world;
 
   WorldRenderer worldRenderer;
 
   std::vector<menu_option_t> menuOptions;
   int selectedMenuOption = 0;
  public:
-  explicit MainMenuScene(Asteroids *game) {
+  explicit MainMenuScene(Asteroids *game) : world(game, 640, 480) {
     this->game = game;
-    world = new World(game, 640, 480);
   }
   void render(WindowRendererInterface *renderer) override;
   void onAction(InputAction action, bool once) override;
@@ -31,6 +30,5 @@ class MainMenuScene : public SceneInterface, public ControllerListenerInterface 
 
   ~MainMenuScene() override {
     game->getControllers().getFirst()->setDelegate(nullptr);
-    delete world;
   }
 };

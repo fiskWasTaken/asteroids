@@ -25,7 +25,7 @@ void MainMenuScene::render(WindowRendererInterface *renderer) {
   startPromptText.setPosition(center, middle);
   startLicenseText.setPosition(center, middle + 14);
 
-  worldRenderer.drawWorld(renderer, world);
+  worldRenderer.drawWorld(renderer, &world);
 
   window->draw(startTitleText);
   window->draw(startPromptText);
@@ -46,7 +46,7 @@ void MainMenuScene::onVisible() {
   game->getControllers().getFirst()->setDelegate(this);
 
   LevelLoader loader;
-  loader.load(world, {
+  loader.load(&world, {
       "Main menu background",
       0,
       30,
@@ -56,5 +56,5 @@ void MainMenuScene::onVisible() {
 }
 
 void MainMenuScene::main() {
-  world->update();
+  world.update();
 }

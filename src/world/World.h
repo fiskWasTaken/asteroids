@@ -63,4 +63,8 @@ class World : public WorldInterface {
     }
   }
   void containObject(WorldObjectInterface *object);
+
+  void clear() {
+    objects.clear();
+  }
 };

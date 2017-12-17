@@ -12,7 +12,7 @@ void StressTestScene::render(WindowRendererInterface *renderer) {
 
   startTitleText.setPosition(4, 0);
 
-  worldRenderer.drawWorld(renderer, world);
+  worldRenderer.drawWorld(renderer, &world);
   worldRenderer.drawTimings(renderer);
 
   window->draw(startTitleText);
@@ -28,7 +28,7 @@ void StressTestScene::onVisible() {
   game->getControllers().getFirst()->setDelegate(this);
 
   LevelLoader loader;
-  loader.load(world, {
+  loader.load(&world, {
       "Stress test",
       0,
       0,
@@ -38,5 +38,5 @@ void StressTestScene::onVisible() {
 }
 
 void StressTestScene::main() {
-  world->update();
+  world.update();
 }

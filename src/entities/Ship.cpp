@@ -61,7 +61,7 @@ void Ship::update() {
   vel = vector::limit(vel, MAX_SPEED);
   this->pos += vel;
 
-  vel *= 0.99F;
+  vel *= 0.95F;
 
   if (isOnInvincibilityCooldown()) {
     invincibilityTimer--;
