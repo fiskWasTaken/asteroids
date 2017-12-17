@@ -124,12 +124,11 @@ void GameScene::main() {
 }
 
 void GameScene::updateRespawnTimers() {
-  for (auto respawnTimer : respawnTimers) {
-    auto session = respawnTimer.first;
+  for (auto it = respawnTimers.begin(); it != respawnTimers.end(); ++it) {
+    auto session = (*it).first;
     respawnTimers[session]--;
 
     if (respawnTimers[session] == 0) {
-      respawnTimers.erase(session);
       session->setLives(session->getLives() - 1);
 
       if (session->getLives() == 0) {
@@ -137,6 +136,8 @@ void GameScene::updateRespawnTimers() {
       } else {
         session->spawnShip(world);
       }
+
+      respawnTimers.erase(session);
     }
   }
 }

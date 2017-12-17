@@ -3,6 +3,7 @@
 #include "AbstractWorldObject.h"
 #include "player/Player.h"
 #include <SFML/Graphics/ConvexShape.hpp>
+#include <particles/ParticleSystem.h>
 
 class PlayerSession;
 
@@ -16,6 +17,7 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
   sf::ConvexShape shape;
   sf::ConvexShape thruster;
 
+  ParticleSystem particleSystem;
   PlayerSession *playerSession;
   int altFireCooldown = 0;
   int fireCooldown = 0;
@@ -30,9 +32,9 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
     return WorldObjectClass::SHIP;
   }
 
-  explicit Ship(WorldInterface *world, PlayerSession *playerSession) : AbstractWorldObject(world) {
+  explicit Ship(WorldInterface *world, PlayerSession *playerSession)
+      : AbstractWorldObject(world), particleSystem(128, 128) {
     this->playerSession = playerSession;
-
     points.emplace_back(20, 8);
     points.emplace_back(0, 0);
     points.emplace_back(0, 3);
@@ -68,6 +70,9 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
     thruster.setFillColor(sf::Color::Transparent);
     thruster.setOrigin(origin.x, origin.y);
 
+    particleSystem.setDissolve(true);
+    particleSystem.setDissolutionRate(30);
+    particleSystem.setShape(Shape::CIRCLE);
   }
 
   void onAction(InputAction action, bool once) override;
@@ -96,4 +101,6 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
   }
 
   void fireAltWeapon();
+
+  ~Ship() override = default;
 };

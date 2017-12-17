@@ -36,7 +36,15 @@ void World::update() {
   auto size = objects.size();
 
   for (int a = 0; a < size; a++) {
+    if (objects[a]->points.empty()) {
+      continue;
+    }
+
     for (int b = a + 1; b < size; b++) {
+      if (objects[b]->points.empty()) {
+        continue;
+      }
+
       collision_result_t result = collisionModel.check(objects[a], objects[b]);
 
       if (result.isCollision) {

@@ -3,8 +3,10 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <scenes/GameScene.h>
+#include <caca_conio.h>
 #include "Bullet.h"
 #include "../utility/vector.h"
+#include "ParticleEmitter.h"
 
 void Ship::fireBullet() {
   auto thisRot = vector::fromAngle(rot);
@@ -70,6 +72,16 @@ void Ship::onDestroyed() {
   auto scene = dynamic_cast<GameScene *>(world->getGame()->getScene());
   isDestroyed = true;
   scene->onShipDestroyed(playerSession);
+
+  auto explosion = new ParticleSystem(128, 128);
+  explosion->fuel(200);
+  explosion->setDissolve(true);
+  explosion->setDissolutionRate(10);
+  explosion->setShape(Shape::CIRCLE);
+  auto emitter = new ParticleEmitter(world, explosion);
+  emitter->pos.x = pos.x;
+  emitter->pos.y = pos.y;
+  world->pushObject(emitter);
 }
 
 void Ship::onAction(InputAction action, bool once) {
@@ -143,6 +155,15 @@ void Ship::renderTo(sf::RenderWindow *renderWindow) {
     renderThruster(renderWindow);
     isThrusting = false;
   }
+
+  particleSystem.setGravity(-vel.x, -vel.y);
+  particleSystem.remove();
+  particleSystem.update();
+  particleSystem.render();
+
+  auto sprite = particleSystem.getSprite();
+  sprite.setPosition(pos.x - 64, pos.y - 64);
+  renderWindow->draw(sprite);
 }
 
 void Ship::renderShip(sf::RenderWindow *renderWindow) {
@@ -163,6 +184,8 @@ void Ship::renderThruster(sf::RenderWindow *renderWindow) {
   thruster.setRotation(rot);
   thruster.setPosition(pos);
   renderWindow->draw(thruster);
+
+  particleSystem.fuel(1);
 }
 
 void Ship::onCollision(AbstractWorldObject *other) {

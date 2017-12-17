@@ -1,6 +1,8 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include "drawing.h"
 
+// todo: change into composite sf::Drawable so shapes are not instantiated on the stack on every render call
+
 namespace drawing {
 void drawHealthBar(
     sf::RenderWindow *renderWindow,

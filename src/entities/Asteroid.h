@@ -21,7 +21,7 @@ class Asteroid : public AbstractWorldObject {
     auto edges = 5 + size / 20;
     points = shape::generateShape(static_cast<unsigned long>(edges), size);
     origin = sf::Vector2f(size / 2, size / 2);
-    this->health = this->getMaxHealth();
+    health = this->getMaxHealth();
 
     shape.setPointCount(points.size());
 

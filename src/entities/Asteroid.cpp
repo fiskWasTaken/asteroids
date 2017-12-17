@@ -2,6 +2,7 @@
 #include <utility/drawing.h>
 #include "Asteroid.h"
 #include "player/PlayerSession.h"
+#include "ParticleEmitter.h"
 
 void Asteroid::onDestroyed() {
   if (size > 13) {
@@ -19,6 +20,16 @@ void Asteroid::onDestroyed() {
 
     world->pushObject(ast2);
   }
+
+  auto explosion = new ParticleSystem(128, 128);
+  explosion->fuel(200);
+  explosion->setDissolve(true);
+  explosion->setDissolutionRate(10);
+  explosion->setShape(Shape::CIRCLE);
+  auto emitter = new ParticleEmitter(world, explosion);
+  emitter->pos.x = pos.x;
+  emitter->pos.y = pos.y;
+  world->pushObject(emitter);
 }
 
 bool Asteroid::isRecyclable() {
@@ -63,8 +74,8 @@ void Asteroid::onBulletHit(Bullet *bullet) {
 void Asteroid::onAsteroidHit(Asteroid *other) {
   // bounce
   auto diff = vel - other->vel;
-  diff.x /= 1.1;
-  diff.y /= 1.1;
+  diff.x /= 1.05;
+  diff.y /= 1.05;
 
   vel -= diff;
   other->vel += diff;

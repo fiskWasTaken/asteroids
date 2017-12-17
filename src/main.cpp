@@ -26,6 +26,8 @@ void renderer(Asteroids *game) {
   auto renderer = WindowRenderer(window, game);
   sf::Clock clock;
 
+  window->setVerticalSyncEnabled(true);
+
   glEnable(GL_TEXTURE_2D);
   while (window->isOpen()) {
     auto beforeRender = clock.getElapsedTime();
