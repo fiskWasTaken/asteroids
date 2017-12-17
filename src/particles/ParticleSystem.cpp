@@ -21,7 +21,7 @@ ParticleSystem::~ParticleSystem() = default;
 void ParticleSystem::fuel(int count) {
   float angle;
   for (int i = 0; i < count; i++) {
-    auto particle = Particle();
+    auto particle = particle_t();
     particle.pos.x = pos.x;
     particle.pos.y = pos.y;
 
@@ -45,13 +45,12 @@ void ParticleSystem::fuel(int count) {
     particle.color.g = color.g;
     particle.color.b = color.b;
     particle.color.a = 255;
-    particles.push_back(std::make_unique<Particle>(particle));
+    particles.push_back(std::make_unique<particle_t>(particle));
   }
 }
 
 void ParticleSystem::update() {
   float time = clock.restart().asSeconds();
-
   auto it = particles.begin();
 
   while (it != particles.end()) {

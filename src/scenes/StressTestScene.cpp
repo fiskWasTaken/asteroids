@@ -1,5 +1,5 @@
-#include <levels/LevelLoader.h>
 #include <SFML/Graphics/Text.hpp>
+#include <waves/WaveGenerator.h>
 #include "StressTestScene.h"
 #include "MainMenuScene.h"
 
@@ -27,14 +27,8 @@ void StressTestScene::onAction(InputAction action, bool once) {
 void StressTestScene::onVisible() {
   game->getControllers().getFirst()->setDelegate(this);
 
-  LevelLoader loader;
-  loader.load(&world, {
-      "Stress test",
-      0,
-      0,
-      0,
-      500
-  });
+  WaveGenerator generator;
+  generator.generate(&world, 500);
 }
 
 void StressTestScene::main() {

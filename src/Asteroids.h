@@ -2,7 +2,6 @@
 
 #include <vector>
 #include <SFML/Window/Keyboard.hpp>
-#include <levels/Playlist.h>
 #include <input/ControllerManager.h>
 #include <input/presets.h>
 #include "GameInterface.h"
@@ -11,7 +10,6 @@
 class Asteroids : public GameInterface {
  private:
   std::vector<std::shared_ptr<PlayerSession>> *sessions;
-  Playlist playlist;
   ControllerManager controllerManager;
 
  public:
@@ -36,6 +34,5 @@ class Asteroids : public GameInterface {
 
   void main() override;
 
-  Playlist &getPlaylist();
   ControllerManager &getControllers();
 };

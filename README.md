@@ -1,13 +1,18 @@
 # Asteroids
 
-(WIP) Simple C++/SFML Asteroids clone.
+A simple C++/SFML Asteroids clone.
 
 Features:
 
 * Joystick and keyboard support
 * Automatic controller detection
 * SAT (Separating Axis Theorem) collision engine
-* 3 levels (probably crashes after that right now)
-* A ship that can shoot things
+* Rocks of different shapes and sizes
+* Infinite waves of rocks
 * Multiplayer
-* Variable-sized rocks with funky shapes to take advantage of SAT
+* Particles
+
+## Todo
+
+* Move all non-trivial functions to .cpp files
+* Attempt to resolve some remaining circular dependency problems

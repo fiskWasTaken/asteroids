@@ -14,7 +14,7 @@ class PlayerSession {
   int lives;
 
  public:
-  explicit PlayerSession(Player *player, int lives = 1) {
+  explicit PlayerSession(Player *player, int lives = 5) {
     this->player = player;
     this->lives = lives;
     this->score = 0;

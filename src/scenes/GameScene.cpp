@@ -2,8 +2,6 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/ConvexShape.hpp>
-#include <levels/Playlist.h>
-#include <levels/LevelLoader.h>
 #include <input/KeyboardController.h>
 #include "GameScene.h"
 #include "GameOverScene.h"
@@ -15,13 +13,11 @@ void GameScene::render(WindowRendererInterface *renderer) {
   drawHud(renderer);
 }
 
-void GameScene::loadCurrentLevel() {
-  LevelLoader loader;
-  auto level = game->getPlaylist().getLevel();
-  loader.load(&world, level);
-  showLevelTextTimeout = LEVEL_TEXT_DISPLAY_TIME;
+void GameScene::startWave() {
+  showWaveTextTimeout = WAVE_TEXT_DISPLAY_TIME;
+  waveGenerator.generate(&world, waveId);
 
-  for (auto session : *game->getSessions()) {
+  for (const auto &session : *game->getSessions()) {
     session->getShip()->setInvincibilityCooldown(100);
   }
 }
@@ -41,8 +37,7 @@ void GameScene::onVisible() {
 //  session2->spawnShip(world);
 //  game->getSessions()->push_back(session2);
 
-  game->getPlaylist().rewind();
-  loadCurrentLevel();
+  startWave();
 }
 
 void GameScene::drawHud(WindowRendererInterface *renderer) {
@@ -51,10 +46,11 @@ void GameScene::drawHud(WindowRendererInterface *renderer) {
   auto view = renderer->getView();
   int offset = 4;
 
-  for (auto session: *game->getSessions()) {
+  for (const auto &session: *game->getSessions()) {
     sf::Text nameText(session->getPlayer()->getName(), font, 14);
     sf::Text scoreText("Score: " + std::to_string(session->getScore()), font, 14);
 
+    // Bing bing wahoo
     std::stringstream marios;
 
     for (int i = 0; i < session->getLives(); i++) {
@@ -77,7 +73,7 @@ void GameScene::drawHud(WindowRendererInterface *renderer) {
   }
 
   if (paused) {
-    sf::Text pausedText("Paused", font, 16);
+    sf::Text pausedText("[Paused]", font, 16);
 
     auto center = view.getSize().x / 2;
     auto middle = view.getSize().y / 2;
@@ -86,16 +82,19 @@ void GameScene::drawHud(WindowRendererInterface *renderer) {
     window->draw(pausedText);
   }
 
-  if (showLevelTextTimeout > 0) {
-    sf::Text levelText(game->getPlaylist().getLevel().name, font, 16);
+  if (showWaveTextTimeout > 0) {
+    sf::Text waveText("Wave " + std::to_string(waveId), font, 16);
+    sf::Text readyText("Ready!", font, 16);
 
     auto center = view.getSize().x / 2;
     auto middle = view.getSize().y / 2;
 
-    levelText.setPosition(center, middle - 14);
-    window->draw(levelText);
+    waveText.setPosition(center, middle - 8);
+    readyText.setPosition(center, middle + 8);
+    window->draw(waveText);
+    window->draw(readyText);
 
-    showLevelTextTimeout--;
+    showWaveTextTimeout--;
   }
 }
 
@@ -118,13 +117,8 @@ void GameScene::main() {
     }
 
     if (remainingAsteroids == 0) {
-      auto next = game->getPlaylist().next();
-
-      if (!next) {
-        game->setScene(new GameOverScene(game));
-      } else {
-        loadCurrentLevel();
-      }
+      startWave();
+      waveId++;
     }
 
     updateRespawnTimers();
@@ -132,19 +126,23 @@ void GameScene::main() {
 }
 
 void GameScene::updateRespawnTimers() {
-  for (auto it = respawnTimers.begin(); it != respawnTimers.end(); ++it) {
-    auto session = (*it).first;
-    respawnTimers[session]--;
+  auto it = respawnTimers.begin();
 
-    if (respawnTimers[session] == 0) {
-      session->setLives(session->getLives() - 1);
+  while (it != respawnTimers.end()) {
+    (**it).time--;
 
-      if (session->getLives() == 0) {
-        onGameOver(session);
+    if ((**it).time == 0) {
+      (**it).session->setLives((**it).session->getLives() - 1);
+
+      if ((**it).session->getLives() == 0) {
+        onGameOver((**it).session);
       } else {
-        session->spawnShip(&world);
-        respawnTimers.erase(session);
+        (**it).session->spawnShip(&world);
       }
+
+//      it = respawnTimers.erase(it);
+    } else {
+      ++it;
     }
   }
 }
@@ -157,9 +155,10 @@ void GameScene::onAction(InputAction action, bool once) {
 }
 
 void GameScene::onGameOver(PlayerSession *playerSession) {
-  if (getRemainingPlayerCount() == 0)
+  if (getRemainingPlayerCount() == 0) {
     world.clear();
     game->setScene(new GameOverScene(game));
+  }
 }
 
 void GameScene::onShipDestroyed(PlayerSession *playerSession) {
@@ -168,13 +167,16 @@ void GameScene::onShipDestroyed(PlayerSession *playerSession) {
 }
 
 void GameScene::startRespawnTimer(PlayerSession *playerSession) {
-  respawnTimers[playerSession] = RESPAWN_TIME;
+  respawnTimers.push_back(std::make_unique<respawn_timer_t>(respawn_timer_t{
+      session: playerSession,
+      time: RESPAWN_TIME
+  }));
 }
 
 int GameScene::getRemainingPlayerCount() {
   int count = 0;
 
-  for (auto session : *game->getSessions())
+  for (const auto &session : *game->getSessions())
     if (session->getLives() > 0)
       count++;
 

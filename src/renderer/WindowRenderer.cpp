@@ -1,6 +1,5 @@
 #include <iostream>
 #include "WindowRenderer.h"
-#include <cmath>
 
 void WindowRenderer::main() {
   handleEvents();

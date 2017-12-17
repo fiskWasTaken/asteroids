@@ -4,7 +4,7 @@
 
 void PlayerSession::spawnShip(WorldInterface *world) {
   if (ship != nullptr) {
-    delete(ship);
+    delete (ship);
   }
 
   ship = new Ship(world, this);

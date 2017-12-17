@@ -1,5 +1,4 @@
 #include <SFML/Graphics/Text.hpp>
-#include <levels/LevelLoader.h>
 #include <sstream>
 #include <SFML/Graphics/ConvexShape.hpp>
 #include "MainMenuScene.h"
@@ -45,14 +44,9 @@ void MainMenuScene::onAction(InputAction action, bool once) {
 void MainMenuScene::onVisible() {
   game->getControllers().getFirst()->setDelegate(this);
 
-  LevelLoader loader;
-  loader.load(&world, {
-      "Main menu background",
-      0,
-      30,
-      30,
-      30
-  });
+  WaveGenerator generator;
+
+  generator.generate(&world, 90);
 }
 
 void MainMenuScene::main() {

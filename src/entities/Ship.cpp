@@ -3,7 +3,6 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <scenes/GameScene.h>
-#include <caca_conio.h>
 #include "Bullet.h"
 #include "../utility/vector.h"
 #include "TemporaryParticle.h"

@@ -2,24 +2,33 @@
 
 #include <Asteroids.h>
 #include <renderer/WorldRenderer.h>
+#include <waves/WaveGenerator.h>
 #include "SceneInterface.h"
+
+struct respawn_timer_t {
+  PlayerSession *session;
+  int time;
+};
 
 class GameScene : public SceneInterface, public ControllerListenerInterface {
  private:
   const int BASE_WAVE_INTERVAL_TIME = 1000;
   const int RESPAWN_TIME = 50;
-  const int LEVEL_TEXT_DISPLAY_TIME = 100;
+  const int WAVE_TEXT_DISPLAY_TIME = 100;
 
   Asteroids *game;
   World world;
-  std::map<PlayerSession *, int> respawnTimers;
+  std::vector<std::unique_ptr<respawn_timer_t>> respawnTimers;
   PlayerSession *pauseInitiator = nullptr;
   WorldRenderer worldRenderer;
 
+  WaveGenerator waveGenerator;
+
   int waveTimer = 0;
+  int waveId = 1;
 
   bool paused = false;
-  int showLevelTextTimeout = 0;
+  int showWaveTextTimeout = 0;
 
   void onGameOver(PlayerSession *playerSession);
   void startRespawnTimer(PlayerSession *playerSession);
@@ -40,7 +49,7 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   void main() override;
   void onShipDestroyed(PlayerSession *playerSession);
 
-  void loadCurrentLevel();
+  void startWave();
 
   void updateRespawnTimers();
   int getRemainingPlayerCount();
