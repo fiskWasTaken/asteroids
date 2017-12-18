@@ -27,3 +27,6 @@ bool KeyboardController::pass(sf::Event event) {
 
   return true;
 }
+void KeyboardController::assignKeyToAction(InputAction action, sf::Keyboard::Key key) {
+  map[key] = {action, false};
+}

@@ -16,10 +16,6 @@ class KeyboardController : public ControllerInterface {
  public:
   void poll() override;
   std::string getKeyString(InputAction action) override;
-
-  void assignKeyToAction(InputAction action, sf::Keyboard::Key key) {
-    map[key] = {action, false};
-  }
-
+  void assignKeyToAction(InputAction action, sf::Keyboard::Key key);
   bool pass(sf::Event event) override;
 };

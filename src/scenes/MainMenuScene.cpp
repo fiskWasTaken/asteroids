@@ -52,3 +52,10 @@ void MainMenuScene::onVisible() {
 void MainMenuScene::main() {
   world.update();
 }
+MainMenuScene::~MainMenuScene() {
+  game->getControllers().getFirst()->setDelegate(nullptr);
+}
+
+MainMenuScene::MainMenuScene(Asteroids *game) : world(game, 640, 480) {
+  this->game = game;
+}

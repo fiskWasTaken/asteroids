@@ -13,26 +13,10 @@ class Asteroids : public GameInterface {
   ControllerManager controllerManager;
 
  public:
-  Asteroids() : GameInterface() {
-    // update() needs to be called as this is instantiated before the window
-    sf::Joystick::update();
+  Asteroids();
 
-    for (unsigned int i = 0; i < 8; i++) {
-      if (sf::Joystick::isConnected(i)) {
-        controllerManager.registerController("j" + std::to_string(i), presets::getDefaultJoystickController(i));
-      }
-    }
-
-    controllerManager.registerController("k0", presets::getDefaultK0Controller());
-    controllerManager.registerController("k1", presets::getDefaultK1Controller());
-    sessions = new std::vector<std::shared_ptr<PlayerSession>>();
-  }
-
-  std::vector<std::shared_ptr<PlayerSession>> *getSessions() {
-    return sessions;
-  }
+  std::vector<std::shared_ptr<PlayerSession>> *getSessions() { return sessions; }
 
   void main() override;
-
   ControllerManager &getControllers();
 };

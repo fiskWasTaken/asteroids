@@ -8,16 +8,10 @@ class GameOverScene : public SceneInterface, public ControllerListenerInterface 
   Asteroids *game;
 
  public:
+  explicit GameOverScene(Asteroids *game);
+  ~GameOverScene() override;
+
   void render(WindowRendererInterface *renderer) override;
   void onVisible() override;
-
-  ~GameOverScene() override {
-    game->getControllers().getFirst()->setDelegate(nullptr);
-  }
-
-  explicit GameOverScene(Asteroids *game) {
-    this->game = game;
-  }
-
   void onAction(InputAction action, bool once) override;
 };

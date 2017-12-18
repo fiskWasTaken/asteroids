@@ -21,7 +21,6 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   std::vector<std::unique_ptr<respawn_timer_t>> respawnTimers;
   PlayerSession *pauseInitiator = nullptr;
   WorldRenderer worldRenderer;
-
   WaveGenerator waveGenerator;
 
   int waveTimer = 0;
@@ -34,27 +33,18 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   void startRespawnTimer(PlayerSession *playerSession);
 
  public:
-  explicit GameScene(Asteroids *game) : world(game, 640, 480) {
-    this->game = game;
-  }
+  explicit GameScene(Asteroids *game);
+  ~GameScene() override;
 
   void render(WindowRendererInterface *renderer) override;
   void onVisible() override;
   void onAction(InputAction action, bool once) override;
-
   void pause(PlayerSession *initiator);
-
   void drawHud(WindowRendererInterface *renderer);
-
   void main() override;
   void onShipDestroyed(PlayerSession *playerSession);
-
   void startWave();
-
   void updateRespawnTimers();
   int getRemainingPlayerCount();
-
-  ~GameScene() override {
-    game->getControllers().getFirst()->setDelegate(nullptr);
-  }
+  void drawWaveBar();
 };

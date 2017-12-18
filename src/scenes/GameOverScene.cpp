@@ -31,3 +31,11 @@ void GameOverScene::onAction(InputAction action, bool once) {
     game->setScene(new GameScene(game));
   }
 }
+
+GameOverScene::GameOverScene(Asteroids *game) {
+  this->game = game;
+}
+
+GameOverScene::~GameOverScene() {
+  game->getControllers().getFirst()->setDelegate(nullptr);
+}

@@ -17,54 +17,24 @@ class World : public WorldInterface {
   GameInterface *game;
 
  public:
-  World(GameInterface *game, double w, double h) {
-    this->game = game;
-    this->w = w;
-    this->h = h;
-    this->collisionModel = SATCollisionModel();
-    objects.reserve(2048);
-  }
+  World(GameInterface *game, double w, double h);
+  ~World();
 
   void update() override;
 
-  double getWidth() const override {
-    return w;
-  }
-
-  double getHeight() const override {
-    return h;
-  }
+  double getWidth() const override { return w; }
+  double getHeight() const override { return h; }
 
   void wrapObject(WorldObjectInterface *object) override;
-
-  bool pushObject(AbstractWorldObject *object) override {
-    objects.push_back(object);
-    return true;
-  }
-
-  bool popObject(AbstractWorldObject *object) override {
-    objects.erase(std::remove(objects.begin(), objects.end(), object), objects.end());
-    return true;
-  }
-
-  const std::vector<AbstractWorldObject *> &getObjects() const {
-    return objects;
-  }
-
-  GameInterface *getGame() override {
-    return game;
-  }
-
-  void recycle();
-
-  ~World() {
-    for (auto object: objects) {
-      delete object;
-    }
-  }
   void containObject(WorldObjectInterface *object);
 
-  void clear() {
-    objects.clear();
-  }
+  bool pushObject(AbstractWorldObject *object) override;
+  bool popObject(AbstractWorldObject *object) override;
+
+  const std::vector<AbstractWorldObject *> &getObjects() const { return objects; }
+
+  GameInterface *getGame() override { return game; }
+
+  void recycle();
+  void clear() { objects.clear(); }
 };

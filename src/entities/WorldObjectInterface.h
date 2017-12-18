@@ -8,15 +8,12 @@ class WorldObjectInterface {
  public:
   std::vector<sf::Vector2f> points;
   sf::Vector2f origin;
-
   sf::Vector2f pos;
   sf::Vector2f vel;
   sf::Vector2f acc;
   float rot{};
 
-  virtual WorldObjectClass getClass() {
-    return WorldObjectClass::NONE;
-  }
+  virtual WorldObjectClass getClass() { return WorldObjectClass::NONE; }
 
   /**
    * Invoked when this object is colliding with another object

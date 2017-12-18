@@ -1,5 +1,4 @@
-#ifndef PARTICLE_H
-#define PARTICLE_H
+#pragma once
 
 #include <SFML/System/Vector2.hpp>
 #include <SFML/System/Clock.hpp>
@@ -10,22 +9,7 @@
 #include <vector>
 #include <random>
 #include <memory>
-
-class Randomizer {
- public:
-  Randomizer() : device_(), engine_(device_()) {};
-  int rnd(int a, int b) {
-    std::uniform_int_distribution<int> uni_dist(a, b);
-    return uni_dist(engine_);
-  };
-  float rnd(float a, float b) {
-    std::uniform_real_distribution<double> uni_dist(a, b);
-    return static_cast<float>(uni_dist(engine_));
-  };
- private:
-  std::random_device device_;
-  std::default_random_engine engine_;
-};
+#include "Randomizer.h"
 
 namespace Shape { enum { CIRCLE, SQUARE }; }
 
@@ -36,6 +20,22 @@ struct particle_t {
 };
 
 class ParticleSystem {
+ private:
+  sf::Vector2f pos; // Particle origin (pixel co-ordinates)
+  sf::Vector2f gravity;  // Affects particle velocities
+  sf::Clock clock;    // Used to scale particle motion
+  sf::Color transparent;  // sf::Color( 0, 0, 0, 0 )
+  sf::Image image;    // See render() and remove()
+  sf::Texture texture;
+  Randomizer randomizer;
+  sf::Sprite sprite;   // Connected to image
+  sf::Color color;
+  float particleSpeed;// Pixels per second (at most)
+  bool dissolve; // Dissolution enabled?
+  unsigned char dissolutionRate;
+  unsigned char shape;
+  std::vector<std::unique_ptr<particle_t>> particles;
+
  public:
   ParticleSystem(int width, int height);
   ~ParticleSystem();
@@ -61,23 +61,4 @@ class ParticleSystem {
 
   unsigned long getCount() { return particles.size(); }
   sf::Sprite &getSprite() { return sprite; }
-
- private:
-  sf::Vector2f pos; // Particle origin (pixel co-ordinates)
-  sf::Vector2f gravity;  // Affects particle velocities
-  sf::Clock clock;    // Used to scale particle motion
-  sf::Color transparent;  // sf::Color( 0, 0, 0, 0 )
-  sf::Image image;    // See render() and remove()
-  sf::Texture texture;
-  Randomizer randomizer;
-  sf::Sprite sprite;   // Connected to image
-  sf::Color color;
-  float particleSpeed;// Pixels per second (at most)
-  bool dissolve; // Dissolution enabled?
-  unsigned char dissolutionRate;
-  unsigned char shape;
-
-  std::vector<std::unique_ptr<particle_t>> particles;
 };
-
-#endif

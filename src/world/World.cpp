@@ -83,3 +83,23 @@ void World::update() {
 
   recycle();
 }
+World::World(GameInterface *game, double w, double h) {
+  this->game = game;
+  this->w = w;
+  this->h = h;
+  this->collisionModel = SATCollisionModel();
+  objects.reserve(2048);
+}
+bool World::pushObject(AbstractWorldObject *object) {
+  objects.push_back(object);
+  return true;
+}
+bool World::popObject(AbstractWorldObject *object) {
+  objects.erase(std::remove(objects.begin(), objects.end(), object), objects.end());
+  return true;
+}
+World::~World() {
+  for (auto object: objects) {
+    delete object;
+  }
+}

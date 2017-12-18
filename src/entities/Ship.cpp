@@ -202,3 +202,36 @@ void Ship::onShipHit(Ship *other) {
   vel -= diff;
   other->vel += diff;
 }
+Ship::Ship(WorldInterface *world, PlayerSession *playerSession)
+    : AbstractWorldObject(world), particleSystem(128, 128) {
+  this->playerSession = playerSession;
+  points.emplace_back(20, 8);
+  points.emplace_back(0, 0);
+  points.emplace_back(0, 3);
+  points.emplace_back(2, 3);
+  points.emplace_back(2, 5);
+  points.emplace_back(0, 5);
+  points.emplace_back(0, 11);
+  points.emplace_back(2, 11);
+  points.emplace_back(2, 13);
+  points.emplace_back(0, 13);
+  points.emplace_back(0, 16);
+
+  origin = sf::Vector2f(10, 8);
+
+  auto size = points.size();
+
+  shape.setPointCount(size);
+
+  for (size_t i = 0; i < size; i++) {
+    shape.setPoint(i, points[i]);
+  }
+
+  shape.setFillColor(fillColor);
+  shape.setOutlineThickness(1.0F);
+  shape.setOrigin(origin.x, origin.y);
+
+  particleSystem.setDissolve(true);
+  particleSystem.setDissolutionRate(30);
+  particleSystem.setShape(Shape::CIRCLE);
+}

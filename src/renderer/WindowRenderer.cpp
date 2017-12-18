@@ -69,3 +69,14 @@ WindowRenderer::WindowRenderer(sf::RenderWindow *window, Asteroids *game) {
 
   onResize();
 }
+
+sf::RenderWindow *WindowRenderer::getWindow() {
+  return window;
+}
+
+sf::Font WindowRenderer::getFont() {
+  return font;
+}
+sf::View WindowRenderer::getView() {
+  return view;
+}

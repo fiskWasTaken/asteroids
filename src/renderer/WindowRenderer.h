@@ -23,15 +23,7 @@ class WindowRenderer : public WindowRendererInterface {
   void onResize() override;
   void main() override;
 
-  sf::RenderWindow *getWindow() override {
-    return window;
-  }
-
-  sf::Font getFont() override {
-    return font;
-  }
-
-  sf::View getView() override {
-    return view;
-  }
+  sf::RenderWindow *getWindow() override;
+  sf::Font getFont() override;
+  sf::View getView() override;
 };

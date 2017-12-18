@@ -14,21 +14,16 @@ class MainMenuScene : public SceneInterface, public ControllerListenerInterface 
  private:
   Asteroids *game;
   World world;
-
   WorldRenderer worldRenderer;
-
   std::vector<menu_option_t> menuOptions;
   int selectedMenuOption = 0;
+
  public:
-  explicit MainMenuScene(Asteroids *game) : world(game, 640, 480) {
-    this->game = game;
-  }
+  explicit MainMenuScene(Asteroids *game);
   void render(WindowRendererInterface *renderer) override;
   void onAction(InputAction action, bool once) override;
   void onVisible() override;
   void main() override;
 
-  ~MainMenuScene() override {
-    game->getControllers().getFirst()->setDelegate(nullptr);
-  }
+  ~MainMenuScene() override;
 };

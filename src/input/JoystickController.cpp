@@ -40,3 +40,7 @@ bool JoystickController::pass(sf::Event event) {
 
   return true;
 }
+
+void JoystickController::assignButtonToAction(unsigned int buttonId, InputAction action) {
+  buttonMap[buttonId] = {action, false};
+}

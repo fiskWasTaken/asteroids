@@ -29,9 +29,7 @@ class JoystickController : public ControllerInterface {
   void poll() override;
   std::string getKeyString(InputAction action) override;
 
-  void assignButtonToAction(unsigned int buttonId, InputAction action) {
-    buttonMap[buttonId] = {action, false};
-  }
+  void assignButtonToAction(unsigned int buttonId, InputAction action);
 
   void assignAxisToActions(sf::Joystick::Axis axis, axis_actions_t actions) {
     axisMap[axis] = actions;

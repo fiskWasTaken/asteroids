@@ -120,3 +120,32 @@ void Asteroid::onCollision(AbstractWorldObject *other) {
     onShipHit(dynamic_cast<Ship *>(other));
   }
 }
+Asteroid::Asteroid(WorldInterface *world, float size) : AbstractWorldObject(world) {
+  this->size = size;
+  rotSpeed = (-5 + float(random() % 10)) / 10;
+
+  auto edges = 5 + size / 20;
+  points = shape::generateShape(static_cast<unsigned long>(edges), size);
+  origin = sf::Vector2f(size / 2, size / 2);
+  health = this->getMaxHealth();
+
+  shape.setPointCount(points.size());
+
+  for (size_t i = 0; i < points.size(); i++) {
+    shape.setPoint(i, points[i]);
+  }
+
+  shape.setFillColor(fillColor);
+  shape.setOutlineColor(outlineColor);
+  shape.setOutlineThickness(1.0F);
+  shape.setOrigin(origin.x, origin.y);
+}
+void Asteroid::takeDamage(int damage) {
+  // guards against triggering onDestroyed() multiple times if hit again before entity recycle
+  if (health > 1) {
+    health -= damage;
+
+    if (health <= 0)
+      this->onDestroyed();
+  }
+}

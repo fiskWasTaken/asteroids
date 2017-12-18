@@ -10,13 +10,7 @@ class GameInterface {
 
  public:
   void stop();
-
-  // methods for game instance to implement
   virtual void main() = 0;
-
   void setScene(SceneInterface *scene);
-
-  SceneInterface *getScene() {
-    return scene;
-  }
+  SceneInterface *getScene() { return scene; }
 };

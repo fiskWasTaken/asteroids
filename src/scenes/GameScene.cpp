@@ -11,6 +11,7 @@ void GameScene::render(WindowRendererInterface *renderer) {
   worldRenderer.drawWorld(renderer, &world);
 
   drawHud(renderer);
+  drawWaveBar();
 }
 
 void GameScene::startWave() {
@@ -181,4 +182,16 @@ int GameScene::getRemainingPlayerCount() {
       count++;
 
   return count;
+}
+
+void GameScene::drawWaveBar() {
+
+}
+
+GameScene::GameScene(Asteroids *game) : world(game, 640, 480) {
+  this->game = game;
+}
+
+GameScene::~GameScene() {
+  game->getControllers().getFirst()->setDelegate(nullptr);
 }

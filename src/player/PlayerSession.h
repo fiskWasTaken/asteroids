@@ -28,9 +28,7 @@ class PlayerSession {
   int getLives() const { return lives; }
   void setLives(int lives) { this->lives = lives; }
 
-  Ship *getShip() {
-    return ship;
-  }
+  Ship *getShip() { return ship; }
 
   void spawnShip(WorldInterface *world);
 };

@@ -11,9 +11,7 @@ class TemporaryParticle : public AbstractWorldObject {
   ParticleSystem *particle;
 
  public:
-  explicit TemporaryParticle(WorldInterface *world, ParticleSystem *particle) : AbstractWorldObject(world) {
-    this->particle = particle;
-  }
+  explicit TemporaryParticle(WorldInterface *world, ParticleSystem *particle);
 
   void update() override;
   bool isRecyclable() override;

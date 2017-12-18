@@ -21,3 +21,6 @@ void TemporaryParticle::renderTo(sf::RenderWindow *renderWindow) {
 TemporaryParticle::~TemporaryParticle() {
   delete particle;
 }
+TemporaryParticle::TemporaryParticle(WorldInterface *world, ParticleSystem *particle) : AbstractWorldObject(world) {
+  this->particle = particle;
+}

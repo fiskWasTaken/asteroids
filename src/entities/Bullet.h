@@ -19,19 +19,10 @@ class Bullet : public AbstractWorldObject {
   PlayerSession *owner;
 
  public:
-  WorldObjectClass getClass() override {
-    return WorldObjectClass::BULLET;
-  }
-
   explicit Bullet(WorldInterface *world, PlayerSession *owner);
-
-  PlayerSession *getOwner() const {
-    return this->owner;
-  }
-
-  bool isRecyclable() override {
-    return lifetime <= 0;
-  }
+  WorldObjectClass getClass() override { return WorldObjectClass::BULLET; }
+  PlayerSession *getOwner() const { return this->owner; }
+  bool isRecyclable() override { return lifetime <= 0; }
 
   void update() override {
     pos += vel;
@@ -39,8 +30,6 @@ class Bullet : public AbstractWorldObject {
   };
 
   void setLifetime(int lifetime);
-
   void renderTo(sf::RenderWindow *renderWindow) override;
-
   const sf::Color outlineColor = sf::Color(150, 150, 150);
 };

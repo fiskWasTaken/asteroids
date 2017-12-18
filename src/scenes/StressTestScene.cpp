@@ -34,3 +34,11 @@ void StressTestScene::onVisible() {
 void StressTestScene::main() {
   world.update();
 }
+
+StressTestScene::~StressTestScene() {
+  game->getControllers().getFirst()->setDelegate(nullptr);
+}
+
+StressTestScene::StressTestScene(Asteroids *game) : world(game, 640, 480) {
+  this->game = game;
+}
