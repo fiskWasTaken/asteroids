@@ -11,8 +11,3 @@ Features:
 * Infinite waves of rocks
 * Multiplayer
 * Particles
-
-## Todo
-
-* Move all non-trivial functions to .cpp files
-* Attempt to resolve some remaining circular dependency problems
