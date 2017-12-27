@@ -1,4 +1,5 @@
 #include <SFML/Window/Keyboard.hpp>
+#include <iostream>
 #include "KeyboardController.h"
 
 void KeyboardController::poll() {

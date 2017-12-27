@@ -1,6 +1,7 @@
 #include <SFML/Graphics/Text.hpp>
+#include <utility/drawing.h>
 #include "GameOverScene.h"
-#include "GameScene.h"
+#include "MainMenuScene.h"
 
 void GameOverScene::render(WindowRendererInterface *renderer) {
   auto window = renderer->getWindow();
@@ -8,11 +9,13 @@ void GameOverScene::render(WindowRendererInterface *renderer) {
   auto font = renderer->getFont();
 
   sf::Text startTitleText("Game Over", font, 16);
-  sf::Text startPromptText("Press C to retry", font, 16);
-  sf::Text highScorePromptText("Press E to view high score tables", font, 16);
+  sf::Text startPromptText("Press Fire to return to the main menu", font, 16);
 
   auto center = view.getSize().x / 2;
   auto middle = view.getSize().y / 2;
+
+  drawing::centreText(startTitleText);
+  drawing::centreText(startPromptText);
 
   startTitleText.setPosition(center, middle - 14);
   startPromptText.setPosition(center, middle);
@@ -28,7 +31,7 @@ void GameOverScene::onVisible() {
 
 void GameOverScene::onAction(InputAction action, bool once) {
   if (action == InputAction::FIRE && once) {
-    game->setScene(new GameScene(game));
+    game->setScene(new MainMenuScene(game));
   }
 }
 

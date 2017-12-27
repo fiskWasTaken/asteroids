@@ -27,20 +27,11 @@ void GameScene::startWave() {
 }
 
 void GameScene::onVisible() {
-  auto player = new Player("Player 1");
-  PlayerSession session(player);
-  auto sessionPtr = std::make_shared<PlayerSession>(session);
-  player->setController(game->getControllers().getFirstAvailable());
-  sessionPtr->spawnShip(&world);
-  game->getSessions()->push_back(sessionPtr);
-  waveTimer = 200;
+  waveTimer = 50;
 
-//  auto player2 = new Player("Player 2");
-//  player2->setColor(sf::Color(58, 144, 163));
-//  auto session2 = new PlayerSession(player2);
-//  player2->setController(game->getControllers().getFirstAvailable());
-//  session2->spawnShip(world);
-//  game->getSessions()->push_back(session2);
+  for (const auto &session: *game->getSessions()) {
+    session->spawnShip(&world);
+  }
 }
 
 void GameScene::drawHud(WindowRendererInterface *renderer) {
@@ -78,11 +69,25 @@ void GameScene::drawHud(WindowRendererInterface *renderer) {
   if (paused) {
     sf::Text pausedText("[Paused]", font, 16);
 
+    auto bounds = pausedText.getLocalBounds();
+    pausedText.setOrigin(sf::Vector2f(int(bounds.left + bounds.width / 2), 0));
+
     auto center = view.getSize().x / 2;
     auto middle = view.getSize().y / 2;
 
     pausedText.setPosition(center, middle - 14);
     window->draw(pausedText);
+  }
+
+  if (waveId == 0) {
+    sf::Text readyText("Get Ready!!!", font, 16);
+
+    auto bounds = readyText.getLocalBounds();
+    readyText.setOrigin(sf::Vector2f(int(bounds.left + bounds.width / 2), 0));
+
+    auto center = view.getSize().x / 2;
+    readyText.setPosition(center, 64);
+    window->draw(readyText);
   }
 }
 
@@ -110,7 +115,7 @@ void GameScene::main() {
       }
     }
 
-    if (remainingAsteroids == 0) {
+    if (remainingAsteroids == 0 && waveId != 0) {
       startWave();
     }
 
@@ -198,11 +203,10 @@ void GameScene::drawWaveBar(WindowRendererInterface *renderer) {
   );
 
   sf::Text waveText("Wave " + std::to_string(waveId), font, 16);
-  waveText.setPosition(sf::Vector2f(view.getSize().x / 2, view.getSize().y - 26));
+  waveText.setPosition(sf::Vector2f(view.getSize().x / 2, view.getSize().y - 40));
 
   auto bounds = waveText.getLocalBounds();
-  waveText.setOrigin(sf::Vector2f(int(bounds.left + bounds.width / 2), int(bounds.top + bounds.height / 2)));
-
+  waveText.setOrigin(sf::Vector2f(int(bounds.left + bounds.width / 2), 0));
   waveText.setFillColor(sf::Color(255, 255, 255));
 
   if (waveTimer > BASE_WAVE_INTERVAL_TIME - 50 && waveTimer / 2 % 2 == 0) {

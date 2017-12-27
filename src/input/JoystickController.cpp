@@ -34,11 +34,15 @@ bool JoystickController::pass(sf::Event event) {
   if (event.type == event.JoystickButtonPressed) {
     buttonMap[event.joystickButton.button].pressed = true;
     emit(buttonMap[event.joystickButton.button].action, true);
+    return true;
   } else if (event.type == event.JoystickButtonReleased) {
     buttonMap[event.joystickButton.button].pressed = false;
+    return true;
   }
 
-  return true;
+  // NB: cases have been known to fall through and cause keyboard input to be eaten
+  // Thus, we return false instead of true
+  return false;
 }
 
 void JoystickController::assignButtonToAction(unsigned int buttonId, InputAction action) {

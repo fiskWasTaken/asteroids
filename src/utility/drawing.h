@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Text.hpp>
 
 struct progress_bar_t {
   int progress = 0;
@@ -18,4 +19,6 @@ void drawProgressBar(
     sf::RenderWindow *renderWindow,
     progress_bar_t options
 );
+
+void centreText(sf::Text &text);
 }

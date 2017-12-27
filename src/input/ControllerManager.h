@@ -55,5 +55,11 @@ class ControllerManager {
     return map.begin()->second;
   }
 
+  void undelegateAll() {
+    for (auto const &controller : map) {
+      controller.second->setDelegate(nullptr);
+    }
+  }
+
   void delegateEvent(sf::Event event);
 };

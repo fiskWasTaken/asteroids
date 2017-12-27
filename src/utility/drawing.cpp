@@ -27,4 +27,8 @@ void drawProgressBar(
   renderWindow->draw(bar);
   renderWindow->draw(progress);
 }
+void centreText(sf::Text &text) {
+    auto bounds = text.getLocalBounds();
+    text.setOrigin(sf::Vector2f(int(bounds.left + bounds.width / 2), 0));
+}
 }

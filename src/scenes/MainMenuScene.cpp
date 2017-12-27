@@ -1,25 +1,18 @@
 #include <SFML/Graphics/Text.hpp>
 #include <sstream>
 #include <SFML/Graphics/ConvexShape.hpp>
+#include <utility/drawing.h>
 #include "MainMenuScene.h"
 #include "GameScene.h"
 #include "StressTestScene.h"
-
-void centreText(sf::Text &text) {
-  auto bounds = text.getLocalBounds();
-  text.setOrigin(sf::Vector2f(int(bounds.left + bounds.width / 2), 0));
-}
 
 void MainMenuScene::render(WindowRendererInterface *renderer) {
   auto window = renderer->getWindow();
   auto view = renderer->getView();
   auto font = renderer->getFont();
 
-  std::string
-      startPromptString = "Press " + game->getControllers().getFirst()->getKeyString(InputAction::FIRE) + " to start";
-
   sf::Text startTitleText("Asteroids", font, 16);
-  sf::Text startPromptText(startPromptString, font, 16);
+  sf::Text startPromptText("Press Fire to start", font, 16);
   sf::Text startLicenseText("fisk, 2017", font, 16);
   sf::Text menuOptionText("< " + menuOptions[selectedMenuOption].string + " >", font, 16);
 
@@ -31,10 +24,10 @@ void MainMenuScene::render(WindowRendererInterface *renderer) {
   startPromptText.setPosition(center, middle + 16);
   startLicenseText.setPosition(center, view.getSize().y - 24);
 
-  centreText(startTitleText);
-  centreText(startPromptText);
-  centreText(startLicenseText);
-  centreText(menuOptionText);
+  drawing::centreText(startTitleText);
+  drawing::centreText(startPromptText);
+  drawing::centreText(startLicenseText);
+  drawing::centreText(menuOptionText);
 
   worldRenderer.drawWorld(renderer, &world);
 
@@ -75,9 +68,7 @@ void MainMenuScene::onVisible() {
 void MainMenuScene::main() {
   world.update();
 }
-MainMenuScene::~MainMenuScene() {
-  game->getControllers().getFirst()->setDelegate(nullptr);
-}
+MainMenuScene::~MainMenuScene() {}
 
 MainMenuScene::MainMenuScene(Asteroids *game) : world(game, 640, 480) {
   this->game = game;
@@ -85,18 +76,50 @@ MainMenuScene::MainMenuScene(Asteroids *game) : world(game, 640, 480) {
   menu_option_t onePlayer;
   onePlayer.string = "1 Player";
   onePlayer.onSelect = [](Asteroids *game) {
+    game->getControllers().undelegateAll();
+
+    auto player = new Player("Player 1");
+    PlayerSession session(player);
+    auto sessionPtr = std::make_shared<PlayerSession>(session);
+    player->setController(game->getControllers().getFirstAvailable());
+    game->getSessions()->push_back(sessionPtr);
+
     game->setScene(new GameScene(game));
   };
 
   menu_option_t twoPlayers;
   twoPlayers.string = "2 Players";
   twoPlayers.onSelect = [](Asteroids *game) {
+    game->getControllers().undelegateAll();
+
+    auto player = new Player("Player 1");
+    PlayerSession session(player);
+    auto sessionPtr = std::make_shared<PlayerSession>(session);
+    player->setController(game->getControllers().getFirstAvailable());
+    game->getSessions()->push_back(sessionPtr);
+
+    // fixes a bug with controller delegation, until I sort it out again...
+    // TODO@ we need to handle delegation through the player instance instead of doing these redelegation gymnastics.
+    game->getControllers().getFirstAvailable()->setDelegate(new Ship(new World(game, 1, 1), &session));
+
+    auto controller2 = game->getControllers().getFirstAvailable();
+
+    if (controller2 != nullptr) {
+      auto player2 = new Player("Player 2");
+      player2->setColor(sf::Color(58, 144, 163));
+      PlayerSession session2(player2);
+      auto session2Ptr = std::make_shared<PlayerSession>(session2);
+      player2->setController(controller2);
+      game->getSessions()->push_back(session2Ptr);
+    }
+
     game->setScene(new GameScene(game));
   };
 
   menu_option_t benchmark;
   benchmark.string = "Stress Test";
   benchmark.onSelect = [](Asteroids *game) {
+    game->getControllers().undelegateAll();
     game->setScene(new StressTestScene(game));
   };
 
