@@ -8,24 +8,23 @@ void drawProgressBar(
     sf::RenderWindow *renderWindow,
     progress_bar_t options
 ) {
-  // health bar
-  auto healthBar = sf::RectangleShape();
-  auto remainingHealth = sf::RectangleShape();
+  auto bar = sf::RectangleShape();
+  auto progress = sf::RectangleShape();
 
-  remainingHealth.setPosition(options.pos);
-  remainingHealth.setOrigin(options.origin);
-  remainingHealth.setSize(sf::Vector2f(options.progress, options.height));
-  remainingHealth.setOutlineColor(sf::Color::Transparent);
-  remainingHealth.setFillColor(options.fillColor);
+  progress.setPosition(options.pos);
+  progress.setOrigin(options.origin);
+  progress.setSize(sf::Vector2f(options.progress, options.height));
+  progress.setOutlineColor(sf::Color::Transparent);
+  progress.setFillColor(options.fillColor);
 
-  healthBar.setPosition(options.pos);
-  healthBar.setOrigin(options.origin);
-  healthBar.setSize(sf::Vector2f(options.maxProgress, options.height));
-  healthBar.setOutlineThickness(1.0f);
-  healthBar.setFillColor(sf::Color::Transparent);
-  healthBar.setOutlineColor(options.outlineColor);
+  bar.setPosition(options.pos - sf::Vector2f(options.gutter, options.gutter));
+  bar.setOrigin(options.origin);
+  bar.setSize(sf::Vector2f(options.maxProgress + (options.gutter * 2), options.height + (options.gutter * 2)));
+  bar.setOutlineThickness(1.0f);
+  bar.setFillColor(sf::Color::Transparent);
+  bar.setOutlineColor(options.outlineColor);
 
-  renderWindow->draw(healthBar);
-  renderWindow->draw(remainingHealth);
+  renderWindow->draw(bar);
+  renderWindow->draw(progress);
 }
 }

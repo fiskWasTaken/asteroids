@@ -206,6 +206,7 @@ void GameScene::drawWaveBar(WindowRendererInterface *renderer) {
   progress_bar.maxProgress = static_cast<int>(maxWidth);
   progress_bar.fillColor = sf::Color(49, 88, 150);
   progress_bar.height = 4;
+  progress_bar.gutter = 1;
 
   drawing::drawProgressBar(
       window,
