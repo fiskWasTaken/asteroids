@@ -4,30 +4,26 @@
 // todo: change into composite sf::Drawable so shapes are not instantiated on the stack on every render call
 
 namespace drawing {
-void drawHealthBar(
+void drawProgressBar(
     sf::RenderWindow *renderWindow,
-    int health,
-    int maxHealth,
-    sf::Vector2f pos,
-    sf::Vector2f origin
+    progress_bar_t options
 ) {
   // health bar
-  int height = 3;
   auto healthBar = sf::RectangleShape();
   auto remainingHealth = sf::RectangleShape();
 
-  remainingHealth.setPosition(pos);
-  remainingHealth.setOrigin(origin);
-  remainingHealth.setSize(sf::Vector2f(health, height));
+  remainingHealth.setPosition(options.pos);
+  remainingHealth.setOrigin(options.origin);
+  remainingHealth.setSize(sf::Vector2f(options.progress, options.height));
   remainingHealth.setOutlineColor(sf::Color::Transparent);
-  remainingHealth.setFillColor(sf::Color::Red);
+  remainingHealth.setFillColor(options.fillColor);
 
-  healthBar.setPosition(pos);
-  healthBar.setOrigin(origin);
-  healthBar.setSize(sf::Vector2f(maxHealth, height));
+  healthBar.setPosition(options.pos);
+  healthBar.setOrigin(options.origin);
+  healthBar.setSize(sf::Vector2f(options.maxProgress, options.height));
   healthBar.setOutlineThickness(1.0f);
   healthBar.setFillColor(sf::Color::Transparent);
-  healthBar.setOutlineColor(sf::Color(127, 127, 127));
+  healthBar.setOutlineColor(options.outlineColor);
 
   renderWindow->draw(healthBar);
   renderWindow->draw(remainingHealth);

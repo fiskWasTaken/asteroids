@@ -24,12 +24,11 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   WaveGenerator waveGenerator;
 
   int waveTimer = 0;
-  int waveId = 1;
+  int waveId = 0;
 
   bool paused = false;
   int showWaveTextTimeout = 0;
 
-  void onGameOver(PlayerSession *playerSession);
   void startRespawnTimer(PlayerSession *playerSession);
 
  public:
@@ -46,5 +45,5 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   void startWave();
   void updateRespawnTimers();
   int getRemainingPlayerCount();
-  void drawWaveBar();
+  void drawWaveBar(WindowRendererInterface *renderer);
 };

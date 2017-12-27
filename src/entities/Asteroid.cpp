@@ -50,12 +50,16 @@ void Asteroid::renderTo(sf::RenderWindow *renderWindow) {
   renderWindow->draw(shape);
 
   if (health < getMaxHealth()) {
-    drawing::drawHealthBar(
+    progress_bar_t progress_bar;
+    progress_bar.pos = sf::Vector2f(pos.x, pos.y + 40);
+    progress_bar.origin = sf::Vector2f(origin.x, 20);
+    progress_bar.progress = getHealth();
+    progress_bar.maxProgress = getMaxHealth();
+    progress_bar.fillColor = sf::Color::Red;
+
+    drawing::drawProgressBar(
         renderWindow,
-        getHealth(),
-        getMaxHealth(),
-        sf::Vector2f(pos.x, pos.y + 40),
-        sf::Vector2f(origin.x, 20)
+        progress_bar
     );
   }
 }

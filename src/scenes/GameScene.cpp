@@ -3,6 +3,7 @@
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <input/KeyboardController.h>
+#include <utility/drawing.h>
 #include "GameScene.h"
 #include "GameOverScene.h"
 
@@ -11,7 +12,7 @@ void GameScene::render(WindowRendererInterface *renderer) {
   worldRenderer.drawWorld(renderer, &world);
 
   drawHud(renderer);
-  drawWaveBar();
+  drawWaveBar(renderer);
 }
 
 void GameScene::startWave() {
@@ -21,6 +22,9 @@ void GameScene::startWave() {
   for (const auto &session : *game->getSessions()) {
     session->getShip()->setInvincibilityCooldown(100);
   }
+
+  waveTimer = BASE_WAVE_INTERVAL_TIME;
+  waveId++;
 }
 
 void GameScene::onVisible() {
@@ -30,6 +34,7 @@ void GameScene::onVisible() {
   player->setController(game->getControllers().getFirstAvailable());
   sessionPtr->spawnShip(&world);
   game->getSessions()->push_back(sessionPtr);
+  waveTimer = 200;
 
 //  auto player2 = new Player("Player 2");
 //  player2->setColor(sf::Color(58, 144, 163));
@@ -37,8 +42,6 @@ void GameScene::onVisible() {
 //  player2->setController(game->getControllers().getFirstAvailable());
 //  session2->spawnShip(world);
 //  game->getSessions()->push_back(session2);
-
-  startWave();
 }
 
 void GameScene::drawHud(WindowRendererInterface *renderer) {
@@ -107,6 +110,12 @@ void GameScene::pause(PlayerSession *initiator) {
 
 void GameScene::main() {
   if (!paused) {
+    if (waveTimer <= 0) {
+      startWave();
+    }
+
+    waveTimer -= 1;
+
     world.update();
 
     int remainingAsteroids = 0;
@@ -119,10 +128,14 @@ void GameScene::main() {
 
     if (remainingAsteroids == 0) {
       startWave();
-      waveId++;
     }
 
     updateRespawnTimers();
+
+    if (getRemainingPlayerCount() == 0) {
+      world.clear();
+      game->setScene(new GameOverScene(game));
+    }
   }
 }
 
@@ -130,18 +143,18 @@ void GameScene::updateRespawnTimers() {
   auto it = respawnTimers.begin();
 
   while (it != respawnTimers.end()) {
+    auto timer = **it;
+
     (**it).time--;
 
     if ((**it).time == 0) {
       (**it).session->setLives((**it).session->getLives() - 1);
 
-      if ((**it).session->getLives() == 0) {
-        onGameOver((**it).session);
-      } else {
+      if ((**it).session->getLives() > 0) {
         (**it).session->spawnShip(&world);
       }
 
-//      it = respawnTimers.erase(it);
+      it = respawnTimers.erase(it);
     } else {
       ++it;
     }
@@ -152,13 +165,6 @@ void GameScene::onAction(InputAction action, bool once) {
   if (action == InputAction::PAUSE && once) {
     paused = false;
     pauseInitiator->getPlayer()->getController()->setDelegate(pauseInitiator->getShip());
-  }
-}
-
-void GameScene::onGameOver(PlayerSession *playerSession) {
-  if (getRemainingPlayerCount() == 0) {
-    world.clear();
-    game->setScene(new GameOverScene(game));
   }
 }
 
@@ -184,8 +190,37 @@ int GameScene::getRemainingPlayerCount() {
   return count;
 }
 
-void GameScene::drawWaveBar() {
+void GameScene::drawWaveBar(WindowRendererInterface *renderer) {
+  auto font = renderer->getFont();
+  auto view = renderer->getView();
+  auto window = renderer->getWindow();
 
+  auto maxWidth = view.getSize().x / 4;
+  auto barWidth = (maxWidth / BASE_WAVE_INTERVAL_TIME) * waveTimer;
+  auto position = sf::Vector2f((view.getSize().x / 8) * 3, view.getSize().y - 16);
+
+  progress_bar_t progress_bar;
+  progress_bar.pos = sf::Vector2f(position);
+  progress_bar.origin = sf::Vector2f(0, 0);
+  progress_bar.progress = static_cast<int>(barWidth);
+  progress_bar.maxProgress = static_cast<int>(maxWidth);
+  progress_bar.fillColor = sf::Color(49, 88, 150);
+  progress_bar.height = 4;
+
+  drawing::drawProgressBar(
+      window,
+      progress_bar
+  );
+
+  sf::Text waveText("Wave " + std::to_string(waveId), font, 12);
+  waveText.setPosition(sf::Vector2f(view.getSize().x / 2, view.getSize().y - 26));
+
+  auto bounds = waveText.getLocalBounds();
+
+  waveText.setOrigin(sf::Vector2f(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2));
+  waveText.setFillColor(sf::Color(255, 255, 255));
+
+  window->draw(waveText);
 }
 
 GameScene::GameScene(Asteroids *game) : world(game, 640, 480) {
