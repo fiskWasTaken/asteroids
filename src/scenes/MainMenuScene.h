@@ -7,7 +7,7 @@
 
 struct menu_option_t {
   std::string string;
-  std::function<void(void)> onSelect;
+  std::function<void(Asteroids*)> onSelect;
 };
 
 class MainMenuScene : public SceneInterface, public ControllerListenerInterface {

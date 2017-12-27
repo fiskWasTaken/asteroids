@@ -8,7 +8,7 @@ void StressTestScene::render(WindowRendererInterface *renderer) {
   auto view = renderer->getView();
   auto font = renderer->getFont();
 
-  sf::Text startTitleText("Stress test", font, 16);
+  sf::Text startTitleText("Stress test - press fire button to exit.", font, 16);
 
   startTitleText.setPosition(4, 0);
 
@@ -19,7 +19,7 @@ void StressTestScene::render(WindowRendererInterface *renderer) {
 }
 
 void StressTestScene::onAction(InputAction action, bool once) {
-  if (action == InputAction::PANIC && once) {
+  if (action == InputAction::FIRE && once) {
     game->setScene(new MainMenuScene(game));
   }
 }

@@ -7,16 +7,16 @@
 void Asteroid::onDestroyed() {
   if (size > 13) {
     auto ast1 = new Asteroid(world, size / 2);
-    ast1->pos.x = pos.x - 6;
+    ast1->pos.x = pos.x - size / 4;
     ast1->pos.y = pos.y;
-    ast1->vel = vector::rot(vel, vector::rot(vel) + 5);
+    ast1->vel = vector::len(vector::rot(vel, vector::rot(vel) + 45), vector::len(vel) * 1.3f);
 
     world->pushObject(ast1);
 
     auto ast2 = new Asteroid(world, size / 2);
-    ast2->pos.x = pos.x + 6;
+    ast2->pos.x = pos.x + size / 4;
     ast2->pos.y = pos.y;
-    ast2->vel = vector::rot(vel, vector::rot(vel) - 5);
+    ast2->vel = vector::len(vector::rot(vel, vector::rot(vel) - 45), vector::len(vel) * 1.3f);
 
     world->pushObject(ast2);
   }
@@ -52,7 +52,7 @@ void Asteroid::renderTo(sf::RenderWindow *renderWindow) {
   if (health < getMaxHealth()) {
     progress_bar_t progress_bar;
     progress_bar.pos = sf::Vector2f(pos.x, pos.y + 40);
-    progress_bar.origin = sf::Vector2f(origin.x, 20);
+    progress_bar.origin = sf::Vector2f(int(origin.x), 20);
     progress_bar.progress = getHealth();
     progress_bar.maxProgress = getMaxHealth();
     progress_bar.fillColor = sf::Color::Red;

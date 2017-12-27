@@ -16,7 +16,6 @@ void GameScene::render(WindowRendererInterface *renderer) {
 }
 
 void GameScene::startWave() {
-  showWaveTextTimeout = WAVE_TEXT_DISPLAY_TIME;
   waveGenerator.generate(&world, waveId);
 
   for (const auto &session : *game->getSessions()) {
@@ -84,21 +83,6 @@ void GameScene::drawHud(WindowRendererInterface *renderer) {
 
     pausedText.setPosition(center, middle - 14);
     window->draw(pausedText);
-  }
-
-  if (showWaveTextTimeout > 0) {
-    sf::Text waveText("Wave " + std::to_string(waveId), font, 16);
-    sf::Text readyText("Ready!", font, 16);
-
-    auto center = view.getSize().x / 2;
-    auto middle = view.getSize().y / 2;
-
-    waveText.setPosition(center, middle - 8);
-    readyText.setPosition(center, middle + 8);
-    window->draw(waveText);
-    window->draw(readyText);
-
-    showWaveTextTimeout--;
   }
 }
 
@@ -197,7 +181,7 @@ void GameScene::drawWaveBar(WindowRendererInterface *renderer) {
 
   auto maxWidth = view.getSize().x / 4;
   auto barWidth = (maxWidth / BASE_WAVE_INTERVAL_TIME) * waveTimer;
-  auto position = sf::Vector2f((view.getSize().x / 8) * 3, view.getSize().y - 16);
+  auto position = sf::Vector2f(int((view.getSize().x / 8) * 3), int(view.getSize().y - 16));
 
   progress_bar_t progress_bar;
   progress_bar.pos = sf::Vector2f(position);
@@ -213,13 +197,17 @@ void GameScene::drawWaveBar(WindowRendererInterface *renderer) {
       progress_bar
   );
 
-  sf::Text waveText("Wave " + std::to_string(waveId), font, 12);
+  sf::Text waveText("Wave " + std::to_string(waveId), font, 16);
   waveText.setPosition(sf::Vector2f(view.getSize().x / 2, view.getSize().y - 26));
 
   auto bounds = waveText.getLocalBounds();
+  waveText.setOrigin(sf::Vector2f(int(bounds.left + bounds.width / 2), int(bounds.top + bounds.height / 2)));
 
-  waveText.setOrigin(sf::Vector2f(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2));
   waveText.setFillColor(sf::Color(255, 255, 255));
+
+  if (waveTimer > BASE_WAVE_INTERVAL_TIME - 50 && waveTimer / 2 % 2 == 0) {
+    waveText.setFillColor(sf::Color(127, 127, 127));
+  }
 
   window->draw(waveText);
 }

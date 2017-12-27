@@ -55,10 +55,15 @@ ControllerInterface *getDefaultJoystickController(unsigned int index = 0) {
   // Button 3: Y
   controller->assignButtonToAction(3, InputAction::PANIC);
   // Button 4: LB
+  controller->assignButtonToAction(4, InputAction::LEFT);
   // Button 5: RB
+  controller->assignButtonToAction(5, InputAction::RIGHT);
   // Button 6: Back/Share/Menu/Select/etc
   // Button 7: Start
   controller->assignButtonToAction(7, InputAction::PAUSE);
+  // Button 8: Unknown
+  // Button 9: Left stick click
+  // Button 10: Right stick click
 
   return controller;
 }

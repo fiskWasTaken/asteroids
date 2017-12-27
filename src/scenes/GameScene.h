@@ -14,7 +14,6 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
  private:
   const int BASE_WAVE_INTERVAL_TIME = 1000;
   const int RESPAWN_TIME = 50;
-  const int WAVE_TEXT_DISPLAY_TIME = 100;
 
   Asteroids *game;
   World world;
@@ -27,7 +26,6 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   int waveId = 0;
 
   bool paused = false;
-  int showWaveTextTimeout = 0;
 
   void startRespawnTimer(PlayerSession *playerSession);
 

@@ -4,8 +4,8 @@
 void placeRandomly(WorldInterface *world, AbstractWorldObject *object) {
   object->pos.x = rand() % int(world->getWidth());
   object->pos.y = rand() % int(world->getHeight());
-  object->vel.x = rand() % 2;
-  object->vel.y = rand() % 2;
+  object->vel.x = -0.5 + rand() % 2;
+  object->vel.y = -0.5 + rand() % 2;
   world->pushObject(object);
 }
 
