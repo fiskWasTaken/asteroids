@@ -4,6 +4,7 @@
 #include <renderer/WorldRenderer.h>
 #include <functional>
 #include "SceneInterface.h"
+#include <SFML/Graphics/Shader.hpp>
 
 struct menu_option_t {
   std::string string;
@@ -17,6 +18,8 @@ class MainMenuScene : public SceneInterface, public ControllerListenerInterface 
   WorldRenderer worldRenderer;
   std::vector<menu_option_t> menuOptions;
   int selectedMenuOption = 0;
+  sf::Shader shader;
+  sf::Clock clock;
 
  public:
   explicit MainMenuScene(Asteroids *game);

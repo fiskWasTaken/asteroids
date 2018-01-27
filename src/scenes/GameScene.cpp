@@ -8,7 +8,17 @@
 #include "GameOverScene.h"
 
 void GameScene::render(WindowRendererInterface *renderer) {
+  auto view = renderer->getView();
+  auto window = renderer->getWindow();
+
   worldRenderer.drawBg(renderer, &world);
+
+  sf::RectangleShape bg(view.getSize());
+
+  shader.setUniform("u_time", clock.getElapsedTime().asSeconds());
+  shader.setUniform("u_resolution", view.getSize());
+  window->draw(bg, &shader);
+
   worldRenderer.drawWorld(renderer, &world);
 
   drawHud(renderer);
@@ -218,6 +228,12 @@ void GameScene::drawWaveBar(WindowRendererInterface *renderer) {
 
 GameScene::GameScene(Asteroids *game) : world(game, 640, 480) {
   this->game = game;
+
+  // load only the fragment shader
+  if (!this->shader.loadFromFile("assets/test.frag", sf::Shader::Fragment))
+  {
+    exit(253);
+  }
 }
 
 GameScene::~GameScene() {

@@ -1,3 +1,4 @@
+#include <SFML/Graphics/Shader.hpp>
 #include "Asteroids.h"
 
 void Asteroids::main() {

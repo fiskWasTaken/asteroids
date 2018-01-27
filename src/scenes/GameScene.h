@@ -4,6 +4,7 @@
 #include <renderer/WorldRenderer.h>
 #include <waves/WaveGenerator.h>
 #include "SceneInterface.h"
+#include <SFML/Graphics/Shader.hpp>
 
 struct respawn_timer_t {
   PlayerSession *session;
@@ -21,6 +22,8 @@ class GameScene : public SceneInterface, public ControllerListenerInterface {
   PlayerSession *pauseInitiator = nullptr;
   WorldRenderer worldRenderer;
   WaveGenerator waveGenerator;
+  sf::Shader shader;
+  sf::Clock clock;
 
   int waveTimer = 0;
   int waveId = 0;

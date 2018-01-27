@@ -2,6 +2,8 @@
 #include <sstream>
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <utility/drawing.h>
+#include <SFML/Graphics/Shader.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 #include "MainMenuScene.h"
 #include "GameScene.h"
 #include "StressTestScene.h"
@@ -29,8 +31,13 @@ void MainMenuScene::render(WindowRendererInterface *renderer) {
   drawing::centreText(startLicenseText);
   drawing::centreText(menuOptionText);
 
-  worldRenderer.drawWorld(renderer, &world);
+  sf::RectangleShape bg(view.getSize());
 
+  shader.setUniform("u_time", clock.getElapsedTime().asSeconds());
+  shader.setUniform("u_resolution", view.getSize());
+  window->draw(bg, &shader);
+
+  worldRenderer.drawWorld(renderer, &world);
   window->draw(startTitleText);
   window->draw(startPromptText);
   window->draw(startLicenseText);
@@ -72,6 +79,12 @@ MainMenuScene::~MainMenuScene() {}
 
 MainMenuScene::MainMenuScene(Asteroids *game) : world(game, 640, 480) {
   this->game = game;
+
+  // load only the fragment shader
+  if (!this->shader.loadFromFile("assets/test.frag", sf::Shader::Fragment))
+  {
+    exit(253);
+  }
 
   menu_option_t onePlayer;
   onePlayer.string = "1 Player";
