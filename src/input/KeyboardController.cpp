@@ -19,7 +19,7 @@ bool KeyboardController::pass(sf::Event event) {
   if (map.count(event.key.code) == 0)
     return false;
 
-  if (event.type == event.KeyPressed) {
+  if (event.type == event.KeyPressed && !map[event.key.code].pressed) {
     map[event.key.code].pressed = true;
     emit(map[event.key.code].action, true);
   } else if (event.type == event.KeyReleased) {
