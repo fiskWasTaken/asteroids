@@ -81,7 +81,7 @@ MainMenuScene::MainMenuScene(Asteroids *game) : world(game, 640, 480) {
   this->game = game;
 
   // load only the fragment shader
-  if (!this->shader.loadFromFile("assets/test.frag", sf::Shader::Fragment))
+  if (!this->shader.loadFromFile("assets/nebulae.frag", sf::Shader::Fragment))
   {
     exit(253);
   }
