@@ -2,7 +2,6 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "WorldObjectClass.h"
 
 class WorldObjectInterface {
  public:
@@ -13,7 +12,7 @@ class WorldObjectInterface {
   sf::Vector2f acc;
   float rot{};
 
-  virtual WorldObjectClass getClass() { return WorldObjectClass::NONE; }
+  virtual std::string getClass() { return "undefined"; }
 
   /**
    * Invoked when this object is colliding with another object

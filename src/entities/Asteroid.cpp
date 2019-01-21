@@ -11,14 +11,14 @@ void Asteroid::onDestroyed() {
     ast1->pos.y = pos.y;
     ast1->vel = vector::len(vector::rot(vel, vector::rot(vel) + 45), vector::len(vel) * 1.3f);
 
-    world->pushObject(ast1);
+    world->push(ast1);
 
     auto ast2 = new Asteroid(world, size / 2);
     ast2->pos.x = pos.x + size / 4;
     ast2->pos.y = pos.y;
     ast2->vel = vector::len(vector::rot(vel, vector::rot(vel) - 45), vector::len(vel) * 1.3f);
 
-    world->pushObject(ast2);
+    world->push(ast2);
   }
 
   auto explosion = new ParticleSystem(128, 128);;
@@ -31,7 +31,7 @@ void Asteroid::onDestroyed() {
   auto emitter = new TemporaryParticle(world, explosion);
   emitter->pos.x = pos.x;
   emitter->pos.y = pos.y;
-  world->pushObject(emitter);
+  world->push(emitter);
 }
 
 bool Asteroid::isRecyclable() {
@@ -86,7 +86,7 @@ void Asteroid::onBulletHit(Bullet *bullet) {
   auto emitter = new TemporaryParticle(world, ricochet);
   emitter->pos.x = bullet->pos.x;
   emitter->pos.y = bullet->pos.y;
-  world->pushObject(emitter);
+  world->push(emitter);
 }
 
 void Asteroid::onAsteroidHit(Asteroid *other) {
@@ -112,15 +112,17 @@ void Asteroid::onShipHit(Ship *other) {
 }
 
 void Asteroid::onCollision(AbstractWorldObject *other) {
-  if (other->getClass() == WorldObjectClass::BULLET) {
+  auto klass = other->getClass();
+
+  if (klass == "bullet") {
     onBulletHit(dynamic_cast<Bullet *>(other));
   }
 
-  if (other->getClass() == WorldObjectClass::ASTEROID) {
+  if (klass == "asteroid") {
     onAsteroidHit(dynamic_cast<Asteroid *>(other));
   }
 
-  if (other->getClass() == WorldObjectClass::SHIP) {
+  if (klass == "ship") {
     onShipHit(dynamic_cast<Ship *>(other));
   }
 }

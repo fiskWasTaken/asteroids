@@ -36,13 +36,16 @@ void World::containObject(WorldObjectInterface *object) {
 
 }
 
+// Recycles objects from the game world, deleting the reference.
 void World::recycle() {
   auto it = objects.begin();
 
   while (it != objects.end()) {
 
     if ((*it)->isRecyclable()) {
+      auto ref = *it;
       it = objects.erase(it);
+      delete (ref);
     } else {
       ++it;
     }
@@ -90,11 +93,11 @@ World::World(GameInterface *game, double w, double h) {
   this->collisionModel = SATCollisionModel();
   objects.reserve(2048);
 }
-bool World::pushObject(AbstractWorldObject *object) {
+bool World::push(AbstractWorldObject *object) {
   objects.push_back(object);
   return true;
 }
-bool World::popObject(AbstractWorldObject *object) {
+bool World::pop(AbstractWorldObject *object) {
   objects.erase(std::remove(objects.begin(), objects.end(), object), objects.end());
   return true;
 }

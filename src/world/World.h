@@ -28,8 +28,8 @@ class World : public WorldInterface {
   void wrapObject(WorldObjectInterface *object) override;
   void containObject(WorldObjectInterface *object);
 
-  bool pushObject(AbstractWorldObject *object) override;
-  bool popObject(AbstractWorldObject *object) override;
+  bool push(AbstractWorldObject *object) override;
+  bool pop(AbstractWorldObject *object) override;
 
   const std::vector<AbstractWorldObject *> &getObjects() const { return objects; }
 

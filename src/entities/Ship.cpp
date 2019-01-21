@@ -20,7 +20,7 @@ void Ship::fireBullet() {
   vel.x -= bullet->vel.x / 100;
   vel.y -= bullet->vel.y / 100;
 
-  world->pushObject(bullet);
+  world->push(bullet);
 }
 
 void Ship::fireAltWeapon() {
@@ -32,7 +32,7 @@ void Ship::fireAltWeapon() {
     bullet->pos.y = pos.y + thisRot.y * 10;
     bullet->vel = velocity + vel;
     bullet->rot = rot;
-    world->pushObject(bullet);
+    world->push(bullet);
   }
 }
 
@@ -82,7 +82,7 @@ void Ship::onDestroyed() {
   auto emitter = new TemporaryParticle(world, explosion);
   emitter->pos.x = pos.x;
   emitter->pos.y = pos.y;
-  world->pushObject(emitter);
+  world->push(emitter);
 }
 
 void Ship::onAction(InputAction action, bool once) {
@@ -188,7 +188,7 @@ void Ship::renderThruster(sf::RenderWindow *renderWindow) {
 }
 
 void Ship::onCollision(AbstractWorldObject *other) {
-  if (other->getClass() == WorldObjectClass::SHIP) {
+  if (other->getClass() == "ship") {
     onShipHit(dynamic_cast<Ship *>(other));
   }
 }

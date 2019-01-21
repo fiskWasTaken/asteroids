@@ -17,8 +17,8 @@ class Asteroid : public AbstractWorldObject {
  public:
   explicit Asteroid(WorldInterface *world, float size);
 
-  WorldObjectClass getClass() override {
-    return WorldObjectClass::ASTEROID;
+  std::string getClass() override {
+    return "asteroid";
   }
 
   bool isDestroyed() { return health <= 0; }

@@ -27,8 +27,8 @@ class Ship : public AbstractWorldObject, public ControllerListenerInterface {
   const sf::Color fillColor = sf::Color(255, 255, 255, 25);
 
  public:
-  WorldObjectClass getClass() override {
-    return WorldObjectClass::SHIP;
+  std::string getClass() override {
+    return "ship";
   }
 
   explicit Ship(WorldInterface *world, PlayerSession *playerSession);

@@ -20,7 +20,7 @@ class Bullet : public AbstractWorldObject {
 
  public:
   explicit Bullet(WorldInterface *world, PlayerSession *owner);
-  WorldObjectClass getClass() override { return WorldObjectClass::BULLET; }
+  std::string getClass() override { return "bullet"; }
   PlayerSession *getOwner() const { return this->owner; }
   bool isRecyclable() override { return lifetime <= 0; }
 

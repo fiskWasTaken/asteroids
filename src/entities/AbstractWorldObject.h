@@ -4,7 +4,6 @@
 #include <utility>
 #include <vector>
 #include <SFML/Graphics/Shape.hpp>
-#include "WorldObjectClass.h"
 #include "world/WorldInterface.h"
 #include "WorldObjectInterface.h"
 

@@ -120,7 +120,7 @@ void GameScene::main() {
     int remainingAsteroids = 0;
 
     for (auto object : world.getObjects()) {
-      if (object->getClass() == WorldObjectClass::ASTEROID) {
+      if (object->getClass() == "asteroid") {
         remainingAsteroids++;
       }
     }

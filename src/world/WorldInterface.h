@@ -13,9 +13,9 @@ class WorldInterface {
 
   virtual void wrapObject(WorldObjectInterface *object) = 0;
 
-  virtual bool pushObject(AbstractWorldObject *object) = 0;
+  virtual bool push(AbstractWorldObject *object) = 0;
 
-  virtual bool popObject(AbstractWorldObject *object) = 0;
+  virtual bool pop(AbstractWorldObject *object) = 0;
 
   virtual void update() = 0;
 
