@@ -3,7 +3,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-class WorldObjectInterface {
+class IActor {
  public:
   std::vector<sf::Vector2f> points;
   sf::Vector2f origin;
@@ -20,7 +20,7 @@ class WorldObjectInterface {
    *
    * @param other the other object this object is colliding with
    */
-  virtual void onCollision(WorldObjectInterface *other) {}
+  virtual void onCollision(IActor *other) {}
 
   virtual void renderTo(sf::RenderWindow *renderWindow) = 0;
 };

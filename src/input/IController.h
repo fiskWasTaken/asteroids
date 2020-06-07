@@ -3,20 +3,20 @@
 #include <set>
 #include <map>
 #include "InputAction.h"
-#include "ControllerListenerInterface.h"
+#include "IControllerListener.h"
 
-class ControllerInterface {
+class IController {
  protected:
-  ControllerListenerInterface *delegate = nullptr;
+  IControllerListener *delegate = nullptr;
 
  public:
   virtual void poll() = 0;
 
-  void setDelegate(ControllerListenerInterface *listenerInterface) {
+  void setDelegate(IControllerListener *listenerInterface) {
     delegate = listenerInterface;
   }
 
-  ControllerListenerInterface *getDelegate() {
+  IControllerListener *getDelegate() {
     return delegate;
   }
 

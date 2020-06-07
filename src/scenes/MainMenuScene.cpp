@@ -8,20 +8,21 @@
 #include "GameScene.h"
 #include "StressTestScene.h"
 
-void MainMenuScene::render(WindowRendererInterface *renderer) {
+void MainMenuScene::render(IWindowRenderer *renderer) {
   auto window = renderer->getWindow();
   auto view = renderer->getView();
   auto font = renderer->getFont();
 
-  sf::Text startTitleText("Asteroids", font, 16);
+  sf::Text startTitleText("Asterpop", font, 32);
   sf::Text startPromptText("Press Fire to start", font, 16);
-  sf::Text startLicenseText("fisk, 2017", font, 16);
-  sf::Text menuOptionText("< " + menuOptions[selectedMenuOption].string + " >", font, 16);
+  sf::Text startLicenseText("fisk, 2017-2020", font, 12);
+  sf::Text menuOptionText("< " + menuOptions[selected].string + " >", font, 16);
 
   auto center = view.getSize().x / 2;
   auto middle = view.getSize().y / 2;
 
-  startTitleText.setPosition(center, middle - 32);
+  startTitleText.setPosition(center, middle - 64);
+  startTitleText.setRotation(-5);
   menuOptionText.setPosition(center, middle);
   startPromptText.setPosition(center, middle + 16);
   startLicenseText.setPosition(center, view.getSize().y - 24);
@@ -46,23 +47,19 @@ void MainMenuScene::render(WindowRendererInterface *renderer) {
 
 void MainMenuScene::onAction(InputAction action, bool once) {
   if (action == InputAction::FIRE && once) {
-    menuOptions[selectedMenuOption].onSelect(game);
+    menuOptions[selected].onSelect(game);
   }
 
   if (action == InputAction::LEFT && once) {
-    selectedMenuOption--;
+    selected--;
 
-    if (selectedMenuOption < 0) {
-      selectedMenuOption = static_cast<int>(menuOptions.size() - 1);
+    if (selected < 0) {
+      selected = static_cast<int>(menuOptions.size() - 1);
     }
   }
 
   if (action == InputAction::RIGHT && once) {
-    selectedMenuOption++;
-
-    if (selectedMenuOption >= menuOptions.size()) {
-      selectedMenuOption = 0;
-    }
+    selected = (selected + 1) % menuOptions.size();
   }
 }
 
@@ -77,7 +74,7 @@ void MainMenuScene::main() {
 }
 MainMenuScene::~MainMenuScene() {}
 
-MainMenuScene::MainMenuScene(Asteroids *game) : world(game, 640, 480) {
+MainMenuScene::MainMenuScene(IGame *game) : world(game, 640, 480) {
   this->game = game;
 
   // load only the fragment shader
@@ -88,28 +85,28 @@ MainMenuScene::MainMenuScene(Asteroids *game) : world(game, 640, 480) {
 
   menu_option_t onePlayer;
   onePlayer.string = "1 Player";
-  onePlayer.onSelect = [](Asteroids *game) {
+  onePlayer.onSelect = [](IGame *game) {
     game->getControllers().undelegateAll();
 
     auto player = new Player("Player 1");
     PlayerSession session(player);
     auto sessionPtr = std::make_shared<PlayerSession>(session);
     player->setController(game->getControllers().getFirstAvailable());
-    game->getSessions()->push_back(sessionPtr);
+    game->getSessions().push_back(sessionPtr);
 
     game->setScene(new GameScene(game));
   };
 
   menu_option_t twoPlayers;
   twoPlayers.string = "2 Players";
-  twoPlayers.onSelect = [](Asteroids *game) {
+  twoPlayers.onSelect = [](IGame *game) {
     game->getControllers().undelegateAll();
 
     auto player = new Player("Player 1");
     PlayerSession session(player);
     auto sessionPtr = std::make_shared<PlayerSession>(session);
     player->setController(game->getControllers().getFirstAvailable());
-    game->getSessions()->push_back(sessionPtr);
+    game->getSessions().push_back(sessionPtr);
 
     // fixes a bug with controller delegation, until I sort it out again...
     // TODO@ we need to handle delegation through the player instance instead of doing these redelegation gymnastics.
@@ -123,7 +120,7 @@ MainMenuScene::MainMenuScene(Asteroids *game) : world(game, 640, 480) {
       PlayerSession session2(player2);
       auto session2Ptr = std::make_shared<PlayerSession>(session2);
       player2->setController(controller2);
-      game->getSessions()->push_back(session2Ptr);
+      game->getSessions().push_back(session2Ptr);
     }
 
     game->setScene(new GameScene(game));
@@ -131,7 +128,7 @@ MainMenuScene::MainMenuScene(Asteroids *game) : world(game, 640, 480) {
 
   menu_option_t benchmark;
   benchmark.string = "Stress Test";
-  benchmark.onSelect = [](Asteroids *game) {
+  benchmark.onSelect = [](IGame *game) {
     game->getControllers().undelegateAll();
     game->setScene(new StressTestScene(game));
   };

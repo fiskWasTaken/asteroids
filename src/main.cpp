@@ -1,13 +1,9 @@
 #include <thread>
 #include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
-#include "GameInterface.h"
+#include "Asteroids.h"
 #include "renderer/WindowRenderer.h"
 #include "scenes/MainMenuScene.h"
-
-void engine(Asteroids *game) {
-  game->setScene(new MainMenuScene(game));
-}
 
 sf::ContextSettings getContextSettings() {
   sf::ContextSettings settings;
@@ -45,8 +41,7 @@ void renderer(Asteroids *game) {
 }
 
 int main() {
-  auto game = Asteroids();
-  engine(&game);
+  Asteroids game;
   renderer(&game);
   return 0;
 }

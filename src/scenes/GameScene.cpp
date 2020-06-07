@@ -7,63 +7,26 @@
 #include "GameScene.h"
 #include "GameOverScene.h"
 
-void GameScene::render(WindowRendererInterface *renderer) {
-  auto view = renderer->getView();
-  auto window = renderer->getWindow();
-
-  worldRenderer.drawBg(renderer, &world);
-
-  sf::RectangleShape bg(view.getSize());
-
-  shader.setUniform("u_time", clock.getElapsedTime().asSeconds());
-  shader.setUniform("u_resolution", view.getSize());
-  window->draw(bg, &shader);
-
-  worldRenderer.drawWorld(renderer, &world);
-
-  drawHud(renderer);
-  drawWaveBar(renderer);
-}
-
-void GameScene::startWave() {
-  waveGenerator.generate(&world, waveId);
-
-  for (const auto &session : *game->getSessions()) {
-    session->getShip()->setInvincibilityCooldown(100);
-  }
-
-  waveTimer = BASE_WAVE_INTERVAL_TIME;
-  waveId++;
-}
-
-void GameScene::onVisible() {
-  waveTimer = 50;
-
-  for (const auto &session: *game->getSessions()) {
-    session->spawnShip(&world);
-  }
-}
-
-void GameScene::drawHud(WindowRendererInterface *renderer) {
+void GameScene::drawHud(IWindowRenderer *renderer) {
   auto font = renderer->getFont();
   auto window = renderer->getWindow();
   auto view = renderer->getView();
   int offset = 4;
 
-  for (const auto &session: *game->getSessions()) {
-    sf::Text nameText(session->getPlayer()->getName(), font, 14);
-    sf::Text scoreText("Score: " + std::to_string(session->getScore()), font, 14);
+  for (const auto &session: game->getSessions()) {
+    sf::Text nameText(session->player->getName(), font, 14);
+    sf::Text scoreText("Score: " + std::to_string(session->score), font, 14);
 
     // Bing bing wahoo
     std::stringstream marios;
 
-    for (int i = 0; i < session->getLives(); i++) {
+    for (int i = 0; i < session->lives; i++) {
       marios << "^";
     }
 
     sf::Text livesText(marios.str(), font, 14);
 
-    nameText.setFillColor(session->getPlayer()->getColor());
+    nameText.setFillColor(session->player->getColor());
 
     nameText.setPosition(offset, 0);
     scoreText.setPosition(offset, 14);
@@ -101,12 +64,6 @@ void GameScene::drawHud(WindowRendererInterface *renderer) {
   }
 }
 
-void GameScene::pause(PlayerSession *initiator) {
-  paused = true;
-  pauseInitiator = initiator;
-  initiator->getPlayer()->getController()->setDelegate(this);
-}
-
 void GameScene::main() {
   if (!paused) {
     if (waveTimer <= 0) {
@@ -138,40 +95,6 @@ void GameScene::main() {
   }
 }
 
-void GameScene::updateRespawnTimers() {
-  auto it = respawnTimers.begin();
-
-  while (it != respawnTimers.end()) {
-    auto timer = **it;
-
-    (**it).time--;
-
-    if ((**it).time == 0) {
-      (**it).session->setLives((**it).session->getLives() - 1);
-
-      if ((**it).session->getLives() > 0) {
-        (**it).session->spawnShip(&world);
-      }
-
-      it = respawnTimers.erase(it);
-    } else {
-      ++it;
-    }
-  }
-}
-
-void GameScene::onAction(InputAction action, bool once) {
-  if (action == InputAction::PAUSE && once) {
-    paused = false;
-    pauseInitiator->getPlayer()->getController()->setDelegate(pauseInitiator->getShip());
-  }
-}
-
-void GameScene::onShipDestroyed(PlayerSession *playerSession) {
-  playerSession->getPlayer()->getController()->setDelegate(nullptr);
-  startRespawnTimer(playerSession);
-}
-
 void GameScene::startRespawnTimer(PlayerSession *playerSession) {
   respawnTimers.push_back(std::make_unique<respawn_timer_t>(respawn_timer_t{
       session: playerSession,
@@ -179,17 +102,7 @@ void GameScene::startRespawnTimer(PlayerSession *playerSession) {
   }));
 }
 
-int GameScene::getRemainingPlayerCount() {
-  int count = 0;
-
-  for (const auto &session : *game->getSessions())
-    if (session->getLives() > 0)
-      count++;
-
-  return count;
-}
-
-void GameScene::drawWaveBar(WindowRendererInterface *renderer) {
+void GameScene::drawWaveBar(IWindowRenderer *renderer) {
   auto font = renderer->getFont();
   auto view = renderer->getView();
   auto window = renderer->getWindow();
@@ -226,7 +139,7 @@ void GameScene::drawWaveBar(WindowRendererInterface *renderer) {
   window->draw(waveText);
 }
 
-GameScene::GameScene(Asteroids *game) : world(game, 640, 480) {
+GameScene::GameScene(IGame *game) : world(game, 640, 480) {
   this->game = game;
 
   // load only the fragment shader
@@ -234,8 +147,4 @@ GameScene::GameScene(Asteroids *game) : world(game, 640, 480) {
   {
     exit(253);
   }
-}
-
-GameScene::~GameScene() {
-  game->getControllers().getFirst()->setDelegate(nullptr);
 }

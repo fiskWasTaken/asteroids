@@ -1,7 +1,7 @@
 #pragma once
 
 #include "InputAction.h"
-class ControllerListenerInterface {
+class IControllerListener {
  public:
   virtual void onAction(InputAction action, bool once) = 0;
 };

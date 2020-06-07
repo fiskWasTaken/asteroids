@@ -4,7 +4,7 @@
 
 /**
  * mtv -- the minimum translation vector -- is the smallest translation
- * needed to stop two objects from being in collision
+ * needed to stop two actors from being in collision
  */
 struct collision_result_t {
   bool isCollision = false;

@@ -4,7 +4,7 @@
 #include <SFML/Graphics/View.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-class WindowRendererInterface {
+class IWindowRenderer {
  public:
   virtual void renderFrame() = 0;
   virtual void handleEvents() = 0;

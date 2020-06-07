@@ -1,23 +1,42 @@
 #pragma once
 
 #include <particles/ParticleSystem.h>
-#include "AbstractWorldObject.h"
+#include "Actor.h"
 
 /**
  * TemporaryParticle will clean itself up once the amount of particles in the system drops to 0
  */
-class TemporaryParticle : public AbstractWorldObject {
- private:
+class TemporaryParticle : public Actor
+{
+private:
   ParticleSystem *particle;
 
- public:
-  explicit TemporaryParticle(WorldInterface *world, ParticleSystem *particle);
+public:
+  explicit TemporaryParticle(WorldInterface *world, ParticleSystem *particle) : Actor(world)
+  {
+    this->particle = particle;
+  }
 
-  void update() override;
-  bool isRecyclable() override;
-  void renderTo(sf::RenderWindow *renderWindow) override;
+  void update() override {};
+  
+  bool isRecyclable() override
+  {
+    return particle->getCount() == 0;
+  }
 
-  ~TemporaryParticle() override;
+  void renderTo(sf::RenderWindow *renderWindow) override
+  {
+    particle->remove();
+    particle->update();
+    particle->render();
+
+    auto sprite = particle->getSprite();
+    sprite.setPosition(pos.x - 64, pos.y - 64);
+    renderWindow->draw(sprite);
+  }
+
+  ~TemporaryParticle() override
+  {
+    delete particle;
+  }
 };
-
-

@@ -1,19 +1,26 @@
 #pragma once
 
 #include <SFML/Window/Event.hpp>
-#include "ControllerInterface.h"
+#include "IController.h"
+#include "JoystickController.h"
 
-class ControllerManager {
- private:
-  std::map<std::string, ControllerInterface *> map;
+inline std::string getJoystickKey(int id) {
+  return "j" + std::to_string(id);
+}
 
- public:
+class ControllerManager
+{
+private:
+  std::map<std::string, IController *> map;
+
+public:
   /**
    * Register a controller
    * @param id The unique key for this controller
    * @param controller The controller
    */
-  void registerController(const std::string &id, ControllerInterface *controller) {
+  void connect(const std::string &id, IController *controller)
+  {
     map[id] = controller;
   }
 
@@ -21,24 +28,30 @@ class ControllerManager {
    * @param id
    * @return The controller identified by this key, or the best available if not found
    */
-  ControllerInterface *getController(std::string id) {
-    if (map[id] == nullptr) {
+  IController *getController(std::string id)
+  {
+    if (map[id] == nullptr)
+    {
       return getFirstAvailable();
     }
 
     return map[id];
   }
 
-  std::map<std::string, ControllerInterface *> getControllers() {
+  std::map<std::string, IController *> getControllers()
+  {
     return map;
   };
 
   /**
    * @return The first available controller.
    */
-  ControllerInterface *getFirstAvailable() {
-    for (auto const &controller : map) {
-      if (controller.second->getDelegate() == nullptr) {
+  IController *getFirstAvailable()
+  {
+    for (auto const &controller : map)
+    {
+      if (controller.second->getDelegate() == nullptr)
+      {
         return controller.second;
       }
     }
@@ -51,15 +64,44 @@ class ControllerManager {
    * Caution: use getFirstAvailable to prevent overwriting a
    * delegate for something else using the controller.
    */
-  ControllerInterface *getFirst() {
+  IController *getFirst()
+  {
     return map.begin()->second;
   }
 
-  void undelegateAll() {
-    for (auto const &controller : map) {
+  void undelegateAll()
+  {
+    for (auto const &controller : map)
+    {
       controller.second->setDelegate(nullptr);
     }
   }
 
-  void delegateEvent(sf::Event event);
+  void delegateEvent(sf::Event event)
+  {
+    // graceful Joystick connect/disconnect event handling
+    if (event.type == sf::Event::JoystickConnected)
+    {
+      auto id = event.joystickConnect.joystickId;
+      this->connect(getJoystickKey(id), new JoystickController(id));
+      return;
+    }
+    else if (event.type == sf::Event::JoystickDisconnected)
+    {
+      auto id = event.joystickConnect.joystickId;
+
+      if (this->map.count(getJoystickKey(id)))
+      {
+        this->map.erase(getJoystickKey(id));
+      }
+
+      return;
+    }
+
+    for (auto const &controller : map)
+    {
+      if (controller.second->pass(event))
+        break;
+    }
+  }
 };

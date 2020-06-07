@@ -2,21 +2,37 @@
 
 #include <vector>
 #include <SFML/Window/Keyboard.hpp>
-#include <input/ControllerManager.h>
 #include <input/presets.h>
-#include "GameInterface.h"
-#include "player/PlayerSession.h"
+#include "IGame.h"
 
-class Asteroids : public GameInterface {
- private:
-  std::vector<std::shared_ptr<PlayerSession>> *sessions;
-  ControllerManager controllerManager;
+#include <scenes/SplashScene.h>
+#include <scenes/MainMenuScene.h>
 
- public:
-  Asteroids();
+class Asteroids : public IGame
+{
+public:
+  Asteroids() : IGame()
+  {
+    // update() needs to be called as this is instantiated before the window
+    sf::Joystick::update();
 
-  std::vector<std::shared_ptr<PlayerSession>> *getSessions() { return sessions; }
+    for (unsigned int i = 0; i < 8; i++)
+    {
+      if (sf::Joystick::isConnected(i))
+      {
+        controllers.connect("j" + std::to_string(i), presets::defaultJoystick(i));
+      }
+    }
 
-  void main() override;
-  ControllerManager &getControllers();
+    controllers.connect("k0", presets::defaultK0());
+    controllers.connect("k1", presets::defaultK1());
+
+    setScene(new SplashScene(this));
+  }
+
+  void main() override
+  {
+    scene->main();
+    tick += 1;
+  }
 };

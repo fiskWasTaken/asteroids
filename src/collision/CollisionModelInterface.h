@@ -2,10 +2,11 @@
 
 #include <SFML/System/Vector2.hpp>
 #include <vector>
-#include <entities/WorldObjectInterface.h>
+#include <optional>
+#include <entities/IActor.h>
 #include "collision_result_t.h"
 
 class CollisionModelInterface {
  public:
-  virtual collision_result_t check(WorldObjectInterface *a, WorldObjectInterface *b) = 0;
+  virtual collision_result_t check(IActor *a, IActor *b) = 0;
 };

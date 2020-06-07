@@ -6,29 +6,29 @@
 
 class Ship;
 
-class PlayerSession {
- private:
+struct PlayerSession
+{
   Ship *ship = nullptr;
   Player *player;
-  int score;
-  int lives;
+  int score = 0;
+  int lives = 0;
 
- public:
-  explicit PlayerSession(Player *player, int lives = 5) {
+  PlayerSession(Player *player, int lives = 5)
+  {
     this->player = player;
     this->lives = lives;
-    this->score = 0;
   }
 
-  Player *getPlayer() const { return player; }
+  void spawnShip(WorldInterface *world)
+  {
+    // NB: we do not care about the previous ship reference if there is one. it gets
+    // deleted by the world garbage collector routine and not handled here.
+    ship = new Ship(world, this);
+    ship->pos.x = world->getWidth() / 2;
+    ship->pos.y = world->getHeight() / 2;
+    ship->color = player->getColor();
 
-  int getScore() const { return score; }
-  void setScore(int score) { this->score = score; }
-
-  int getLives() const { return lives; }
-  void setLives(int lives) { this->lives = lives; }
-
-  Ship *getShip() { return ship; }
-
-  void spawnShip(WorldInterface *world);
+    player->getController()->setDelegate(ship);
+    world->push(ship);
+  }
 };
